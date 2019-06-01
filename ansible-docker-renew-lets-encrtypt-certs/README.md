@@ -1,4 +1,4 @@
-#### An snipplet to renew Let's encrtyp SSL certificates
+#### An snippet to renew Let's encrtyp SSL certificates
 Let's encrypt provide CA signed certificates but needs to renew every 3 months.
 The objective for this scritpt is to make certificate renewall simple.
 Recommended to run this from Jenkins or other CI/CD platform. 
