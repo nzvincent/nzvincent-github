@@ -18,6 +18,20 @@
 
   - name: Renew SSL using Let's Encrypt signed Certificates
   
+  - name: Spin up Docker container with persistent volume
+  docker:
+    name: acme.sh
+    image: acme.sh
+    state: create
+    pull: always
+    devices:
+    - "{{ key_store_dir }}/{{ host_domain }}"
+    ports:
+    - "9999:9999"
+    extra_hosts:
+    env:
+      DNSs={{ wildcard_host_domain }}, {{ san_host_domain }}
+  
   
       
   
