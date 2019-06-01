@@ -25,7 +25,7 @@
     state: create
     pull: always
     devices:
-    - "{{ key_store_dir }}/{{ host_domain }}"
+    - "{{ key_store_dir }}/{{ host_domain }}:/DATA"
     ports:
     - "9999:9999"
     extra_hosts:
