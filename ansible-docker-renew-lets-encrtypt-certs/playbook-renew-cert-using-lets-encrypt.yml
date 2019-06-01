@@ -1,8 +1,23 @@
 ---
 
-block:
+- name: Playbook to renew Let's encrypt signed SSL
+  hosts: all
+  serial: 2
+  tasks:
+
+  - name: Check if a certificate is currently still valid, ignoring failures
+    openssl_certificate:
+      path: {{ domain_ssl_path }}
+      provider: assertonly
+      has_expired: no
+    ignore_errors: yes
+    register: validity_check
+    delegate_to:  127.0.0.1
+ 
+   - debug: msg="{{ validity_check.strout }}"
 
   - name: Renew SSL using Let's Encrypt signed Certificates
-    include_role:
+  
+  
       
   
