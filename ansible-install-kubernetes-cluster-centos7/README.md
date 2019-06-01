@@ -15,4 +15,10 @@ Master node  <=                     => NFS persistent shared storage
                 \-  Worker node 2 -/
 
 ```
+##### Installation instruction:
+This installation of Kubernetes cluster includes three parts.
+* An automated master and worker nodes intallation using Ansible.
+* Linux command line to setup one-off Kubernetes master and worker nodes.
+* Deploy 3 replicated NginX web servers using Kubernetes deployment file.
+
 
