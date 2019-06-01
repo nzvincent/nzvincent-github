@@ -3,9 +3,9 @@
 This project installs Kubernetes cluster master and worker nodes to Centos 7.
 
 ##### Requirements:
-* At least 1 Centos7 minimum install VM with 2GB RAM, 20GB storage.
-* At least 2 Centos7 minimum install VM with 2GB RAMm 20GB storage.
-* A NFS file sharing (optional )
+* At least 1 Centos7 minimum installed VM with 2GB RAM, 20GB storage.
+* At least 2 Centos7 minimum installed VM with 2GB RAM, 20GB storage.
+* A NFS file sharing server to be shared by worker nodes (optional)
 
 ##### Architecture overview:
 
