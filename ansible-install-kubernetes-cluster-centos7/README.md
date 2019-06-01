@@ -1,6 +1,6 @@
 #### An Ansible script to install Kubernetes cluster to Centos 7
 
-This project allow you to install Kubernetes cluster master and worker nodes to Centos 7.
+This project installs Kubernetes cluster master and worker nodes to Centos 7.
 
 ##### Requirements:
 * At least 1 Centos7 minimum install VM with 2GB RAM, 20GB storage.
