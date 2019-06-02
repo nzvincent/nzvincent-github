@@ -1,7 +1,8 @@
 #### Setup Elasticsearch + Logstash + Kibana using docker compose
 
-How to?
+Quick way to create ELK ( ElasticSearch + Logstash + Kibana ) using docker.
 
+*Instructions:*
 Create a folder your EKL's persistant storage
 ```
 cd ~/
