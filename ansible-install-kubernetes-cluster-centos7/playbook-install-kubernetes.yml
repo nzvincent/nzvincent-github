@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+
+  tasks:
+
+  #================================================================================================
+  - name: Install Kubernetes base system
+  #================================================================================================
+    include_role:
+      name: install-kubernetes
+  
+  become: yes
+  become_user: root
+  become_method: sudo 

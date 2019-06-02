@@ -1,0 +1,200 @@
+---
+# Install Kubernetes base system to Centos 7
+# - Yum update and install docker and it's dependencies
+# - Add users / groups
+# - Disable swap
+# - Disable firewall 
+# - Add daemon.json and create /etc/systemd/system/docker.service.d
+# - Enable docker on start and restart docker
+# - Reboot OS when -e reboot is defined
+# - Verify services and output debug messages
+
+# https://www.linuxtechi.com/install-kubernetes-1-7-centos7-rhel7/
+# https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/
+
+
+- block:
+
+    ####################################################
+    # Add repository and install Docker and dependencies
+    ####################################################
+
+  - name: Perform YUM upgrade exclude kernel*
+    yum:
+      name: '*'
+      state: latest
+      exclude: kernel*
+
+  - name: Install additional packages
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - nano
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+  
+  - name: Add Docker repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docer-ce.repo
+
+  - name: Disable Docker Edge repo
+    ini_file:
+      dest: /etc/yum.repos.d/docer-ce.repo       
+      section: "{{ item.section_label }}"
+      option: enabled
+      value: 0
+    loop:
+      - section_label: docker-ce-test
+      - section_label: docker-ce-edge
+    
+  - name: Install Docker
+    package:
+      name: docker-ce
+      state: latest
+
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+      
+    #############################################
+    # Add users and groups
+    #############################################
+ 
+  - name: Create new kuberadmin group
+    group:
+      name: '{{ item.name }}'
+      gid: '{{ item.gid }}'
+      state: present
+    loop:
+      - { name: 'kuberadmin', gid: '2000' }
+      - { name: 'kubermonit', gid: '2001' }
+        
+  - name: Create kuberadmin user
+    user:
+      name: '{{ item.name }}'
+      uid: '{{ item.uid }}'
+      password: 'changeme'
+      groups: docker, kuberadmin         # Empty by default.
+      state: present
+      shell: /bin/bash       # Defaults to /bin/bash
+      system: no             # Defaults to no
+      createhome: yes        # Defaults to yes
+      home: /home/{{ item.name }} # Defaults to /home/<username>
+    loop:
+      - name: kuberadmin
+        uid: 2000
+      - name: kuberwatcher
+        uid: 2001
+
+    #############################################
+    # Disable security features for Kubernetes
+    #############################################
+
+  - name: Iptables flush filter # To be commented out
+    iptables:
+      chain: "{{ item }}"
+      flush: yes
+    loop:  [ 'INPUT', 'FORWARD', 'OUTPUT' ]      
+    ignore_errors: yes
+    when: disable_security is defined 
+
+  - name: Disable firewalld
+    service:
+      name: firewalld
+      state: stopped
+      enabled: false 
+    when: disable_security is defined 
+    
+  - name: disable SELinux
+    shell: setenforce 0
+    ignore_errors: yes
+    when: disable_security is defined 
+
+  - name: disable SELinux on reboot
+    selinux:
+      state: disabled
+    ignore_errors: yes  
+    when: disable_security is defined 
+
+  - name: disable selinux config permanently
+    shell: sed -i -e  's/^\(SELINUX\=\)\(.*\)/\1DISABLED/g' /etc/selinux/config
+    when: disable_security is defined 
+   
+    #############################################
+    # Getting configurations ready for Kubernetes
+    #############################################
+   
+  - name: Swap - remove current swaps from fstab
+    lineinfile:
+      dest: /etc/fstab
+      regexp: '^(\/dev\/mapper\/.*\sswap\s*.*)'
+      line: '# \1'
+      backrefs: yes
+
+  - name: Swap - disable swap
+    command: swapoff --all
+    ignore_errors: yes
+
+  - name: ensure net.bridge.bridge-nf-call-ip6tables is set to 1
+    sysctl:
+      name: net.bridge.bridge-nf-call-ip6tables
+      value: 1
+      state: present
+ 
+  - name: ensure net.bridge.bridge-nf-call-iptables is set to 1
+    sysctl:
+      name: net.bridge.bridge-nf-call-iptables
+      value: 1
+      state: present
+      
+  - name: Copy json file https://kubernetes.io/docs/setup/cri/
+    copy:
+      src: daemon.json
+      dest: /etc/docker/daemon.json
+      owner: root
+      group: root
+      mode: 0644
+      backup: yes 
+      
+  - name: Create a directory if it does not exist
+    file:
+      path: /etc/systemd/system/docker.service.d
+      state: directory
+      mode: '0755'   
+      
+    #############################################
+    # Finalise Docker restart
+    #############################################
+   
+  - name: Daemon reload and restart docker
+    systemd:
+      name: docker
+      state: restarted
+      daemon_reload: yes
+      enabled: yes      
+
+  - name: Reboot OS
+    reboot:
+    when: reboot is defined
+     
+  - name: Verify change
+    shell: |
+      echo "Verify services:"
+      docker --version
+      echo "Selinux: (expected disabled) `sestatus`"
+      echo "Swap memory: (expected swap disabled) `free|grep -i swap || echo \"Disabled\"`"
+      echo "Firewall: (expected stopped) `systemctl status firewalld`"
+      echo "Consider reboot if OS is not"
+    register: command_output
+
+  - debug: msg="{{ command_output.stdout.split('\n') }}"  
+
+    ###################################################
+    # Next step: Install Kubernates master and workers
+    ###################################################

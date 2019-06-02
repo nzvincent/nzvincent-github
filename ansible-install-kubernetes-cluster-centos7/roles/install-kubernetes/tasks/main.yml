@@ -1,0 +1,98 @@
+---
+
+- block:
+
+  #####################################################
+  # Verify dependecies before install Kubernetes
+  #####################################################
+  - name: Verify SELINUX
+    shell: |
+      sestatus | grep status | awk -F\: '{print $2}' | sed 's/ //g'
+    register: status_selinux 
+  
+  - name: Verify SWAP
+    shell: |      
+      free | grep -i swap | awk -F\: '{print $2}' | sed 's/ //g'
+    register: status_swap
+   
+  - name: Verify Firewall
+    shell: |
+      systemctl status firewalld | egrep "^\s.*Active:" | awk -F\: '{print $2}'
+    register: status_firewall
+
+  - set_fact: 
+      status_selinux : "{{ status_selinux.stdout }}"
+      status_swap : "{{ status_swap.stdout }}"
+      status_firewall : "{{ status_firewall.stdout }}"
+      
+ 
+      
+  - name: Ready to Install
+    set_fact:
+      ready_to_install: 'Ok'
+    when: 
+      ( status_selinux is defined and status_selinux == 'disabled' and status_selinux != None ) and 
+      ( status_swap is defined and status_swap == '000' and status_swap != None ) and
+      ( status_firewall is defined and status_firewall is regex('inactive|\(dead\)') and status_firewall != None ) 
+
+
+  - debug: 
+      msg:
+      - "Ready to Install: {{ ready_to_install }}"   
+
+  - name: Exit Ansible Playbook if ready_to_install is not 'Ok'
+    fail:
+      msg: "Exit Ansble because {{ ansible_hostname }} not meeting the prerequisite"
+    failed_when: ( ready_to_install is not defined or ready_to_install != 'Ok' ) 
+          
+  #####################################################
+  # Add repository, install Kubernates and dependencies
+  #####################################################
+
+  - name: Add Kubernetes' YUM repository
+    yum_repository:
+      name: Kubernetes
+      description: Kubernetes YUM repository
+      baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+      gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+      gpgcheck: yes
+
+  - name: Install kubelet # all nodes
+    yum:
+      name: kubelet-1.14.0
+      state: present
+      update_cache: true
+    when: ready_to_install == 'Ok'  
+
+  - name: Install kubeadm # Master node or other controller node
+    yum:
+      name: kubeadm-1.14.0
+      state: present
+    when: "'kuber-master' in group_names and 'ready_to_install' == 'Ok'"  
+            
+  - name: Install kubectl # Is Kubernetes CLI tool
+    yum:
+      name: kubectl-1.14.0
+      state: present
+      allow_downgrade: yes
+    when: "'kuber-master' in group_names and 'ready_to_install' == 'Ok'"
+
+  - name: Start kubelet
+    service:
+      name: kubelet
+      enabled: yes
+      state: started
+    when: ( ready_to_install == 'Ok') 
+
+  - name: Reboot OS
+    reboot:
+    when: reboot is defined
+   
+  - name: Verify change
+    shell: |
+      echo "selinux: (expected disable) `sestatus`"
+      echo "Memory: (expected swap 0) `free|grep swap`"
+      echo "Docker filesystem: (expected systemd) `docker info | grep -i cgroup`"
+    register: command_output
+      
+  - debug: msg="{{ command_output.stdout.split('\n') }}"         
