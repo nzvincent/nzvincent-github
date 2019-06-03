@@ -186,6 +186,8 @@
   - name: Verify change
     shell: |
       echo "Verify services:"
+      echo "Uptime"
+      uptime
       docker --version
       echo "Selinux: (expected disabled) `sestatus`"
       echo "Swap memory: (expected swap disabled) `free|grep -i swap || echo \"Disabled\"`"

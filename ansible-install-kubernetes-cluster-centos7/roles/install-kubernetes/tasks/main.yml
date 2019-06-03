@@ -90,6 +90,8 @@
    
   - name: Verify change
     shell: |
+      echo "Uptime"
+      uptime
       echo "selinux: (expected disable) `sestatus`"
       echo "Memory: (expected swap 0) `free|grep swap`"
       echo "Docker filesystem: (expected systemd) `docker info | grep -i cgroup`"

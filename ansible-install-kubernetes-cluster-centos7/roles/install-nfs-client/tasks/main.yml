@@ -1,0 +1,96 @@
+---
+
+- block:
+
+  #####################################################
+  # Install NFS packages
+  #####################################################
+
+  - name: Install NFS packages
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - nfs-utils
+    ignore_errors: yes  
+
+  #############################################
+  # Add users and groups
+  #############################################
+ 
+  - name: Create new nfs group
+    group:
+      name: '{{ item.name }}'
+      gid: '{{ item.gid }}'
+      state: present
+    loop:
+      - { name: 'nfsadmin', gid: '3000' }
+      - { name: 'nfsview', gid: '3001' }
+    ignore_errors: yes
+ 
+  - name: Create nfs user
+    user:
+      name: '{{ item.name }}'
+      uid: '{{ item.uid }}'
+      password: '{{ crypted_default_password }}'
+      groups: nfsadmin, nfsview         # Empty by default.
+      state: present
+      shell: /bin/bash       # Defaults to /bin/bash
+      system: no             # Defaults to no
+      createhome: yes        # Defaults to yes
+      home: /home/{{ item.name }} # Defaults to /home/<username>
+    loop:
+      - name: nfsadmin
+        uid: 3000
+      - name: nfsview
+        uid: 3001
+    ignore_errors: yes
+    
+  - name: Export NFS share point
+    file:
+      path: /data/NFS-SERVER
+      state: directory
+      owner: nfsadmin
+      group: nfsadmin
+      mode: 0775    
+    ignore_errors: yes 
+    
+  #############################################
+  # Configure NFS client mounting
+  #############################################    
+     
+  - name: Configure /etc/fstab file
+    lineinfile:
+      path: /etc/fstab
+      #regexp: '^\/data\/NFS\-EXPORTS\s.*'
+      insertafter: '^#Ansible:\sNFS\sfstab.*'
+      line: "{{ item }}"
+      state: present
+    loop: "{{ nfs_fstab }}"
+    
+
+  - name: Mounting NFS
+    shell: |
+      mount -a
+ 
+  #############################################
+  # Finalise NFS client
+  #############################################
+   
+  - name: Reboot OS
+    reboot:
+    when: reboot is defined
+     
+  - name: Verify change
+    shell: |
+      echo "Verify services:"
+      echo "Uptime"
+      uptime
+      echo "NFS mount point status:"
+      echo "` df /data/NFS-SERVER`"
+    register: command_output
+
+  - debug: msg="{{ command_output.stdout.split('\n') }}"  
+  
+  

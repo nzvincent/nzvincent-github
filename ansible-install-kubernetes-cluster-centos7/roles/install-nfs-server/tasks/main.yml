@@ -1,0 +1,111 @@
+---
+
+- block:
+
+  #####################################################
+  # Install NFS server
+  #####################################################
+
+  - name: Install NFS server packages
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - nfs-utils 
+    ignore_errors: yes  
+
+  #############################################
+  # Add users and groups
+  #############################################
+ 
+  - name: Create new nfs group
+    group:
+      name: '{{ item.name }}'
+      gid: '{{ item.gid }}'
+      state: present
+    loop:
+      - { name: 'nfsadmin', gid: '3000' }
+      - { name: 'nfsview', gid: '3001' }
+    ignore_errors: yes
+ 
+  - name: Create nfs user
+    user:
+      name: '{{ item.name }}'
+      uid: '{{ item.uid }}'
+      password: '{{ crypted_default_password }}'
+      groups: nfsadmin, nfsview         # Empty by default.
+      state: present
+      shell: /bin/bash       # Defaults to /bin/bash
+      system: no             # Defaults to no
+      createhome: yes        # Defaults to yes
+      home: /home/{{ item.name }} # Defaults to /home/<username>
+    loop:
+      - name: nfsadmin
+        uid: 3000
+      - name: nfsview
+        uid: 3001
+    ignore_errors: yes
+    
+  - name: Export NFS share point
+    file:
+      path: /data/NFS-EXPORTS
+      state: directory
+      owner: nfsadmin
+      group: nfsadmin
+      mode: 0775    
+    ignore_errors: yes 
+     
+  - name: Configure /etc/exports file
+    lineinfile:
+      path: /etc/exports
+      #regexp: '^\/data\/NFS\-EXPORTS\s.*'
+      insertafter: '^#Ansible:\sNFS\sExports.*'
+      line: "{{ item }}"
+      state: present
+    loop: "{{ nfs_exports }}"
+    
+
+  - name: Start NFS server
+    service:
+      name: "{{ item.service }}"
+      enabled: yes
+      state: "{{ item.state }}"
+    loop:
+      - service: nfs-server
+        state: started
+      - service: rpcbind
+        state: started
+ 
+  #############################################
+  # Finalise NFS restart
+  #############################################
+   
+  - name: Restart NFS server and rpchind
+    systemd:
+      name: "{{ item.service }}"
+      state: "{{ item.state }}"
+      daemon_reload: yes
+      enabled: yes      
+    loop:
+      - service: nfs-server
+        state: restarted
+      - service: rpcbind
+        state: restarted
+
+  - name: Reboot OS
+    reboot:
+    when: reboot is defined
+     
+  - name: Verify change
+    shell: |
+      echo "Verify services:"
+      echo "Uptime"
+      uptime
+      echo "NFS Server status:"
+      echo "`systemctl status nfs-server`"
+      echo "RPC Bind status:"
+      echo "`systemctl status rpcbind`"
+    register: command_output
+
+  - debug: msg="{{ command_output.stdout.split('\n') }}"  
