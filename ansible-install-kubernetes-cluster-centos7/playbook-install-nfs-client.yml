@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+
+  tasks:
+
+  #================================================================================================
+  - name: Install and configure NFS client 
+  #================================================================================================
+    include_role:
+      name: install-nfs-client
+  
+  become: yes
+  become_user: root
+  become_method: sudo 
