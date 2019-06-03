@@ -1,4 +1,4 @@
-#### An Ansible script to install Kubernetes cluster on Centos 7
+## Install Kubernetes cluster master, worker and NFS on Centos 7 using Ansible playbook
 
 This project installs Kubernetes cluster master and worker nodes and NFS server to Centos 7.
 
