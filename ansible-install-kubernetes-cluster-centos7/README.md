@@ -21,7 +21,7 @@ This instruction includes three parts.
 * Linux command line to setup one-off Kubernetes master and worker nodes.
 * Deploy 3 replicated NginX web servers using Kubernetes deployment file.
 
-**Install Kubernete docker base system*
+**Install Kubernete docker base system**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-base-system.yml -e reboot=1
 ```
