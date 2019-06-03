@@ -17,8 +17,8 @@ Kubernetes master node  <=                      => NFS persistent shared storage
 ```
 #### Installation instruction:
 The installation includes three parts.
-* An automated master and worker nodes intallation using Ansible.
-* Linux command line to setup one-off Kubernetes master and worker nodes.
+* An automated master, worker and NFS nodes intallation using Ansible.
+* Linux command line to setup one-off Kubernetes master and worker nodes pairing.
 * Deploy 3 replicated NginX web servers using Kubernetes deployment file.
 
 **Provisioning your VM**
