@@ -4,7 +4,7 @@ services:
 
   elasticsearch:
     build:
-      context: elasticsearch/
+      context: CONFIG/elasticsearch/
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -15,7 +15,7 @@ services:
 
   logstash:
     build:
-      context: logstash/
+      context: CONFIG/logstash/
     ports:
       - "5000:5000"
     environment:
@@ -27,7 +27,7 @@ services:
 
   kibana:
     build:
-      context: kibana/
+      context: CONFIG/kibana/
     ports:
       - "5601:5601"
     networks:
