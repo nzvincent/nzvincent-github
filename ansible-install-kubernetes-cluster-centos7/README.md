@@ -19,7 +19,7 @@ Kubernetes master node  <=                      => NFS persistent shared storage
 The installation includes three parts.
 * An automated master, worker and NFS nodes intallation using Ansible.
 * Linux command line to setup one-off Kubernetes master and worker nodes pairing.
-* Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment file.
+* Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment and Docker.
 
 **Provisioning your VM**
 First, assuming you've already configured 4 Centos 7 VM with minimun installation for:
