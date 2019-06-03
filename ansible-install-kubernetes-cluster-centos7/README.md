@@ -21,11 +21,13 @@ The installation includes three parts.
 * Linux command line to setup one-off Kubernetes master and worker nodes pairing.
 * Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment and Docker.
 
-**Provisioning your VM**
-First, assuming you've already configured 4 Centos 7 VM with minimun installation for:
+**Provisioning your VMs**
+
+First, assuming you've already configured 4 Centos 7 VMs with minimun installation for:
 * 1 x Kubernetes master node
-* 2 x Kubernetes workder nodes
+* 2 x Kubernetes worker nodes
 * 1 x NFS server node
+Your virtual machines can be Vmware, KVM or Virtualbox. I created and tested this project on KVM.
 
 **Download Ansible shared projects**
 ```
