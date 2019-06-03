@@ -21,22 +21,22 @@ This instruction includes three parts.
 * Linux command line to setup one-off Kubernetes master and worker nodes.
 * Deploy 3 replicated NginX web servers using Kubernetes deployment file.
 
-Install Kubernete master node
+**Install Kubernete master node**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-kuber-master.yml -e reboot=1
 ```
 
-Install Kubernete worker nodes
+**Install Kubernete worker nodes**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-kuber-worker.yml -e reboot=1
 ```
 
-Install Nfs server to nfs node
+**Install NFS server to nfs node**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-nfs-server.yml -e reboot=1
 ```
 
-Install Nfs client to Kubernetes worker nodes
+**Install NFS client to Kubernetes worker nodes**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-workder playbook-install-nfs-server.yml -e reboot=1
 ```
