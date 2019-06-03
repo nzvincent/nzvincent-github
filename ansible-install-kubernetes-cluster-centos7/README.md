@@ -38,7 +38,7 @@ ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-
 
 **Install NFS client to Kubernetes worker nodes**
 ```
-ansible-playbook -i inventories/kuberhosts -l kuber-workder playbook-install-nfs-client.yml -e reboot=1
+ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
 
 
