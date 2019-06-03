@@ -10,9 +10,9 @@ This project installs Kubernetes cluster master and worker nodes and NFS to Cent
 ##### Architecture overview:
 
 ```
-                / - Worker node 1 -\
-Master node  <=                     => NFS persistent shared storage 
-                \-  Worker node 2 -/
+                           / - Worker node 1 -\
+Kubernetes master node  <=                      => NFS persistent shared storage 
+                           \-  Worker node 2 -/
 
 ```
 ##### Installation instruction:
