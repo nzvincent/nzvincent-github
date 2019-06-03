@@ -23,7 +23,7 @@ This instruction includes three parts.
 
 **Install Kubernete docker base system**
 ```
-ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-base-system.yml -e reboot=1
+ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-base-system.yml -e reboot=1 -e disable_security=1
 ```
 
 **Install Kubernete master nodes**
