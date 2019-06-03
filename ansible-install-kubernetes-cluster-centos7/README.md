@@ -27,6 +27,7 @@ First, assuming you've already configured 4 Centos 7 VMs with minimun installati
 * 1 x Kubernetes master node
 * 2 x Kubernetes worker nodes
 * 1 x NFS server node
+
 Your virtual machines can be Vmware, KVM or Virtualbox. I created and tested this project on KVM.
 
 **Step 2: Download Ansible shared projects**
