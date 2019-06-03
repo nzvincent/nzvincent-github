@@ -21,6 +21,19 @@ This instruction includes three parts.
 * Linux command line to setup one-off Kubernetes master and worker nodes.
 * Deploy 3 replicated NginX web servers using Kubernetes deployment file.
 
+**Download Ansible shared projects**
+```
+git clone https://github.com/nzvincent/shared-projects.git
+cd ansible-install-kubernetes-cluster-centos7
+```
+**Modify inventories and group variables**
+Edit the following inventory using your favorite editor, replacing the IPs with your VM IPs.
+```
+vi inventories/kuberhosts
+
+vi inventories/group_vars/kuber/vars
+```
+
 **Install Kubernete docker base system**
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-base-system.yml -e reboot=1 -e disable_security=1
