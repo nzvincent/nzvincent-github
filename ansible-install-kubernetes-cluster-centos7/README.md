@@ -30,9 +30,9 @@ First, assuming you've already configured 4 Centos 7 VMs with minimun installati
 
 Your virtual machines can be Vmware, KVM or Virtualbox. I created and tested this project on KVM.
 
-**Step 2: Download Ansible shared projects**
+**Step 2: Download Ansible my Github projects**
 ```
-git clone https://github.com/nzvincent/shared-projects.git
+git clone https://github.com/nzvincent/nzvincent-github.git
 cd ansible-install-kubernetes-cluster-centos7
 ```
 
