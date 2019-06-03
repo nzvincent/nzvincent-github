@@ -27,6 +27,7 @@ git clone https://github.com/nzvincent/shared-projects.git
 cd ansible-install-kubernetes-cluster-centos7
 ```
 **Modify inventories and group variables**
+
 Edit the following inventory using your favorite editor, replacing the IPs with your VM IPs.
 ```
 vi inventories/kuberhosts
