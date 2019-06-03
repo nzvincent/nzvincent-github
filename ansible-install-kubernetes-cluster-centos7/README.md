@@ -2,12 +2,12 @@
 
 This project installs Kubernetes cluster master and worker nodes and NFS server to Centos 7.
 
-##### Requirements:
+#### Requirements:
 * At least 1 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes master node
 * At least 2 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes worker nodes.
 * A NFS file sharing server to be shared by worker nodes (optional) for NFS persistent storage share.
 
-##### Architecture overview:
+#### Architecture overview:
 
 ```
                            / - Worker node 1 -\
@@ -15,7 +15,7 @@ Kubernetes master node  <=                      => NFS persistent shared storage
                            \-  Worker node 2 -/
 
 ```
-##### Installation instruction:
+#### Installation instruction:
 The installation includes three parts.
 * An automated master and worker nodes intallation using Ansible.
 * Linux command line to setup one-off Kubernetes master and worker nodes.
