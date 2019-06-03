@@ -5,6 +5,8 @@ services:
   elasticsearch:
     build:
       context: CONFIG/elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -16,6 +18,8 @@ services:
   logstash:
     build:
       context: CONFIG/logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION    
     ports:
       - "5000:5000"
     environment:
@@ -28,6 +32,8 @@ services:
   kibana:
     build:
       context: CONFIG/kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION  
     ports:
       - "5601:5601"
     networks:
