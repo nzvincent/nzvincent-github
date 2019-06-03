@@ -21,7 +21,7 @@ The installation includes three parts.
 * Linux command line to setup one-off Kubernetes master and worker nodes pairing.
 * Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment and Docker.
 
-**Provisioning your Virtual Machines**
+**Step 1: Provisioning your Virtual Machines**
 
 First, assuming you've already configured 4 Centos 7 VMs with minimun installation for:
 * 1 x Kubernetes master node
@@ -29,13 +29,13 @@ First, assuming you've already configured 4 Centos 7 VMs with minimun installati
 * 1 x NFS server node
 Your virtual machines can be Vmware, KVM or Virtualbox. I created and tested this project on KVM.
 
-**Download Ansible shared projects**
+**Step 2: Download Ansible shared projects**
 ```
 git clone https://github.com/nzvincent/shared-projects.git
 cd ansible-install-kubernetes-cluster-centos7
 ```
 
-**Modify inventories and group variables**
+**Step 3: Modify inventories and group variables**
 
 Edit the following inventories using your favorite editor, replacing the IPs with your VM IPs.
 ```
@@ -44,22 +44,24 @@ vi inventories/kuberhosts
 vi inventories/group_vars/kuber/vars
 ```
 
-**Install Kubernete docker base system**
+**Step 4: Kick off Ansible playbooks**
+
+*Install Kubernete docker base system*
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-base-system.yml -e reboot=1 -e disable_security=1
 ```
 
-**Install Kubernete master nodes**
+*Install Kubernete master nodes*
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-master playbook-install-kubernetes.yml -e reboot=1
 ```
 
-**Install NFS server to nfs node**
+*Install NFS server to nfs node*
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-nfs-server.yml -e reboot=1
 ```
 
-**Install NFS client to Kubernetes worker nodes**
+*Install NFS client to Kubernetes worker nodes*
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
