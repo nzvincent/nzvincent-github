@@ -9,3 +9,10 @@ Recommended to run this from Jenkins or other CI/CD platform.
 * Start up ACME docker container to generate Key, Csr and renew certificates from Let's encrtypt site.
 * Copy key and certificate to target hosts.
 * Verify your web server and reload configuration.
+
+```
+[ Ansible-playbook ] --> [ spin up docker acme.sh container ] --> generate private-key + csr --> 
+   --> reqeust-certificates through let's encrypt --> verify new certificates
+   --> push private key and certificates to target machine and reload http server.
+   --> delete docker acme.sh container
+```
