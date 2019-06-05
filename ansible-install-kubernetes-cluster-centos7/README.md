@@ -1,12 +1,13 @@
-## Install Kubernetes cluster master, worker and NFS on Centos 7 using Ansible playbook
+## Install Kubernetes cluster master, worker,  NFS on Centos 7 using Ansible playbook
 
 This project installs Kubernetes cluster master and worker nodes and NFS server to Centos 7.
+Please note that the implementation is purely for lab purposes, do not use it on production without hardening.
+I will include environment hardening next phase.
 
 #### Requirements:
 * At least 1 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes master node
 * At least 2 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes worker nodes.
 * A NFS file sharing server to be shared by worker nodes (optional) for NFS persistent storage share.
-
 #### Architecture overview:
 
 ```
@@ -28,7 +29,7 @@ First, assuming you've already configured 4 Centos 7 VMs with minimun installati
 * 2 x Kubernetes worker nodes
 * 1 x NFS server node
 
-Your virtual machines can be Vmware, KVM or Virtualbox. I created and tested this project on KVM.
+Your physical / virtual machines can be Vmware, KVM or Virtualbox. this project is tested on KVM.
 
 **Step 2: Download Ansible my Github projects**
 ```
