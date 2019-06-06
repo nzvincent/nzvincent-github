@@ -69,6 +69,6 @@ ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-
 ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
 
-**Step 5: Setup Kubernetes master and workers pairing (Part 2)
+**Step 5: Setup Kubernetes master and workers pairing (Part 2)**
 
 
