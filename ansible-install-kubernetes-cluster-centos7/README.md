@@ -72,6 +72,7 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 **Step 5: Setup Kubernetes master and workers pairing (Part 2)**
 
 *Initialize and setup kubernetes master node*
+Once completed, you should see *YOur Kubernetes master has initialized successfully!*
 ```
 [root@kuber-master ~]# kubeadm init
 ```
@@ -81,6 +82,11 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
 chown $(id -u):$(id -g) $HOME/.kuber/config
+```
+
+*Deploy Pod network to Kubernetes cluster
+```
+kubctl apply -f pod-network.yml
 ```
 
 
