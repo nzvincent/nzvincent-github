@@ -71,4 +71,19 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 
 **Step 5: Setup Kubernetes master and workers pairing (Part 2)**
 
+*Initialize and setup kubernetes master node*
+
+```
+[root@kuber-master ~]# kubeadm init
+```
+
+*Setup user's kubectl configuration*
+
+```
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
+chown $(id -u):$(id -g) $HOME/.kuber/config
+```
+
+
 
