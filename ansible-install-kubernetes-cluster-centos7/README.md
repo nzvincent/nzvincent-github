@@ -11,9 +11,9 @@ I will include environment hardening next phase.
 #### Architecture overview:
 
 ```
-                           / - Worker node 1 -\
-Kubernetes master node  <=                      => NFS persistent shared storage 
-                           \-  Worker node 2 -/
+                                                 / - Worker node 1 -\
+Kubectl(any OS ) --> Kubernetes master node  <=                      => NFS persistent shared storage 
+(Manage Kubernete)                               \-  Worker node 2 -/
 
 ```
 ## Installation:
