@@ -12,8 +12,8 @@ I will include environment hardening next phase.
 
 ```
                                                  / - Worker node 1 -\
-Kubectl(any OS ) --> Kubernetes master node  <=                      => NFS persistent shared storage 
-(Manage Kubernete)                               \-  Worker node 2 -/
+Kubectl(any OS ) --> Kubernetes master node  <=                      => NFS persistent shared storage / Database 
+(Manage Kubernetes)                              \-  Worker node 2 -/
 
 ```
 ## Installation:
