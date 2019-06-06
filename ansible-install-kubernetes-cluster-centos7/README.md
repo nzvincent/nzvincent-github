@@ -39,7 +39,7 @@ cd ansible-install-kubernetes-cluster-centos7
 
 **Step 3: Modify inventories and group variables**
 
-Edit the following inventories using your favorite editor, replacing the IPs with your VM IPs.
+Edit the following inventories using your favorite editor, replacing the IPs with your VM IPs or hostnames.
 ```
 vi inventories/kuberhosts
 
