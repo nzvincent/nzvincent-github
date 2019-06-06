@@ -7,7 +7,7 @@ I will include environment security uplift next phase.
 #### Requirements:
 * At least 1 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes master node
 * At least 2 Centos7 minimum installed VM with 2GB RAM, 20GB storage for Kubernetes worker nodes.
-* A NFS file sharing server to be shared by worker nodes (optional) for NFS persistent storage share.
+* A NFS file sharing server to be shared by worker nodes for persistent storage share. (optional) 
 #### Architecture overview:
 
 ```
