@@ -10,7 +10,11 @@
 * Install jFrog Artifactory
 * Install Jenkins and agent nodes
 * Quick install / deploy Elasticsearch / Logstash / Kibana ( ELK ) docker container
+* Let's Encrypt via ACME.sh
 
 
 **Application projects**
 * YAML based test case Python Selenuium App
+* Jenkins CI / CD pipeline
+* Github CI / CD
+* Drupal projects
