@@ -6,11 +6,10 @@
   # Install NFS server
   #####################################################
 
-  - name: Install Docker Registry
-    yum:
-      name: "{{ packages }}"
-      state: latest
-    vars:
-      packages:
-      - nfs-utils 
-    ignore_errors: yes  
+  - name: Install Docker private registry
+    docker_compose:
+      project_src: homebrew-registry
+      state: present
+
+  - debug:
+      var: output
