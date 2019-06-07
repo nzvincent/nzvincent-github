@@ -104,7 +104,7 @@ kubectl get pods --all-namespaces
 
 *Go to worker nodes to join workers to Kubernetes master* 
 
-Copy the command **kubeadm join.....** what you've just paste to your editor. 
+Copy the command **kubeadm join.....** what you've just pasted to your editor. 
 Repeat the command to all your worker nodes. Below is example:
 
 ```
