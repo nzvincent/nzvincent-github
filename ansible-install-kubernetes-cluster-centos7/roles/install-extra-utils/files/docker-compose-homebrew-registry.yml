@@ -10,8 +10,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      -e REGISTRY_HTTP_TLS_CERTIFICATE={{ docker_registry_cert }}
-      -e REGISTRY_HTTP_TLS_KEY={{ docker_registry_key }}
+      -e REGISTRY_HTTP_TLS_CERTIFICATE=$REGISTRY_TLS_CERT
+      -e REGISTRY_HTTP_TLS_KEY=$REGISTRY_TLS_KEY
     volume:
-      - {{ docker_registry_cert_vol }}
-      - {{ docker_registry_persistent_vol }}
+      - $REGISTRY_CERT_VOL:/cert
+      - $REGISTRY_STORAGE_VOL:/var/lib/registry
