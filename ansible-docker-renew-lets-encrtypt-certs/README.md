@@ -6,7 +6,7 @@ Recommended to run this from Jenkins or other CI/CD platform.
 #### How this scritp works?
 * Trigger Ansible playbook from Jenkins
 * Verify your existing expiring certificates.
-* Start up ACME docker container to generate Key, Csr and renew certificates from Let's encrtypt site.
+* Start up ACME docker container to generate Key, Csr and renew certificates from Let's encrtypt site using DOMAIN.cnf template.
 * Copy key and certificate to target hosts.
 * Verify your web server and reload configuration.
 
