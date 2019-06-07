@@ -1,0 +1,16 @@
+---
+
+- block:
+
+  #####################################################
+  # Install NFS server
+  #####################################################
+
+  - name: Install NFS server packages
+    yum:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - nfs-utils 
+    ignore_errors: yes  
