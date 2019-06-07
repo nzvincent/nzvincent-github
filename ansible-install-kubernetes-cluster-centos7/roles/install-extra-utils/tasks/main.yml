@@ -3,8 +3,11 @@
 - block:
 
   #####################################################
-  # Install NFS server
+  # Install Docker private registry
   #####################################################
+
+  - name: Prepare persistent storage
+    file:
 
   - name: Install Docker private registry
     docker_compose:
