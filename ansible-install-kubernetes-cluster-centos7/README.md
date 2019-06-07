@@ -75,7 +75,7 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 
 **Step 5: Initialize and setup kubernetes master node**
 
-*Run the following command to initialise Kubernetes cluster. Once completed, you should see *Your Kubernetes master has initialized successfully!*
+*Run the following command to initialise Kubernetes cluster. Once completed, you should see **Your Kubernetes master has initialized successfully!** *
 
 * **apiserver-advertise-address** is your master node IP address 
 * **pod-network-cidr** is private address cidr block that you would like to assign to your cluster pods
