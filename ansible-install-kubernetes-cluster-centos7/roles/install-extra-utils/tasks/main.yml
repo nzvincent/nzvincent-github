@@ -6,7 +6,7 @@
   # Install NFS server
   #####################################################
 
-  - name: Install NFS server packages
+  - name: Install Docker Registry
     yum:
       name: "{{ packages }}"
       state: latest
