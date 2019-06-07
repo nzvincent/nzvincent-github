@@ -87,9 +87,7 @@ cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
 chown $(id -u):$(id -g) $HOME/.kuber/config
 ```
 
-
-
-*Deploy flannel network to Kubernetes cluster
+*Deploy flannel network to Kubernetes cluster*
 ```
 [root@kuber-master ~]#
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
