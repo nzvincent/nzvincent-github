@@ -1,8 +1,6 @@
 ### A collection of shared projects by Vincent Pang
 
-**ToDo...**
-
-**Infrastructure**
+**Infrastructure projects**
 * Kubernetes cluster installation via Ansible - completed
 * Kubernetes cluster NFS / DB / persistent share storage - completed NFS
 * Kubernetes security uplift
@@ -11,6 +9,8 @@
 * Gogs ligth weight GIT repository
 * Install jFrog Artifactory
 * Install Jenkins and agent nodes
+* Quick install / deploy Elasticsearch / Logstash / Kibana ( ELK ) docker container
 
-**Application**
+
+**Application projects**
 * YAML based test case Python Selenuium App
