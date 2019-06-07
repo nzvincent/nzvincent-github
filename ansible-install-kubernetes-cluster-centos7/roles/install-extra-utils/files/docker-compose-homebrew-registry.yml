@@ -9,6 +9,9 @@ services:
         REGISTRY_VERSION: $REGISTRY_VERSION
     ports:
       - "5000:5000"
-      - "9300:9300"
     environment:
-     - EVN
+      -e REGISTRY_HTTP_TLS_CERTIFICATE={{ docker_registry_cert }}
+      -e REGISTRY_HTTP_TLS_KEY={{ docker_registry_key }}
+    volume:
+      - {{ docker_registry_cert_vol }}
+      - {{ docker_registry_persistent_vol }}
