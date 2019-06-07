@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+
+  tasks:
+
+  #================================================================================================
+  - name: Install NFS server
+  #================================================================================================
+    include_role:
+      name: install-private-registry
+  
+  become: yes
+  become_user: root
+  become_method: sudo 
