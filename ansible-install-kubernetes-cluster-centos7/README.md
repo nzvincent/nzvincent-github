@@ -101,6 +101,7 @@ kubectl get pods --all-namespaces
 ```
 
 *Go to worker nodes to join workers to Kubernetes master* 
+
 Copy the command **kubeadm join.....** what you've just paste to your editor. 
 Repeat the command to all your worker nodes. Below is example:
 
@@ -112,6 +113,7 @@ kubeadm join 10.0.15.10:6443 --token vzau5v.vjiqyxq26lzsf28e \
 ```
 
 *Re-run previous step to verify nodes and pods*
+
 You should see list of master and worker nodes.
 ```
 [root@kuber-master ~]#
