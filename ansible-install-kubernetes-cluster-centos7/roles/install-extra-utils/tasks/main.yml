@@ -11,7 +11,7 @@
 
   - name: Install Docker private registry
     docker_compose:
-      project_src: homebrew-registry
+      project_src: homebrew-registry.yml
       state: present
 
   - debug:
