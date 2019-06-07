@@ -77,16 +77,22 @@ Once completed, you should see *Your Kubernetes master has initialized successfu
 [root@kuber-master ~]# kubeadm init --apiserver-advertise-address=10.0.15.10 --pod-network-cidr=10.244.0.0/16
 ```
 
+*Copy the **kubeadm join...** from the kubeadmin init output to your text editor, the command will then be used on worker nodes to register new nodes to Kubernetes cluster*
+
 *Setup user's kubectl configuration*
 ```
+[root@kuber-master ~]#
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
 chown $(id -u):$(id -g) $HOME/.kuber/config
 ```
 
-*Deploy Pod network to Kubernetes cluster
+
+
+*Deploy flannel network to Kubernetes cluster
 ```
-kubctl apply -f pod-network.yml
+[root@kuber-master ~]#
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 
