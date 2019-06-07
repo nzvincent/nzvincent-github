@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+
+  homebrew-registry:
+    build:
+      context: BUILD/homebrew-registry/
+      args:
+        REGISTRY_VERSION: $REGISTRY_VERSION
+    ports:
+      - "5000:5000"
+      - "9300:9300"
+    environment:
+     - EVN
