@@ -71,7 +71,7 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 ```
 
 #### Setup Kubernetes master and workers pairing (Part 2)
-**Initialize and setup kubernetes master node**
+**Step 5: Initialize and setup kubernetes master node**
 *Run the following command to initialise Kubernetes cluster. Once completed, you should see *Your Kubernetes master has initialized successfully!*
 * **apiserver-advertise-address** is your master node IP address 
 * **pod-network-cidr** is private address cidr block that you would like to assign to your cluster pods
@@ -81,7 +81,9 @@ ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-
 
 *Copy the **kubeadm join.....** from the kubeadm init output to your text editor, the command will then be used on worker nodes to register new nodes to Kubernetes cluster*
 
-*Setup user's kubectl configuration*
+**Step 6: Setup kubectl user's profile configuration**
+
+*Assuming you are using root user here*
 ```
 [root@kuber-master ~]#
 mkdir -p $HOME/.kube
@@ -89,7 +91,7 @@ cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
 chown $(id -u):$(id -g) $HOME/.kuber/config
 ```
 
-*Deploy flannel network to Kubernetes cluster*
+**Step 7: Deploy flannel network to Kubernetes cluster**
 ```
 [root@kuber-master ~]#
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -102,7 +104,7 @@ kubectl get nodes
 kubectl get pods --all-namespaces
 ```
 
-*Go to worker nodes to join workers to Kubernetes master* 
+**Step 8: Join workers and register nodes to Kubernetes master** 
 
 Copy the command **kubeadm join.....** what you've just pasted to your editor. 
 Repeat the command to all your worker nodes. Below is example:
