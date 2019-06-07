@@ -31,7 +31,8 @@ First, assuming you've already configured 4 Centos 7 VMs with minimun installati
 
 Your physical / virtual machines can be Vmware, KVM or Virtualbox. this project is tested on KVM.
 
-**Step 2: Download Ansible scripts from my Github projects (Part 1)** 
+#### Setup Kubernetes cluster using Ansible script (Part 1)
+**Step 2: Download Ansible scripts from my Github projects ** 
 ```
 git clone https://github.com/nzvincent/nzvincent-github.git
 cd ansible-install-kubernetes-cluster-centos7
@@ -69,12 +70,13 @@ ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-
 ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
 
-**Step 5: Setup Kubernetes master and workers pairing (Part 2)**
-
-*Initialize and setup kubernetes master node*
-Once completed, you should see *Your Kubernetes master has initialized successfully!*
+#### Setup Kubernetes master and workers pairing (Part 2)
+**Initialize and setup kubernetes master node**
+*Run the following command to initialise Kubernetes cluster. Once completed, you should see *Your Kubernetes master has initialized successfully!*
+* **apiserver-advertise-address** is your master node IP address 
+* **pod-network-cidr** is private address cidr block that you would like to assign to your cluster pods
 ```
-[root@kuber-master ~]# kubeadm init --apiserver-advertise-address=10.0.15.10 --pod-network-cidr=10.244.0.0/16
+[root@kuber-master ~]# kubeadm init --apiserver-advertise-address=192.168.1.100 --pod-network-cidr=10.244.0.0/16
 ```
 
 *Copy the **kubeadm join.....** from the kubeadm init output to your text editor, the command will then be used on worker nodes to register new nodes to Kubernetes cluster*
