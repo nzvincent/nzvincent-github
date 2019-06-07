@@ -12,6 +12,7 @@
 * Quick install / deploy Elasticsearch / Logstash / Kibana ( ELK ) docker container
 * Let's Encrypt via ACME.sh
 * AWS CloudFormation infrastruture provisioning
+* RUM ( Real user monitoring ) on Boomerang and Splunk.
 
 **Application projects**
 * YAML based test case Python Selenuium App
