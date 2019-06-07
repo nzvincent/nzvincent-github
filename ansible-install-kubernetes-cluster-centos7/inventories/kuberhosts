@@ -1,7 +1,7 @@
 [kuber:children]
 kuber-master
 kuber-worker
-kuber-training
+kuber-extra-services
 kuber-nfs-server
 
 [kuber-master]
@@ -11,5 +11,9 @@ kuber-nfs-server
 192.168.1.110
 192.168.1.120
 
+[kuber-extra-services]
+192.168.1.130
+
 [kuber-nfs-server]
 192.168.1.90
+
