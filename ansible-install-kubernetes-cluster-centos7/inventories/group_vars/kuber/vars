@@ -16,6 +16,8 @@ nfs_fstab:
  
 registry_cert_dir: '/data/DF/HOSTS/REGISTRY/CERT'
 registry_data_dir: '/data/DF/HOSTS/REGISTRY/DATA'
+registry_ssl_key: 'docker-registry.key'
+registry_ssl_crt: 'docker-registry.crt'
 
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
