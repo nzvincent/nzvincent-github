@@ -24,8 +24,8 @@ UNIT="Example Unit"
 # Subject Alternative Name ( SAN )
 ALT_DNS="
 DNS.1 = *.example.com
-DNS.2 = www2.example.com
-DNS.3 = www2.example.com"
+DNS.2 = www.example.com
+DNS.3 = www1.example.com"
 
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
