@@ -1,6 +1,7 @@
 #/bin/bash -x
 
 # This script generates CA and Device CERT
+# @Author: nzvincent@gmail.com
 # Usage:
 # ./gen-roo-ca-ssl.sh
 
