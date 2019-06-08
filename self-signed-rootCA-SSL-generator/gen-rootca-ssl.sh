@@ -7,7 +7,7 @@
 
 BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
- [ -d ${BACKUP}x ] && cp -pv *.csr *.key *.crt ${BACKUP} || echo "Backup directory ${BACKUP} not found, please ensure you've write permission to current folder."; exit 127
+#[ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt ${BACKUP} || echo "Backup directory ${BACKUP} not found, please ensure you've write permission to current folder."; exit 127
 
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
