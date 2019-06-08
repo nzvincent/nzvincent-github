@@ -191,6 +191,14 @@ openssl x509 -noout -text \
 h1 "Secure private keys"
 chmod 600 *.key
 
+############################################
+# Decrypt private key
+# reference: https://www.digicert.com/csr-ssl-installation/ubuntu-server-with-apache2-openssl.htm
+############################################
+h1 "To decrypt encrypted private key"
+openssl rsa -in ${HOST_KEY} -out ${HOST_KEY}.decrypted -passin pass:${CA_KEY_PASS}
+
+
 echo "Copy rootCA cert to your desktop / PC and import the cert to your OS or App trusted keystore"
 echo "Keep your private keys and passphrase in a secure place"
 echo "Install device's cert and key to your device. eg. Apache"
