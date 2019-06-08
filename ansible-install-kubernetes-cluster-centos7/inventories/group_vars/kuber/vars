@@ -23,6 +23,11 @@ registry_hostname_alias:
   - 'registry'
   - 'registry.localnetwork'
 registry_host_ip: '192.168.1.130'
+registry_port: '443'
 
+docker_daemon_config:
+  - '     "exec-opts": ["native.cgroupdriver=systemd"]'
+  - '     ,"insecure-registries" : ["{{ registry_hostname_alias[0] }}:{{ registry_port }}"]
+'
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
