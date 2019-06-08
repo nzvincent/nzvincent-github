@@ -7,7 +7,7 @@
       docker run -d \
       --restart=always \
       --name registry \
-      -v {{ registry_cert }}/certs:/certs \
+      -v {{ registry_cert_dir }}/certs:/certs \
       -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/kuber-registry.crt \
       -e REGISTRY_HTTP_TLS_KEY=/certs/kuber-registry.key \
