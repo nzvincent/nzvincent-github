@@ -5,10 +5,10 @@
   tasks:
 
   #================================================================================================
-  - name: Install NFS server
+  - name: Install Docker registry
   #================================================================================================
     include_role:
-      name: install-private-registry
+      name: install-docker-registry
   
   become: yes
   become_user: root
