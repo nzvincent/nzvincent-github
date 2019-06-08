@@ -1,0 +1,10 @@
+---
+
+- block:
+
+  - name: Reload NFS
+    shell: 'exportfs -ra'
+    
+  - name: Restart Docker
+    shell: 'servie docker restart'
+    register: command_output

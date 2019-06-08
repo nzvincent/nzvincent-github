@@ -1,6 +1,0 @@
----
-
-- block:
-
-  - name: reload nfs
-    shell: 'exportfs -ra'
