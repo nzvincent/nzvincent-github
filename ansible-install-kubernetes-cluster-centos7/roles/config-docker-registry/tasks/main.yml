@@ -1,0 +1,13 @@
+---
+
+- block:
+
+  - name: Add registry DNS to /etc/hosts
+    lineinfile:
+  
+  - name: Add registry to /etc/docker/daemon.json
+    lineinfile: 
+  
+  - name: Restart dockers  
+  
+  
