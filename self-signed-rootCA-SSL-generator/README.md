@@ -7,8 +7,8 @@
 * Allow SAN and wildcard certificates 
 
 **Usage**
-* Edit the variable in the shell script
-* Run ./gen-rootca-ssl.sh
+* Copy the input-example.com.txt to your-domain.com and edit the variables
+* Run ./gen-rootca-ssl.sh your-domain.com
 
 
 
