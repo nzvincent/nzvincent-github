@@ -12,9 +12,7 @@
       - '{{ registry_data_dir }}'
     register: command_output  
 
-  - debug: 
-      msg:
-        "{{ command_output.stdout.split('\n') }}"  
+ # - debug: msg="{{ command_output.stdout.split('\n') }}"  
   
   
   - name: Copy SSL key, cert to registry_cert_dir
