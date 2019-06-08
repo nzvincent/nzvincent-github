@@ -12,6 +12,18 @@
       - {{ registry_cert_dir }}
       - {{ registry_data_dir }}
 
+  - name: Copy SSL key, cert to registry_cert_dir
+    copy:
+      src: {{ item.source }}
+      dest: {{ item.dest }}
+      owner: root
+      group: root
+      mode: '0600'
+    vars:
+      - '{ source: {{ registry_ssl_crt }}, dest: {{ registry_cert_dir }}/{{ registry_ssl_crt }}  }'
+      - '{ source: {{ registry_ssl_key }}, dest: {{ registry_cert_dir }} {{ registry_ssl_key }} }'    
+
+
   - name: Deploy Docker registry
     shell: | 
       docker run -d \
