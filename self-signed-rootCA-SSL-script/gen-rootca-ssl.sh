@@ -3,7 +3,7 @@
 # This script generates CA and Device CERT
 # @Author: nzvincent@gmail.com
 # Usage:
-# ./gen-roo-ca-ssl.sh
+# ./gen-rootca-ssl.sh
 
 BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
