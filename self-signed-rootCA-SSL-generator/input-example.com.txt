@@ -26,3 +26,7 @@ HOST_KEY_CIPHER="aes256"
 # Secure Hashing Algorithm
 CA_SHA=sha256
 HOST_SHA=sha256
+
+# Certificate expiry
+CA_EXPIRE_DAY=3560
+HOST_EXPIRE_DAY=730
