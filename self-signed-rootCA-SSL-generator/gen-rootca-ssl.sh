@@ -43,6 +43,9 @@ HOST_SHA=sha256
 CA_EXPIRE_DAY=3560
 HOST_EXPIRE_DAY=730
 
+INPUT=$1
+[ -f ${INPUT} ] && source $INPUT
+
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
 CA_CFN=rootCA-${CA_DNS}.cfn
@@ -54,11 +57,6 @@ HOST_CFN=device-${CA_DNS}.cfn
 
 INDEX=index.txt
 SERIAL=serial
-
-INPUT="$1"
-if [ -f ${INPUT} ]; then
-  source $INPUT
-fi
 
 echo > ${CA_CFN}
 cat <<EOT >> ${CA_CFN}
