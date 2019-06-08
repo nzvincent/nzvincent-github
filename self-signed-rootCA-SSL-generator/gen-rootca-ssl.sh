@@ -31,6 +31,10 @@ DNS.3 = www1.example.com"
 CA_KEY_CIPHER="aes256" 
 HOST_KEY_CIPHER="aes256" 
 
+# Secure Hashing Algorithm
+CA_SHA=sha256
+HOST_SHA=sha256
+
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
 CA_CFN=rootCA-${CA_DNS}.cfn
@@ -114,7 +118,7 @@ openssl genrsa -${CA_KEY_CIPHER} \
 
 h1 "Generate rootCA cert"
 openssl req -new -x509 -nodes \
-  -sha256 \
+  -${CA_SHA} \
   -days 3650 \
   -key ${CA_KEY}\
   -passin pass:${CA_KEY_PASS} \
@@ -148,7 +152,7 @@ openssl req -noout -text \
 # Device's Cert
 ############################################
 h1 "Generate device's cert"
-openssl x509 -req -sha256 \
+openssl x509 -req -${HOST_SHA} \
   -days 730 \
   -in ${HOST_CSR} \
   -CA ${CA_CRT} \
