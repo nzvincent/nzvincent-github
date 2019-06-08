@@ -9,11 +9,7 @@
       state: present
     loop: "{{ registry_hostname_alias }}"
     
-    
-  
   - name: Add registry to /etc/docker/daemon.json
-    lineinfile: 
-   - name: Configure /etc/fstab file
     lineinfile:
       path: /etc/docker/daemon.json
       insertafter: '\s*\"exec-opts\": \[\".*\]'
