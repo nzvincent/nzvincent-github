@@ -7,7 +7,7 @@
 
 BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
-[ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt ${BACKUP} 
+[ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt *.cnf ${BACKUP} 
 
 
 CA_DNS=ca.example.com
