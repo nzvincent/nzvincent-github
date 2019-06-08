@@ -19,7 +19,9 @@ registry_data_dir: '/data/DF/HOSTS/REGISTRY/DATA'
 registry_ssl_key: 'docker-registry.key'
 registry_ssl_crt: 'docker-registry.crt'
 
-registry_hostname_alias: 'REGISTRY'
+registry_hostname_alias: 
+  - 'registry'
+  - 'registry.localnetwork'
 registry_host_ip: '192.168.1.130'
 
 nfs_rpcbind_state: started
