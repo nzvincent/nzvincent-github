@@ -5,7 +5,6 @@ cluster_members:
 # python -c 'import crypt; print crypt.crypt("This is my Password", "$1$SomeSalt$")'
 crypted_default_password: $1$SomeSalt$UqddPX3r4kH3UL5jq5/ZI.'
 
-
 nfs_exports:
   - '#Ansible: NFS sexport config'
   - '/data/NFS-EXPORTS 192.168.1.110(rw,sync,no_subtree_check,no_root_squash)'
@@ -14,8 +13,9 @@ nfs_exports:
 nfs_fstab:
  - '#Ansible: NFS fstab config'
  - '192.168.1.90:/data/NFS-EXPORTS /data/NFS-SERVER nfs auto,noatime,rsize=32768,wsize=32768  0 0'
-
-
+ 
+registry_cert_dir: '/data/DF/HOSTS/REGISTRY/CERT'
+registry_data_dir: '/data/DF/HOSTS/REGISTRY/DATA'
 
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
