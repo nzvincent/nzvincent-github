@@ -1,3 +1,7 @@
+# Deploy docker private registry to kuber-extra-services as local-registry:443
+# Example: - docker tag IMAGE_ID local-registry:443/nginx-latest
+#          - docker push local-registry:443/nginx-latest 
+#          - docker run -it --name web -host web local-registry:443/nginx-latest /bin/sh
 ---
 
 - hosts: all
