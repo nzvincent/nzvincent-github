@@ -1,5 +1,5 @@
-REGEN_CA_KEY=YES
-REGEN_CA_CRT=YES
+REGEN_CA_KEY=NO
+REGEN_CA_CRT=NO
 
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
