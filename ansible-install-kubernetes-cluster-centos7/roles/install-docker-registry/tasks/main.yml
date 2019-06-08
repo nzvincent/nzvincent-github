@@ -4,11 +4,10 @@
 
   - name: Create a directory if it does not exist
     file:
-      path: {{ directories }}
+      path: {{ item }}
       state: directory
       mode: '0755'
-    vars:
-      directories:
+    loop:
       - {{ registry_cert_dir }}
       - {{ registry_data_dir }}
 
