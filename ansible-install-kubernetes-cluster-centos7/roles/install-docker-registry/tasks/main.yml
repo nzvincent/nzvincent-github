@@ -8,8 +8,8 @@
       state: directory
       mode: '0755'
     loop:
-      - {{ registry_cert_dir }}
-      - {{ registry_data_dir }}
+      - '{{ registry_cert_dir }}'
+      - '{{ registry_data_dir }}'
 
   - name: Copy SSL key, cert to registry_cert_dir
     copy:
