@@ -1,3 +1,6 @@
+REGEN_CA_KEY=YES
+REGEN_CA_CERT=YES
+
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
 CA_KEY_PASS="topsecret"
