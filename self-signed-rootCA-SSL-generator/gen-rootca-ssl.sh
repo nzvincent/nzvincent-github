@@ -27,6 +27,10 @@ DNS.1 = *.example.com
 DNS.2 = www.example.com
 DNS.3 = www1.example.com"
 
+# Private key encryption cipher
+CA_KEY_CIPHER="aes256" 
+HOST_KEY_CIPHER="aes256" 
+
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
 CA_CFN=rootCA-${CA_DNS}.cfn
@@ -104,7 +108,7 @@ touch ${INDEX}
 echo "1234" > ${SERIAL}
 
 h1 "Create rootCA key"
-openssl genrsa -aes256 \
+openssl genrsa -${CA_KEY_CIPHER} \
   -passout pass:${CA_KEY_PASS} \
   -out ${CA_KEY} 2048 \
 
@@ -125,7 +129,7 @@ openssl x509 -noout -text \
 # Device's key and CSR
 ############################################
 h1 "Create device's key"
-openssl genrsa -aes256 \
+openssl genrsa -${HOST_KEY_CIPHER} \
   -passout pass:${HOST_KEY_PASS} \
   -out ${HOST_KEY} 2048
 
