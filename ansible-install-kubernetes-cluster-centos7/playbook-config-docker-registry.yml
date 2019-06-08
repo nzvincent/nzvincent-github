@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+
+  tasks:
+
+  #================================================================================================
+  - name: Configure Kubernates workers with private registry
+  #================================================================================================
+    include_role:
+      name: config-docker-registry
+  
+  become: yes
+  become_user: root
+  become_method: sudo 
+
