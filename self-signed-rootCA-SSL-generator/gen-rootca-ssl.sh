@@ -10,6 +10,10 @@ BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
 [ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt *.cnf *.srl serial *.txt ${BACKUP} 
 
+# Re-generate rootCA key and certificate
+REGEN_CA_KEY=YES
+REGEN_CA_CRT=YES
+
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
 CA_KEY_PASS="topsecret"
@@ -115,19 +119,27 @@ h1 (){
 touch ${INDEX}
 echo "1234" > ${SERIAL}
 
-h1 "Create rootCA key"
-openssl genrsa -${CA_KEY_CIPHER} \
-  -passout pass:${CA_KEY_PASS} \
-  -out ${CA_KEY} 2048 \
+if [ "${REGEN_CA_KEY}" = "YES" ]; then
+  h1 "Create rootCA key"
+  openssl genrsa -${CA_KEY_CIPHER} \
+    -passout pass:${CA_KEY_PASS} \
+    -out ${CA_KEY} 2048 \
+else
+  h1 "Skip Create rootCA key"
+fi
 
-h1 "Generate rootCA cert"
-openssl req -new -x509 -nodes \
-  -${CA_SHA} \
-  -days ${CA_EXPIRE_DAY} \
-  -key ${CA_KEY}\
-  -passin pass:${CA_KEY_PASS} \
-  --config ${CA_CFN} \
-  -out ${CA_CRT} \
+if [ "${REGEN_CA_CRT}" = "YES" ]; then
+  h1 "Generate rootCA cert"
+  openssl req -new -x509 -nodes \
+    -${CA_SHA} \
+    -days ${CA_EXPIRE_DAY} \
+    -key ${CA_KEY}\
+    -passin pass:${CA_KEY_PASS} \
+    --config ${CA_CFN} \
+    -out ${CA_CRT} \
+else
+  h1 "Skip Create rootCA cert"
+fi
 
 h1  "Verify rootCA cert"
 openssl x509 -noout -text \
