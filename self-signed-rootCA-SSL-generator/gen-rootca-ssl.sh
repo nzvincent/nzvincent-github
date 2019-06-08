@@ -100,7 +100,7 @@ echo "1234" > ${SERIAL}
 
 h1 "Create rootCA key"
 openssl genrsa -aes256 \
-  -passout pass:${CA_PASS} \
+  -passout pass:${CA_KEY_PASS} \
   -out ${CA_KEY} 2048 \
 
 h1 "Generate rootCA cert"
@@ -108,7 +108,7 @@ openssl req -new -x509 -nodes \
   -sha256 \
   -days 3650 \
   -key ${CA_KEY}\
-  -passin pass:${CA_PASS} \
+  -passin pass:${CA_KEY_PASS} \
   --config ${CA_CFN} \
   -out ${CA_CRT} \
 
@@ -121,13 +121,13 @@ openssl x509 -noout -text \
 ############################################
 h1 "Create device's key"
 openssl genrsa -aes256 \
-  -passout pass:${HOST_PASS} \
+  -passout pass:${HOST_KEY_PASS} \
   -out ${HOST_KEY} 2048
 
 h1 "Generate device's csr"
 openssl req -new \
   -key ${HOST_KEY} \
-  -passin pass:${HOST_PASS} \
+  -passin pass:${HOST_KEY_PASS} \
   -config ${HOST_CFN} \
   -out ${HOST_CSR}
   
@@ -145,7 +145,7 @@ openssl x509 -req -sha256 \
   -CA ${CA_CRT} \
   -CAkey ${CA_KEY} \
   -CAcreateserial \
-  -passin pass:${CA_PASS} \
+  -passin pass:${CA_KEY_PASS} \
   -out ${HOST_CRT}
 
 h1 "Verify device's cert"
