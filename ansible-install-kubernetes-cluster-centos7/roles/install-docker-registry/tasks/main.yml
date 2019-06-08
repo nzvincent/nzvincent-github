@@ -34,8 +34,8 @@
       --name registry \
       -v {{ registry_cert_dir }}:/certs \
       -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
-      -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/kuber-registry.crt \
-      -e REGISTRY_HTTP_TLS_KEY=/certs/kuber-registry.key \
+      -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/{{ registry_ssl_crt }} \
+      -e REGISTRY_HTTP_TLS_KEY=/certs/{{ registry_ssl_key }} \
       -p 443:443 \
       registry:2
  
