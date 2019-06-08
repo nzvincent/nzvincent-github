@@ -4,7 +4,7 @@
 **Features**
 * To create self-signed rootCA certificate
 * To create rootCA signed certificates for your devices
-* SAN and wildcard certificate
+* Allow SAN and wildcard certificates 
 
 **Usage**
 * Edit the variable in the shell script
