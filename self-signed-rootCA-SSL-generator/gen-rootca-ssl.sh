@@ -117,9 +117,6 @@ h1 (){
 touch ${INDEX}
 echo "1234" > ${SERIAL}
 
-[ ! -f ${CA_KEY} ] && REGEN_CA_KEY="YES"
-[ ! -f ${CA_CRT} ] && REGEN_CA_CRT="YES"
-
 if [ "${REGEN_CA_KEY}" == "YES" ]; then
   h1 "Create rootCA key"
   openssl genrsa -${CA_KEY_CIPHER} \
