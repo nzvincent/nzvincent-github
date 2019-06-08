@@ -33,6 +33,7 @@
       --restart=always \
       --name registry \
       -v {{ registry_cert_dir }}:/certs \
+      -v {{ registry_data_dir }}:/var/lib/registry \
       -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
       -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/{{ registry_ssl_crt }} \
       -e REGISTRY_HTTP_TLS_KEY=/certs/{{ registry_ssl_key }} \
