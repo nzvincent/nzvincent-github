@@ -35,6 +35,10 @@ HOST_KEY_CIPHER="aes256"
 CA_SHA=sha256
 HOST_SHA=sha256
 
+# Certificate expiry
+CA_EXPIRE_DAY=3560
+HOST_EXPIRE_DAY=730
+
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
 CA_CFN=rootCA-${CA_DNS}.cfn
@@ -119,7 +123,7 @@ openssl genrsa -${CA_KEY_CIPHER} \
 h1 "Generate rootCA cert"
 openssl req -new -x509 -nodes \
   -${CA_SHA} \
-  -days 3650 \
+  -days ${CA_EXPIRE_DAY} \
   -key ${CA_KEY}\
   -passin pass:${CA_KEY_PASS} \
   --config ${CA_CFN} \
@@ -153,7 +157,7 @@ openssl req -noout -text \
 ############################################
 h1 "Generate device's cert"
 openssl x509 -req -${HOST_SHA} \
-  -days 730 \
+  -days ${HOST_EXPIRE_DAY} \
   -in ${HOST_CSR} \
   -CA ${CA_CRT} \
   -CAkey ${CA_KEY} \
