@@ -4,10 +4,28 @@
 
   - name: Add registry DNS to /etc/hosts
     lineinfile:
+      path: /etc/hosts
+      line: "{{ registry_host_ip }} {{ item }}"
+      state: present
+    loop: "{{ registry_hostname_alias }}"
+    
+    
   
   - name: Add registry to /etc/docker/daemon.json
     lineinfile: 
+   - name: Configure /etc/fstab file
+    lineinfile:
+      path: /etc/docker/daemon.json
+      insertafter: '\s*\"exec-opts\": \[\".*\]'
+      line: "{{ item }}"
+      state: present
+    loop: "{{ docker_daemon_config }}"  
   
   - name: Restart dockers  
+    shell: |
+      service docker restart
+    register: command_output
+    
+  - debug: msg=""  
   
   
