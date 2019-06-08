@@ -16,8 +16,8 @@
   
   - name: Copy SSL key, cert to registry_cert_dir
     copy:
-      src: {{ item.source }}
-      dest: {{ item.dest }}
+      src: "{{ item.source }}"
+      dest: "{{ item.dest }}"
       owner: root
       group: root
       mode: {{ item.mode }}
