@@ -4,11 +4,11 @@
 # @Author: nzvincent@gmail.com
 # Usage:
 # ./gen-rootca-ssl.sh
+# ./gen-rootca-ssl.sh inputfile
 
 BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
 [ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt *.cnf ${BACKUP} 
-
 
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
@@ -38,6 +38,11 @@ HOST_CFN=host.cfn
 
 INDEX=index.txt
 SERIAL=serial
+
+INPUT="$1"
+if [ -f ${INPUT} ]; then
+  source $INPUT
+fi
 
 echo > ${CA_CFN}
 cat <<EOT >> ${CA_CFN}
