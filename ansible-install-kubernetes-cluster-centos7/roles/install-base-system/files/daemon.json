@@ -1,5 +1,5 @@
 {
   "exec-opts": ["native.cgroupdriver=systemd"] ,
-  "insecure-registries" : ["registry:443"]
+  "insecure-registries" : ["registry.localnetwork:443"]
 
 }
