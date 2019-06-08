@@ -20,6 +20,7 @@ registry_ssl_key: 'docker-registry.key'
 registry_ssl_crt: 'docker-registry.crt'
 
 registry_hostname_alias: 
+  - 'local-registry'
   - 'registry.localnetwork'
   - 'registry'
   
