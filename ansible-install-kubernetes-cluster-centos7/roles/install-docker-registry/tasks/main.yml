@@ -2,6 +2,16 @@
 
 - block:
 
+  - name: Create a directory if it does not exist
+    file:
+      path: {{ directories }}
+      state: directory
+      mode: '0755'
+    vars:
+      directories:
+      - {{ registry_cert_dir }}
+      - {{ registry_data_dir }}
+
   - name: Deploy Docker registry
     shell: | 
       docker run -d \
