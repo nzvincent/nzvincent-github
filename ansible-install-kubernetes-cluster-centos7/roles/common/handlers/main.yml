@@ -8,3 +8,8 @@
   - name: Restart Docker
     shell: 'servie docker restart'
     register: command_output
+    
+  - name: Reboot OS
+    reboot:
+    register: command_output
+        
