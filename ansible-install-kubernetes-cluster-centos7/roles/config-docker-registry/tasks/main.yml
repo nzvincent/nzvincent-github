@@ -17,12 +17,8 @@
       group: root
       mode: 0644
       backup: yes 
-  
-  - name: Restart dockers  
-    shell: |
-      service docker restart
-    register: command_output
+  notify:
+    Restart Docker
     
-  - debug: msg=""  
   
   
