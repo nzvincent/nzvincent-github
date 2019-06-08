@@ -11,8 +11,8 @@ mkdir -p ${BACKUP}
 [ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt *.cnf *.srl serial *.txt ${BACKUP} 
 
 # Re-generate rootCA key and certificate
-REGEN_CA_KEY=YES
-REGEN_CA_CRT=YES
+REGEN_CA_KEY=NO
+REGEN_CA_CRT=NO
 
 CA_DNS=ca.example.com
 HOST_DNS=www.example.com
@@ -117,19 +117,36 @@ h1 (){
 touch ${INDEX}
 echo "1234" > ${SERIAL}
 
-h1 "Create rootCA key"
-openssl genrsa -${CA_KEY_CIPHER} \
+# Set generate rootCA key and cert to Yes if not available 
+[ ! -f "${CA_KEY}" ] && REGEN_CA_KEY="YES"
+[ ! -f "${CA_CRT}" ] && REGEN_CA_CRT="YES"
+
+if [ "${REGEN_CA_KEY}" == "YES" ]; then
+
+  h1 "Create rootCA key"
+  openssl genrsa -${CA_KEY_CIPHER} \
   -passout pass:${CA_KEY_PASS} \
   -out ${CA_KEY} 2048 \
 
-h1 "Generate rootCA cert"
-openssl req -new -x509 -nodes \
+else
+  h1 "SKIP: rootCA key"
+fi
+
+if [ "${REGEN_CA_CRT}" == "YES" ]; then
+
+  h1 "Generate rootCA cert"
+  openssl req -new -x509 -nodes \
   -${CA_SHA} \
   -days ${CA_EXPIRE_DAY} \
   -key ${CA_KEY}\
   -passin pass:${CA_KEY_PASS} \
   --config ${CA_CFN} \
   -out ${CA_CRT} \
+
+else
+  h1 "SKIP: rootCA cert"
+fi
+
 
 h1  "Verify rootCA cert"
 openssl x509 -noout -text \
