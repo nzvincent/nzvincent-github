@@ -27,14 +27,14 @@ DNS.1 = *.example.com
 DNS.2 = www2.example.com
 DNS.3 = www2.example.com"
 
-CA_KEY=rootCA.key
-CA_CRT=rootCA.crt
-CA_CFN=rootCA.cfn
+CA_KEY=rootCA-${CA_DNS}.key
+CA_CRT=rootCA-${CA_DNS}.crt
+CA_CFN=rootCA-${CA_DNS}.cfn
 
-HOST_KEY=host.key
-HOST_CSR=host.csr
-HOST_CRT=host.crt
-HOST_CFN=host.cfn
+HOST_KEY=device-${CA_DNS}.key
+HOST_CSR=device-${CA_DNS}.csr
+HOST_CRT=device-${CA_DNS}.crt
+HOST_CFN=device-${CA_DNS}.cfn
 
 INDEX=index.txt
 SERIAL=serial
