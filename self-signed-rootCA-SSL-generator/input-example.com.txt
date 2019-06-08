@@ -22,3 +22,7 @@ DNS.3 = www2.example.com"
 # Private key encryption cipher
 CA_KEY_CIPHER="aes256" 
 HOST_KEY_CIPHER="aes256" 
+
+# Secure Hashing Algorithm
+CA_SHA=sha256
+HOST_SHA=sha256
