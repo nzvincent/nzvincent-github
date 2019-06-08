@@ -12,4 +12,21 @@
   - name: Reboot OS
     reboot:
     register: command_output
+    
+ - name: Verify services
+  shell: |
+    echo "Verify services:"
+    echo "Uptime: `uptime`"
+    docker --version
+    docker ps -a
+    docker images
+    echo "Selinux: (expected disabled) `sestatus`"
+    echo "Swap memory: (expected swap disabled) `free|grep -i swap || echo \"Disabled\"`"
+    echo "Firewall: (expected stopped) `systemctl status firewalld`"
+    echo "Consider reboot if OS is not"
+    echo -e "hosts: `cat /etc/hosts`"
+    echo -e "fstab: `cat /etc/fstab`"
+  register: command_output
+  
+- debug: msg="{{ command_output.stdout.split('\n') }}"     
         
