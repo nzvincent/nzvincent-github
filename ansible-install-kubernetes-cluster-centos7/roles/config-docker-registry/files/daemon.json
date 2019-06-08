@@ -1,1 +1,5 @@
-'daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"] ,
+  "insecure-registries" : ["registry.localnetwork:443"]
+
+}
