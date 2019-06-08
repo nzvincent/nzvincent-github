@@ -27,7 +27,7 @@ registry_port: '443'
 
 docker_daemon_config:
   - '     "exec-opts": ["native.cgroupdriver=systemd"]'
-  - '     ,"insecure-registries" : ["{{ registry_hostname_alias[0] }}:{{ registry_port }}"]
+  - '    ,"insecure-registries" : ["{{ registry_hostname_alias[0] }}:{{ registry_port }}"]
 '
 nfs_rpcbind_state: started
 nfs_rpcbind_enabled: true
