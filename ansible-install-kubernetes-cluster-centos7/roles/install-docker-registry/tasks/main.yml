@@ -10,9 +10,9 @@
     loop:
       - '{{ registry_cert_dir }}'
       - '{{ registry_data_dir }}'
-    register: debug_output  
+    register: command_output  
     
-  - debug: msg={{ debug_output.stdout.split("\n") }}
+  - debug: msg="{{ command_output.stdout.split('\n') }}"  
   
   - name: Copy SSL key, cert to registry_cert_dir
     copy:
