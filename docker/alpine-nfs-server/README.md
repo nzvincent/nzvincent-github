@@ -15,8 +15,10 @@
   export CONTAINERNAME=nfs-server
   export PORT1=111:111/udp
   export PORT2=2049:2049/tcp
-  export CUR_DIR=`pwd`
-  
-  docker run -d -p $PORT2 -v $CUR_DIR/exports:/etc/exports --privileged --name  $CONTAINERIMAGE
+  export CUR_DIR=`pwd`  
+  export VOLUME_DATA=$CUR_DIR/EXPORT-DATA:/EXPORT-DATA
+  export CONFIG_EXPORTS=$CUR_DIR/CONFIG/exports:/etc/exports
+
+  docker run -d -p $PORT2 -v $CONFIG_EXPORTS -v $VOLUME_DATA --privileged --name $CONTAINERIMAGE -h $CONTAINERIMAGE
 
 ```
