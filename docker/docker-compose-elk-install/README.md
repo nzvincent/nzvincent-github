@@ -12,6 +12,7 @@ cd ELK_HOME
 ```
 
 **Start up ELK container**
+
 Copy docker-compose.yml file to ELK_HOME folder and kick off the following comamnd:
 ```
 docker-compose up
