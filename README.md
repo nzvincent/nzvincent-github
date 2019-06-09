@@ -1,6 +1,5 @@
-### A collection of shared projects by Vincent Pang
+### A collection of my projects
 
-**Infrastructure projects**
 * Kubernetes cluster installation via Ansible - completed
 * Kubernetes cluster NFS / DB / persistent share storage - completed NFS
 * Kubernetes security uplift
