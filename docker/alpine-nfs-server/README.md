@@ -24,7 +24,7 @@
   export MEM=
 
   docker run -d -p $PORT2 \
-  --name CONTAINER_NAME -h CONTAINER_NAME \
+  --name $CONTAINER_NAME -h $CONTAINER_NAME \
   -v $CONFIG_EXPORTS -v $VOLUME_DATA \
   -v $TIMEZONE $CPU $MEM \
   --privileged \
