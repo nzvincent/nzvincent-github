@@ -4,21 +4,30 @@
 **Step 1. Build docker container**
 
 ```
-  export CONTAINERIMAGE=alpine-nfs:v1
+  export CONTAINER_IMAGE=alpine-nfs:v1
   
-  docker build -t $CONTAINERIMAGE .
+  docker build -t $CONTAINER_IMAGE .
   
 ```
 **Step 2. Start docker container**
 
 ```
-  export CONTAINERNAME=nfs-server
+  export CONTAINER_NAME=nfs-server
   export PORT1=111:111/udp
   export PORT2=2049:2049/tcp
   export CUR_DIR=`pwd`  
   export VOLUME_DATA=$CUR_DIR/DATA-EXPORTS:/DATA-EXPORTS
   export CONFIG_EXPORTS=$CUR_DIR/CONFIG/exports:/etc/exports
+  # Worked for some Linux
+  export TIMEZONE=/etc/timezone:/etc/timezone
+  export CPU=
+  export MEM=
 
-  docker run -d -p $PORT2 -v $CONFIG_EXPORTS -v $VOLUME_DATA --privileged --name $CONTAINERIMAGE -h $CONTAINERIMAGE
+  docker run -d -p $PORT2 \
+  --name CONTAINER_NAME -h CONTAINER_NAME
+  -v $CONFIG_EXPORTS -v $VOLUME_DATA 
+  -v $TIMEZONE $CPU $MEM \
+  --privileged 
+  $CONTAINER_IMAGE
 
 ```
