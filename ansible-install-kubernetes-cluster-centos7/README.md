@@ -11,10 +11,14 @@ I will include environment security uplift next phase.
 #### Architecture overview:
 
 ```
-                                                 / - Worker node 1 -\
-Kubectl(any OS ) --> Kubernetes master node  <=                      => NFS persistent shared storage / Database 
-(Manage Kubernetes)                              \-  Worker node 2 -/
-
+                                                     / - Worker node 1 -\
+[ Kubectl(any OS)]    ==> [ Kubernetes master ]   <=                         ==> NFS persistent shared storage / Database 
+- Manager                                            \-  Worker node 2 -/
+                                                            |
+                                                            v
+                                                 [ other extra services ]
+                                        - private docker registry ( local-registry )
+                                        
 ```
 ## Installation:
 The installation includes three parts.
