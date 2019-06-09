@@ -10,6 +10,8 @@ BACKUP=backup-`date '+%Y%m%d%H%M%S'`
 mkdir -p ${BACKUP}
 [ -d ${BACKUP} ] && cp -pv *.csr *.key *.crt *.cnf *.srl serial *.txt ${BACKUP} 
 
+# --- Below to be replaced by input file
+
 # Re-generate rootCA key and certificate
 REGEN_CA_KEY=NO
 REGEN_CA_CRT=NO
@@ -42,6 +44,8 @@ HOST_SHA=sha256
 # Certificate expiry
 CA_EXPIRE_DAY=3560
 HOST_EXPIRE_DAY=730
+
+# --- Above to be replaced by input file 
 
 INPUT=$1
 [ -f ${INPUT} ] && source $INPUT
@@ -196,7 +200,7 @@ chmod 600 *.key
 # reference: https://www.digicert.com/csr-ssl-installation/ubuntu-server-with-apache2-openssl.htm
 ############################################
 h1 "To decrypt encrypted private key"
-openssl rsa -in ${HOST_KEY} -out ${HOST_KEY}.decrypted -passin pass:${CA_KEY_PASS}
+openssl rsa -in ${HOST_KEY} -out ${HOST_KEY}.decrypted -passin pass:${HOST_KEY_PASS}
 
 # You don't need to decrypt rootCA key in most cases
 # openssl rsa -in ${CA_KEY} -out ${CA_KEY}.decrypted -passin pass:${CA_KEY_PASS}
