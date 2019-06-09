@@ -1,3 +1,13 @@
+# Install Kubernetes base system to Centos 7
+# - Yum update and install docker and it's dependencies
+# - Add users / groups
+# - Disable swap
+# - Disable firewall 
+# - Add daemon.json and create /etc/systemd/system/docker.service.d
+# - Enable docker on start and restart docker
+# - Reboot OS when -e reboot is defined
+# - Verify services and output debug messages
+
 ---
 
 - hosts: all
