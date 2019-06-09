@@ -1,7 +1,7 @@
 # Install Kubernetes kubeadm / kubectl / kubelet 
 #   - kuber-master
 #   - kuber-worker
-# Other reference:
+# Other references:
 #   - https://www.linuxtechi.com/install-kubernetes-1-7-centos7-rhel7/
 #   - https://www.howtoforge.com/tutorial/centos-kubernetes-docker-cluster/
 ---
