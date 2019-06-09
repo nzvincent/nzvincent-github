@@ -1,4 +1,4 @@
-#### Building Alpine NFS Docker images and container
+#### Building Alpine NFS Docker image and start up container
 
 ```
 # Step 1. Build docker container
