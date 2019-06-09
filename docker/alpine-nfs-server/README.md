@@ -18,7 +18,8 @@
   export CUR_DIR=`pwd`  
   export VOLUME_DATA=$CUR_DIR/DATA-EXPORTS:/DATA-EXPORTS
   export CONFIG_EXPORTS=$CUR_DIR/CONFIG/exports:/etc/exports
-  # Worked for some Linux
+  
+  # timezone and localtime may not be worked for some Linux distros
   export TIMEZONE=/etc/timezone:/etc/timezone
   export LOCALTIME=/etc/localtime:/etc/localtime
   export CPU=
