@@ -2,6 +2,7 @@
 
 * Kubernetes cluster installation via Ansible - completed
 * Kubernetes cluster NFS / DB / persistent share storage - completed NFS
+* Deploy docker private registry using Ansible - completed.
 * Kubernetes security uplift
 * Docker filesystem using device mapper
 * Setup Docker private registry
