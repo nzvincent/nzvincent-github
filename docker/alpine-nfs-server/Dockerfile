@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ADD start.sh /start.sh
+ADD CONFIG/start.sh /start.sh
 
 RUN     apk add --update --no-progress nfs-utils && \
         chmod +x /start.sh && \
