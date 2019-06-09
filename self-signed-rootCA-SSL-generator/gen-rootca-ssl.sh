@@ -210,8 +210,9 @@ chmod 600 *.key
 chmod 600 *.key.decrypted
 
 
-
-echo "Copy rootCA cert to your desktop / PC and import the cert to your OS or App trusted keystore"
-echo "Keep your private keys and passphrase in a secure place"
-echo "Install device's cert and key to your device. eg. Apache"
+echo "Copy and install rootCA cert to your desktop PCs or servers OS/App trusted keystore or ca-certificates repository"
+echo "Keep your private keys and passphrase in a secure place, DO not distribute your private keys"
+echo "To install device's certificates, you need to install device's certs and key to the target machine.
+ehco "Please take note some OS/App may not supoort encrypted passphrase key, you may need to use the unencrypted key.
+echo "Install device's cert and key to your device and reload the application. eg. Apache"
 
