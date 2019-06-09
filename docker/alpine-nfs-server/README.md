@@ -27,7 +27,7 @@
   docker run -d -p $PORT2 \
   --name $CONTAINER_NAME -h $CONTAINER_NAME \
   -v $CONFIG_EXPORTS -v $VOLUME_DATA \
-  -v $TIMEZONE $LOCALTIME -v $CPU $MEM \
+  -v $TIMEZONE -v $LOCALTIME -v $CPU $MEM \
   --privileged \
   $CONTAINER_IMAGE
 
