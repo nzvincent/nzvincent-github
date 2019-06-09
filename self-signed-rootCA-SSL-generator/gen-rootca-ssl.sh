@@ -1,6 +1,6 @@
 #/bin/bash -x
 
-# This script generates CA and Device CERT
+# This script generates root CA and Device CERT
 # @Author: nzvincent@gmail.com
 # Usage:
 # ./gen-rootca-ssl.sh
