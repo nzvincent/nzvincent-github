@@ -11,11 +11,11 @@ I will include environment security uplift next phase.
 #### Architecture overview:
 
 ```
-                                                     / - Worker node 1 -\
-[ Kubectl(any OS)]    ==> [ Kubernetes master ]   <=                         ==> NFS persistent shared storage / Database 
-- Manager                                            \-  Worker node 2 -/
-                                                            |
-                                                            v
+                                                     / [ Worker node 1 ] -\
+[ Kubectl(any OS)]    ==> [ Kubernetes master ]   <=                         ==> [ persistent store ]
+- Manager                 -kubectl/kubeadm/kube      \- [ Worker node 2 ] -/      - NFS
+                                                               |                  - Database
+                                                               v
                                                  [ other extra services ]
                                         - private docker registry ( local-registry )
                                         
