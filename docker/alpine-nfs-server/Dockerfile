@@ -2,7 +2,7 @@ FROM alpine:latest
 
 ADD BUILD/start.sh /start.sh
 
-RUN     apk add --update --no-progress nfs-utils && \
+RUN     apk add --update --no-progress nfs-utils tzdata && \
         chmod +x /start.sh && \
         rm -rf /var/cache/apk/*
 
