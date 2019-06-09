@@ -12,7 +12,8 @@ I will include environment security uplift next phase.
 
 ```
                                            / - [ Worker node 1 ] -\
-[ Any OS]   ==> [ Kubernetes master ]   <==                          ==> [ persistent store ] -                                         - kubectl       -kubectl/kubeadm/kubelet   \ - [ Worker node 2 ] -/      - NFS
+[ Any OS]   ==> [ Kubernetes master ]   <==                          ==> [ persistent store ] -  
+- kubectl       -kubectl/kubeadm/kubelet   \ - [ Worker node 2 ] -/      - NFS
                                                       |                  - Database
                                                       V
                                               [ other extra services ]
