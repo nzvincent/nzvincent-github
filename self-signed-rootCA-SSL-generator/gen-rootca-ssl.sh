@@ -198,6 +198,14 @@ chmod 600 *.key
 h1 "To decrypt encrypted private key"
 openssl rsa -in ${HOST_KEY} -out ${HOST_KEY}.decrypted -passin pass:${CA_KEY_PASS}
 
+# You don't need to decrypt rootCA key in most cases
+# openssl rsa -in ${CA_KEY} -out ${CA_KEY}.decrypted -passin pass:${CA_KEY_PASS}
+
+h1 "Secure private keys"
+chmod 600 *.key
+chmod 600 *.key.decrypted
+
+
 
 echo "Copy rootCA cert to your desktop / PC and import the cert to your OS or App trusted keystore"
 echo "Keep your private keys and passphrase in a secure place"
