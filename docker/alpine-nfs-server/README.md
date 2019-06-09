@@ -20,13 +20,14 @@
   export CONFIG_EXPORTS=$CUR_DIR/CONFIG/exports:/etc/exports
   # Worked for some Linux
   export TIMEZONE=/etc/timezone:/etc/timezone
+  export LOCALTIME=/etc/localtime:/etc/localtime
   export CPU=
   export MEM=
 
   docker run -d -p $PORT2 \
   --name $CONTAINER_NAME -h $CONTAINER_NAME \
   -v $CONFIG_EXPORTS -v $VOLUME_DATA \
-  -v $TIMEZONE $CPU $MEM \
+  -v $TIMEZONE $LOCALTIME -v $CPU $MEM \
   --privileged \
   $CONTAINER_IMAGE
 
