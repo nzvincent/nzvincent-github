@@ -107,9 +107,9 @@ ansible-playbook -i inventories/kuberhosts -l kuber playbook-config-docker-regis
 *Assuming you are using root user here*
 ```
 [root@kuber-master ~]#
-mkdir -p $HOME/.kube
-cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
-chown $(id -u):$(id -g) $HOME/.kuber/config
+> mkdir -p $HOME/.kube
+> cp -i /etc/kubernetes/admin.conf $HOME/.kuber/config
+> chown $(id -u):$(id -g) $HOME/.kuber/config
 ```
 
 **Step 7: Deploy flannel network to Kubernetes cluster**
@@ -121,8 +121,8 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 *Verify nodes and pods*
 ```
 [root@kuber-master ~]#
-kubectl get nodes
-kubectl get pods --all-namespaces
+> kubectl get nodes
+> kubectl get pods --all-namespaces
 ```
 
 **Step 8: Join workers and register nodes to Kubernetes master** 
@@ -142,8 +142,8 @@ kubeadm join 10.0.15.10:6443 --token vzau5v.vjiqyxq26lzsf28e \
 You should see list of master and worker nodes.
 ```
 [root@kuber-master ~]#
-kubectl get nodes
-kubectl get pods --all-namespaces
+> kubectl get nodes
+> kubectl get pods --all-namespaces
 ```
 
 
@@ -156,10 +156,10 @@ kubectl get pods --all-namespaces
 > kubectl create deployment nginx --image=nginx
 
 # View deployment
->kubectl describe deployment nginx
+> kubectl describe deployment nginx
 
 # Create service and map tcp port numbers
-kubectl create service nodeport nginx --tcp=80:80
+> kubectl create service nodeport nginx --tcp=80:80
 
 # Verify deployed Pods and Services
 > kubectl get pods
