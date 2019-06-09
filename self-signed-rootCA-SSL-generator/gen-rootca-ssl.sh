@@ -199,7 +199,7 @@ chmod 600 *.key
 # Decrypt private key
 # reference: https://www.digicert.com/csr-ssl-installation/ubuntu-server-with-apache2-openssl.htm
 ############################################
-h1 "To decrypt encrypted private key"
+h1 "To decrypt device's encrypted private key"
 openssl rsa -in ${HOST_KEY} -out ${HOST_KEY}.decrypted -passin pass:${HOST_KEY_PASS}
 
 # You don't need to decrypt rootCA key in most cases
