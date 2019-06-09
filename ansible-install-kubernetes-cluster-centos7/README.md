@@ -76,10 +76,16 @@ ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-
 ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
 
-*Install and Configure Docker private registry*
+*Install Docker private registry*
 ```
-ansible-playbook -i inventories/kuberhosts -l kuber-exta-services playbook-config-docker-registry.yml -e reboot=1
+ansible-playbook -i inventories/kuberhosts -l kuber-exta-services playbook-install-docker-registry.yml -e reboot=1
 ```
+
+*Configure Docker private registry*
+```
+ansible-playbook -i inventories/kuberhosts -l kuber playbook-config-docker-registry.yml -e reboot=1
+```
+
 
 
 #### Setup Kubernetes master and workers pairing (Part 2)
