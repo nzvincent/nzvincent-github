@@ -28,10 +28,11 @@ The installation includes three parts.
 
 **Step 1: Provisioning your Virtual Machines** 
 
-First, assuming you've already configured 4 Centos 7 VMs with minimun installation for:
+First, assuming you've already configured 5 Centos 7 VMs with minimun installation for:
 * 1 x Kubernetes master node
 * 2 x Kubernetes worker nodes
 * 1 x NFS server node
+* 1 x other services ( docker private registry )
 
 Your physical / virtual machines can be Vmware, KVM or Virtualbox. this project is tested on KVM.
 
@@ -74,6 +75,12 @@ ansible-playbook -i inventories/kuberhosts -l kuber-nfs-server playbook-install-
 ```
 ansible-playbook -i inventories/kuberhosts -l kuber-worker playbook-install-nfs-client.yml -e reboot=1
 ```
+
+*Install and Configure Docker private registry*
+```
+ansible-playbook -i inventories/kuberhosts -l kuber-exta-services playbook-config-docker-registry.yml -e reboot=1
+```
+
 
 #### Setup Kubernetes master and workers pairing (Part 2)
 
