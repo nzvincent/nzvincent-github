@@ -22,9 +22,9 @@ I will include environment security uplift next phase.
 ```
 ## Installation:
 The installation includes three parts.
-* An automated master, worker and NFS nodes intallation using Ansible.
-* Linux command line to setup one-off Kubernetes master and worker nodes pairing.
-* Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment and Docker.
+1 An automated master, worker and NFS nodes intallation using Ansible.
+2 Linux command line to setup one-off Kubernetes master and worker nodes pairing.
+3 Deploy 3 replicated Nginx loadbalance proxy using Kubernetes deployment and Docker.
 
 **Step 1: Provisioning your Virtual Machines** 
 
@@ -145,6 +145,28 @@ You should see list of master and worker nodes.
 kubectl get nodes
 kubectl get pods --all-namespaces
 ```
+
+
+#### Deploy Docker containers to Kubernetes cluster (Part 3)
+
+```
+[root@kuber-master ~]#
+
+# Create deployment
+> kubectl create deployment nginx --image=nginx
+
+# View deployment
+>kubectl describe deployment nginx
+
+# Create service and map tcp port numbers
+kubectl create service nodeport nginx --tcp=80:80
+
+# Verify deployed Pods and Services
+> kubectl get pods
+> kubectl get svc
+
+```
+
 
 
 
