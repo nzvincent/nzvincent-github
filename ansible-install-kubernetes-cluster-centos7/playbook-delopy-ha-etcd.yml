@@ -1,0 +1,3 @@
+# ToDo...
+# This script deploys Kubernetes high availability ETCD 
+# https://kubernetes.io/docs/setup/independent/setup-ha-etcd-with-kubeadm/
