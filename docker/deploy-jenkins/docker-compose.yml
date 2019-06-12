@@ -45,7 +45,7 @@ services:
       HTTPS_PROXY: $HTTPS_PROXY
       SOCKS_PROXY: $SOCKS_PROXY
     networks:
-      - devops-network
+      - dev-network
     depends_on:
       - jenkins
       
