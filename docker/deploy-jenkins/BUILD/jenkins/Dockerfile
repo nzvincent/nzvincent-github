@@ -1,6 +1,8 @@
 ARG JENKIN_VERSION
 ARG JENKIN_APT_GET
 
+# The leading open source automation server based on Debian 
+
 FROM jenkins/jenkins:${JENKIN_VERSION}
 
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
