@@ -13,8 +13,8 @@ services:
     build:
       context: BUILD/jenkins
       args:
-        - JENKINS_VERSION: $JENKINS_VERSION
-        - JENKINS_APT_GET: $JENKINS_APT_GET
+        - JENKINS_VERSION: "$JENKINS_VERSION"
+        - JENKINS_APT_GET: "$JENKINS_APT_GET"
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -24,9 +24,9 @@ services:
     environment:
       - JAVA_OPTS: "-Xmx512m -Xms512m"
       - JENKINS_SLAVE_AGENT_PORT: 50000
-      - HTTP_PROXY: $HTTP_PROXY
-      - HTTPS_PROXY: $HTTPS_PROXY
-      - SOCKS_PROXY: $SOCKS_PROXY
+      - HTTP_PROXY: "$HTTP_PROXY"
+      - HTTPS_PROXY: "$HTTPS_PROXY"
+      - SOCKS_PROXY: "$SOCKS_PROXY"
     networks:
       - dev-network
 
@@ -35,17 +35,17 @@ services:
     build:
       context: BUILD/jenkins-slave
       args:
-        - JENKINS_SLAVE_OPENJDK_VERSION: $JENKINS_SLAVE_OPENJDK_VERSION
-        - JENKINS_SLAVE_APT_GET: $JENKINS_SLAVE_APT_GET
+        - JENKINS_SLAVE_OPENJDK_VERSION: "$JENKINS_SLAVE_OPENJDK_VERSION"
+        - JENKINS_SLAVE_APT_GET: "$JENKINS_SLAVE_APT_GET"
     ports:
       - "50001:50001"
     volumes:
       - ./DATA/JENKINS_SLAVE_HOME:/home/jenkins     
     environment:
       - JAVA_OPTS: "-Xmx512m -Xms512m"
-      - HTTP_PROXY: $HTTP_PROXY
-      - HTTPS_PROXY: $HTTPS_PROXY
-      - SOCKS_PROXY: $SOCKS_PROXY
+      - HTTP_PROXY: "$HTTP_PROXY"
+      - HTTPS_PROXY: "$HTTPS_PROXY"
+      - SOCKS_PROXY: "$SOCKS_PROXY"
     networks:
       - dev-network
     depends_on:
