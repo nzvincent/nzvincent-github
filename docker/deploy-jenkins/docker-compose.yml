@@ -12,11 +12,12 @@ services:
     hostname: jenkins
     build:
       context: BUILD/jenkins
+      image: homebrew/jenkins:ready
       args:
-        - JENKINS_VERSION="$JENKINS_VERSION"
-        - JENKINS_APT_GET="$JENKINS_APT_GET"
+        JENKINS_VERSION: $JENKINS_VERSION
+        JENKINS_APT_GET: $JENKINS_APT_GET
     ports:
-      - "8080:8080"
+      - "8088:8080"
       - "50000:50000"
       - "8083:8083"
     volumes:
@@ -34,9 +35,10 @@ services:
     hostname: jenkins-slave
     build:
       context: BUILD/jenkins-slave
+      image: homebrew/jenkins-slave:ready
       args:
-        - JENKINS_SLAVE_OPENJDK_VERSION="$JENKINS_SLAVE_OPENJDK_VERSION"
-        - JENKINS_SLAVE_APT_GET="$JENKINS_SLAVE_APT_GET"
+        JENKINS_SLAVE_OPENJDK_VERSION: $JENKINS_SLAVE_OPENJDK_VERSION
+        JENKINS_SLAVE_APT_GET: $JENKINS_SLAVE_APT_GET
     ports:
       - "50001:50001"
     volumes:
