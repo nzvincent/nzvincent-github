@@ -1,15 +1,14 @@
 ARG OPENJDK_VERSION
-ARG OPENJDK_APT_GET
-
 
 # The leading open source automation server based on Debian 
 
 FROM openjdk:${OPENJDK_VERSION}
 USER root
 
-RUN apt-get update && apt-get install -y ${OPENJDK_APT_GET} && \ 
-    useradd -U -g 1000 -u 1000 -m /home/jenkins -l -s /bin/bash jenkins && \
-    mkdir -p /home/jenkins & chown jenkins:jenkins /home/jenkins 
+RUN apt-get update && apt-get install -y git python xvfb && \ 
+    useradd jenkins && \
+    mkdir -p /home/jenkins && \
+    chown jenkins:jenkins /home/jenkins 
     
 # drop back to the regular jenkins user - good practice
 USER jenkins
