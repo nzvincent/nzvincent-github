@@ -22,6 +22,9 @@ services:
     environment:
       JAVA_OPTS: "-Xmx512m -Xms512m"
       JENKINS_SLAVE_AGENT_PORT: 50000
+      HTTP_PROXY: $HTTP_PROXY
+      HTTPS_PROXY: $HTTP_PROXY
+      SOCKS_PROXY: $SOCKS_PROXY
     networks:
       - dev-network
 
