@@ -12,6 +12,7 @@ services:
       context: BUILD/jenkins
       args:
         JENKINS_VERSION: $JENKINS_VERSION
+        JENKINS_APT_GET: $JENKINS_APT_GET
     ports:
       - "8080:8080"
       - "50000:50000"
