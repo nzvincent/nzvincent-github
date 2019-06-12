@@ -35,7 +35,7 @@ services:
     build:
       context: BUILD/jenkins-slave
       args:
-        JENKINS_SLAVE_OPENJDK_VERSION: $JENKINS_SLAVE_OPENJDK_VERSION 
+        JENKINS_SLAVE_OPENJDK_VERSION: $JENKINS_SLAVE_OPENJDK_VERSION
         JENKINS_SLAVE_APT_GET: $JENKINS_SLAVE_APT_GET
     ports:
       - "50001:50001"
