@@ -10,6 +10,7 @@ version: '2'
 services:
   jenkins:
     hostname: jenkins
+    container_name: jenkins
     image: homebrew/jenkins:ready
     build:
       context: BUILD/jenkins
@@ -33,6 +34,7 @@ services:
 
   jenkins-slave:
     hostname: jenkins-slave
+    container_name: jenkins-slave
     image: homebrew/jenkins-slave:ready
     build:
       context: BUILD/jenkins-slave
