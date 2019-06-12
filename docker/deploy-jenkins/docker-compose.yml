@@ -36,11 +36,14 @@ services:
     ports:
       - "50001:50001"
     environment:
-      JAVA_OPTS: "-Xmx256m -Xms256m"
+      JAVA_OPTS: "-Xmx512m -Xms512m"
+      HTTP_PROXY: $HTTP_PROXY
+      HTTPS_PROXY: $HTTP_PROXY
+      SOCKS_PROXY: $SOCKS_PROXY
     networks:
       - devops-network
     depends_on:
-      - $ENV_PREFIX-jenkins
+      - jenkins
 
 
 
