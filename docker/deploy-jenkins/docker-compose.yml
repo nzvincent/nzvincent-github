@@ -18,7 +18,7 @@ services:
       - "50000:50000"
       - "8083:8083"
     volumes:
-      - v DATA/JENKIN_HOME:/var/jenkins_home:rw
+      - DATA/JENKIN_HOME:/var/jenkins_home
     environment:
       JAVA_OPTS: "-Xmx512m -Xms512m"
       JENKINS_SLAVE_AGENT_PORT: 50000
@@ -36,7 +36,7 @@ services:
     ports:
       - "50001:50001"
     volumes:
-      - v DATA/JENKIN_SLAVE_HOME:/var/jenkins_slave_home:rw      
+      - DATA/JENKIN_SLAVE_HOME:/var/jenkins_slave_home:rw      
     environment:
       JAVA_OPTS: "-Xmx512m -Xms512m"
       HTTP_PROXY: $HTTP_PROXY
