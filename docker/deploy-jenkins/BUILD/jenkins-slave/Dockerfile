@@ -7,7 +7,7 @@ FROM openjdk:${JENKIN_SLAVE_OPENJDK_VERSION}
 USER root
 
 RUN apt-get update && apt-get install -y git ${JENKIN_APT_GET} & \ 
-    useradd -U -g 1000 -u 1000 -m /home/jenkins -l -s /bin/bash -u 1000 jenkins & \
+    useradd -U -g 1000 -u 1000 -m /home/jenkins -l -s /bin/bash jenkins & \
     mkdir -p /home/jenkins & chown jenkins:jenkins /home/jenkins & \
     
 # drop back to the regular jenkins user - good practice
