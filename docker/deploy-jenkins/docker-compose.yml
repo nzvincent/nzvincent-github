@@ -16,6 +16,7 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+      - "8083:8083"
     volume:
       - v PV_DATA/JENKIN_HOME:/var/jenkins_home
     environment:
