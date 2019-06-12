@@ -1,9 +1,10 @@
 version: '2'
 
-# Services to deploy:
+# @Author: Vincent Pang / nzvincent@gmail.com
+# Deploy services:
 #   - Jenkins
 #   - Jenkins slave
-# Network to deploy"
+# Deploy network"
 #   - dev-network 
 
 services:
