@@ -6,9 +6,9 @@ ARG JENKIN_SLAVE_APT_GET
 FROM openjdk:${JENKIN_SLAVE_OPENJDK_VERSION}
 USER root
 
-RUN apt-get update && apt-get install -y git ${JENKIN_APT_GET} & \ 
-    useradd -U -g 1000 -u 1000 -m /home/jenkins -l -s /bin/bash jenkins & \
-    mkdir -p /home/jenkins & chown jenkins:jenkins /home/jenkins & \
+RUN apt-get update && apt-get install -y ${JENKIN_SLAVE_APT_GET} && \ 
+    useradd -U -g 1000 -u 1000 -m /home/jenkins -l -s /bin/bash jenkins && \
+    mkdir -p /home/jenkins & chown jenkins:jenkins /home/jenkins 
     
 # drop back to the regular jenkins user - good practice
 USER jenkins
