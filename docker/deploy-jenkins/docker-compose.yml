@@ -44,10 +44,7 @@ services:
       - devops-network
     depends_on:
       - jenkins
-
-
-
+      
 networks:
-
   dev-network:
     driver: bridge
