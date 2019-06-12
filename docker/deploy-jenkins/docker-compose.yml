@@ -22,11 +22,11 @@ services:
     volumes:
       - ./DATA/JENKINS_HOME:/var/jenkins_home
     environment:
-      - JAVA_OPTS: "-Xmx512m -Xms512m"
-      - JENKINS_SLAVE_AGENT_PORT: 50000
-      - HTTP_PROXY: "$HTTP_PROXY"
-      - HTTPS_PROXY: "$HTTPS_PROXY"
-      - SOCKS_PROXY: "$SOCKS_PROXY"
+      - JAVA_OPTS="-Xmx512m -Xms512m"
+      - JENKINS_SLAVE_AGENT_PORT=50000
+      - HTTP_PROXY="$HTTP_PROXY"
+      - HTTPS_PROXY="$HTTPS_PROXY"
+      - SOCKS_PROXY="$SOCKS_PROXY"
     networks:
       - dev-network
 
@@ -42,10 +42,10 @@ services:
     volumes:
       - ./DATA/JENKINS_SLAVE_HOME:/home/jenkins     
     environment:
-      - JAVA_OPTS: "-Xmx512m -Xms512m"
-      - HTTP_PROXY: "$HTTP_PROXY"
-      - HTTPS_PROXY: "$HTTPS_PROXY"
-      - SOCKS_PROXY: "$SOCKS_PROXY"
+      - JAVA_OPTS="-Xmx512m -Xms512m"
+      - HTTP_PROXY="$HTTP_PROXY"
+      - HTTPS_PROXY="$HTTPS_PROXY"
+      - SOCKS_PROXY="$SOCKS_PROXY"
     networks:
       - dev-network
     depends_on:
