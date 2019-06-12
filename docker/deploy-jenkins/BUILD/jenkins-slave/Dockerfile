@@ -1,6 +1,7 @@
 ARG JENKINS_SLAVE_OPENJDK_VERSION
 ARG JENKIN_SLAVE_APT_GET
 
+
 # The leading open source automation server based on Debian 
 
 FROM openjdk:${JENKINS_SLAVE_OPENJDK_VERSION}
