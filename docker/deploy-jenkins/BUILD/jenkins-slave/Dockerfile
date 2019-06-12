@@ -1,9 +1,9 @@
-ARG JENKIN_SLAVE_OPENJDK_VERSION
+ARG JENKINS_SLAVE_OPENJDK_VERSION
 ARG JENKIN_SLAVE_APT_GET
 
 # The leading open source automation server based on Debian 
 
-FROM openjdk:${JENKIN_SLAVE_OPENJDK_VERSION}
+FROM openjdk:${JENKINS_SLAVE_OPENJDK_VERSION}
 USER root
 
 RUN apt-get update && apt-get install -y ${JENKIN_SLAVE_APT_GET} && \ 
