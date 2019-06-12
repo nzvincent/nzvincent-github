@@ -2,8 +2,8 @@ version: '2'
 
 # @Author: Vincent Pang / nzvincent@gmail.com
 # Deploy services:
-#   - Jenkins
-#   - Jenkins slave
+#   - Jenkins ( based on jenkins/jenkins:tls )
+#   - Jenkins slave ( based on openJDK:stretch-11 )
 # Deploy network"
 #   - dev-network 
 
