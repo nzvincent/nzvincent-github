@@ -35,11 +35,11 @@ services:
     build:
       context: BUILD/jenkins-slave
       args:
-        JENKINS_SLAVE_VERION: $JENKINS_SLAVE_VERSION  
+        JENKINS_SLAVE_OPENJDK_VERSION : $JENKINS_SLAVE_OPENJDK_VERSION  
     ports:
       - "50001:50001"
     volumes:
-      - ./DATA/JENKINS_SLAVE_HOME:/var/jenkins_slave_home     
+      - ./DATA/JENKINS_SLAVE_HOME:/home/jenkins     
     environment:
       JAVA_OPTS: "-Xmx512m -Xms512m"
       HTTP_PROXY: $HTTP_PROXY
