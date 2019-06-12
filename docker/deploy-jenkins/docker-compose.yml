@@ -17,7 +17,7 @@ services:
       - "8080:8080"
       - "50000:50000"
     environment:
-      JAVA_OPTS: "-Xmx256m -Xms256m"
+      JAVA_OPTS: "-Xmx512m -Xms512m"
     networks:
       - dev-network
 
