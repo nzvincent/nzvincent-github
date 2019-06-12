@@ -10,9 +10,9 @@ version: '2'
 services:
   jenkins:
     hostname: jenkins
+    image: homebrew/jenkins:ready
     build:
       context: BUILD/jenkins
-      image: homebrew/jenkins:ready
       args:
         JENKINS_VERSION: $JENKINS_VERSION
         JENKINS_APT_GET: $JENKINS_APT_GET
@@ -33,9 +33,9 @@ services:
 
   jenkins-slave:
     hostname: jenkins-slave
+    image: homebrew/jenkins-slave:ready
     build:
       context: BUILD/jenkins-slave
-      image: homebrew/jenkins-slave:ready
       args:
         JENKINS_SLAVE_OPENJDK_VERSION: $JENKINS_SLAVE_OPENJDK_VERSION
         JENKINS_SLAVE_APT_GET: $JENKINS_SLAVE_APT_GET
