@@ -1,0 +1,42 @@
+version: '2'
+
+# Services to deploy:
+#   - Jenkins
+#   - Jenkins slave
+# Network to deploy"
+#   - dev-network 
+
+services:
+  jenkins:
+    build:
+      context: BUILD/jenkins
+      args:
+        JENKINS_VERSION: $JENKINS_VERSION
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - dev-network
+
+  jenkins-slave:
+    build:
+      context: BUILD/jenkins-slave
+      args:
+        JENKINS_SLAVE_VERION: $JENKINS_SLAVE_VERSION  
+    ports:
+      - "50001:50001"
+    environment:
+      JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - devops-network
+    depends_on:
+      - $ENV_PREFIX-jenkins
+
+
+
+networks:
+
+  dev-network:
+    driver: bridge
