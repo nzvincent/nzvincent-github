@@ -16,8 +16,11 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+    volume:
+      - v PV_DATA/JENKIN_HOME:/var/jenkins_home
     environment:
       JAVA_OPTS: "-Xmx512m -Xms512m"
+      JENKINS_SLAVE_AGENT_PORT: 50000
     networks:
       - dev-network
 
