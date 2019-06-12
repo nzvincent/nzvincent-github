@@ -1,4 +1,12 @@
-#### To deploy Jenkins master + Jenkins slave agent
+## To deploy Jenkins master + Jenkins slave agent
+
+This docker compose scritp deploys:
+
+* Jenkins master
+* Jenkins slave
+* Jfrog artifactory
+* Lightweight GIT ( Gogs )
+
 
 **Steps**
 
