@@ -74,7 +74,7 @@
 
     - name: Enable and start up Docker service
       service:
-        name: httpd
+        name: docker
         state: started
         enabled: yes
 
