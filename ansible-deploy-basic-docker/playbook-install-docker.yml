@@ -19,7 +19,7 @@
         upgrade: dist
         update_cache: yes
         
-    - name: Install packages
+    - name: Install common packages
       apt: 
         name: "{{ item }}" 
         state: latest
@@ -48,7 +48,7 @@
         upgrade: dist
         update_cache: yes
         
-    - name: Install packages
+    - name: Install Docker packages
       apt: 
         name: "{{ item }}" 
         state: latest
