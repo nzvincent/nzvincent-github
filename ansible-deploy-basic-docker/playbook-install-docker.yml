@@ -36,3 +36,8 @@
       $(lsb_release -cs) \
       stable"
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    
+  - name: Install Docker - old school bash method
+    shell: |
+      apt-get -y update && \ 
+      apt-get -y install docker-ce docker-ce-cli containerd.io
