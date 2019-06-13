@@ -7,37 +7,40 @@
 
   tasks:
   
-  - name: Update all packages to the latest version
-  apt:
-    upgrade: dist
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
   
-  - name: Install packages
-    apt: 
-      name: {{ item }} 
-      state: latest
-    with_items:
-     - apt-transport-https
-     - ca-certificates
-     - curl
-     - gnupg-agent
-     - software-properties-common
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  ############################
+  # Block: for Debian / Ubuntu
+  ############################
+  - block:
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
     
-  - name: Add Docker’s official GPG key - old school way
-    shell: |
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-    
-  - name: Add Docker respository - old school way
-    shell: |
-      add-apt-repository \
-      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) \
-      stable"
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-    
-  - name: Install Docker - old school bash method
-    shell: |
-      apt-get -y update && \ 
-      apt-get -y install docker-ce docker-ce-cli containerd.io
+    - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+
+    - name: Install packages
+      apt: 
+        name: {{ item }} 
+        state: latest
+      with_items:
+       - apt-transport-https
+       - ca-certificates
+       - curl
+       - gnupg-agent
+       - software-properties-common
+
+    - name: Add Docker’s official GPG key - old school way
+      shell: |
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    - name: Add Docker respository - old school way
+      shell: |
+        add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+        
+    - name: Install Docker - old school bash method
+      shell: |
+        apt-get -y update && \ 
+        apt-get -y install docker-ce docker-ce-cli containerd.io
