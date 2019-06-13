@@ -1,8 +1,10 @@
 ---
+# @Author: Vincent Pang / nzvincent@gmail.com
 
 - hosts: all
-  become: true
-  user: root
+  become: yes
+  become_user: root
+  become_method: sudo
 
   tasks:
   
