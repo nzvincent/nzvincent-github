@@ -19,7 +19,6 @@
         upgrade: dist
         update_cache: yes
         
-
     - name: Install packages
       apt: 
         name: "{{ item }}" 
@@ -30,6 +29,8 @@
         - curl
         - gnupg-agent
         - software-properties-common
+        - libxss1
+        - aptitude
 
     - name: Add Docker’s official GPG key - old school way
       shell: |
