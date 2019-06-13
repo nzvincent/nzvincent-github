@@ -1,4 +1,38 @@
 ---
 
--- tasks:
+- hosts: all
+  become: true
+  user: root
+  connection: ssh 
 
+  tasks:
+  
+  - name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
+  
+  - name: Install packages
+    apt: 
+      name: {{ item }} 
+      state: latest
+    with_items:
+     - apt-transport-https
+     - ca-certificates
+     - curl
+     - gnupg-agent
+     - software-properties-common
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    
+  - name: Add Docker’s official GPG key - old school way
+    shell: |
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    
+  - name: Add Docker respository - old school way
+    shell: |
+      add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) \
+      stable"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
