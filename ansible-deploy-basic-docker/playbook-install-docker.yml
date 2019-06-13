@@ -58,3 +58,4 @@
       register: command_output
 
     - debug: msg="{{ command_output.stdout.split("\n") }}"    
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu' 
