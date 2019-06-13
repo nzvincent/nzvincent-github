@@ -1,7 +1,14 @@
 ---
+# @Author: Vincent Pang / nzvincent@gmail.com
+
 - hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
 
   tasks:
+  
+  - name: Enable No password for %sudo group 
     - lineinfile:
         path: /etc/sudoers
         state: present
