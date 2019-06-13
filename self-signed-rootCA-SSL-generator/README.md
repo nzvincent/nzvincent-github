@@ -12,6 +12,8 @@
 
 
 **To install new rootCA to target OS**
+
+**Option 1: Via Ansible
 * Create your-intentory file
 * Copy your un-encrypted root CA files to CA folder
 * Run the following:
@@ -21,6 +23,11 @@
 ansible-playbook -i your-inventory -l your-host-group ansible-update-trusted-ca.yml
 
 ```
+
+**Option 2: Copy manually
+*[ For Debian and Ubuntu OS ]*
+* scp the root CA file to your target machines machine:/etc/ssl/certs/
+* As root, Run update-ca-certificates
 
 
 
