@@ -10,8 +10,8 @@
   ############################
   # Block: for Debian / Ubuntu
   ############################
-  - block:
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
+  #- block:
+  #  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
 
       - name: Update all packages to the latest version
         apt:
