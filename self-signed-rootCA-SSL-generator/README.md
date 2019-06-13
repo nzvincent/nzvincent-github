@@ -12,12 +12,13 @@
 
 
 **To install new rootCA to target OS**
+* Create your-intentory file
 * Copy your root CA files to CA folder
 
 ```
 mkdir -p CA
 
-ansible-playbook -i your-inventory -l your-host-group play
+ansible-playbook -i your-inventory -l your-host-group ansible-update-trusted-ca.yml
 
 ```
 
