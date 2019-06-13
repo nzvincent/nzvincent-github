@@ -10,9 +10,9 @@
 
   tasks:
   
-  - fail:
-      msg: "This script only run on 64 bits OS"
-    when: ansible_architecture != "64 bits"
+  #- fail:
+  #    msg: "This script only run on 64 bits OS"
+  #  when: ansible_architecture != "64 bits"
   
   ############################
   # Block: for Debian / Ubuntu
