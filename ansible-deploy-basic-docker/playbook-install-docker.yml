@@ -5,8 +5,14 @@
   become: yes
   become_user: root
   become_method: sudo
+  gather_facts: true
+  
 
   tasks:
+  
+  - fail:
+      msg: "This script only run on 64 bits OS"
+    when: ansible_architecture != "64 bits"
   
   ############################
   # Block: for Debian / Ubuntu
