@@ -1,5 +1,7 @@
 ---
+# This script enable no password sudoer via visudo 
 # @Author: Vincent Pang / nzvincent@gmail.com
+
 
 - hosts: all
   become: yes
