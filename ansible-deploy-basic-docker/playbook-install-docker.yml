@@ -35,6 +35,12 @@
     - name: Add Docker’s official GPG key - old school way
       shell: |
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+        when: ansible_distribution == 'Debian'
+
+    - name: Add Docker’s official GPG key - old school way
+      shell: |
+        curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+      when: ansible_distribution == 'Ubuntu'
 
     - name: Add Docker respository - old school way
       shell: |
@@ -42,7 +48,16 @@
            "deb [arch=amd64] https://download.docker.com/linux/debian \
            $(lsb_release -cs) \
            stable"
-        
+      when: ansible_distribution == 'Debian'
+      
+    - name: Add Docker respository - old school way
+      shell: |
+        add-apt-repository \
+           "deb [arch=amd64] https://download.docker.com/linux/debian \
+           $(lsb_release -cs) \
+           stable"
+      when: ansible_distribution == 'Ubuntu'
+   
     - name: Update all packages to the latest version
       apt:
         upgrade: dist
