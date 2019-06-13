@@ -22,7 +22,7 @@
       apt: 
         name: {{ item }} 
         state: latest
-      with_items:
+      loop:
        - apt-transport-https
        - ca-certificates
        - curl
