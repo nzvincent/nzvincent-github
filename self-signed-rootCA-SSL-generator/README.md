@@ -13,7 +13,7 @@
 
 **To install new rootCA to target OS**
 * Create your-intentory file
-* Copy your root CA files to CA folder
+* Copy your un-encrypted root CA files to CA folder
 
 ```
 mkdir -p CA
