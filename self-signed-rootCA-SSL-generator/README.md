@@ -11,6 +11,17 @@
 * Run ./gen-rootca-ssl.sh your-domain.com
 
 
+**To install new rootCA to target OS**
+* Copy your root CA files to CA folder
+
+```
+mkdir -p CA
+
+ansible-playbook -i your-inventory -l your-host-group play
+
+```
+
+
 
 
 
