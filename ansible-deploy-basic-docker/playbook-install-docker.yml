@@ -32,17 +32,17 @@
         - libxss1
         - aptitude
 
-    - name: Add Docker’s official GPG key - old school way
+    - name: Add Docker’s Debian official GPG key - old school way
       shell: |
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
         when: ansible_distribution == 'Debian'
 
-    - name: Add Docker’s official GPG key - old school way
+    - name: Add Docker’s Ubuntu official GPG key - old school way
       shell: |
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
       when: ansible_distribution == 'Ubuntu'
 
-    - name: Add Docker respository - old school way
+    - name: Add Docker Debian respository - old school way
       shell: |
         add-apt-repository \
            "deb [arch=amd64] https://download.docker.com/linux/debian \
@@ -50,7 +50,7 @@
            stable"
       when: ansible_distribution == 'Debian'
       
-    - name: Add Docker respository - old school way
+    - name: Add Docker Ubuntu respository - old school way
       shell: |
         add-apt-repository \
            "deb [arch=amd64] https://download.docker.com/linux/debian \
