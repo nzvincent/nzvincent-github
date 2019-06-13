@@ -24,8 +24,8 @@ ansible-playbook -i your-inventory -l your-host-group ansible-update-trusted-ca.
 
 ```
 
-**Option 2: Copy manually
-*[ For Debian and Ubuntu OS ]*
+**Option 2: Copy manually**
+* [ For Debian and Ubuntu OS ]
 * scp the root CA file to your target machines machine:/etc/ssl/certs/
 * As root, Run update-ca-certificates
 
