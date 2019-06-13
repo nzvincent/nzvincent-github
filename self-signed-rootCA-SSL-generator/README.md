@@ -14,9 +14,9 @@
 **To install new rootCA to target OS**
 * Create your-intentory file
 * Copy your un-encrypted root CA files to CA folder
+* Run the following:
 
 ```
-mkdir -p CA
 
 ansible-playbook -i your-inventory -l your-host-group ansible-update-trusted-ca.yml
 
