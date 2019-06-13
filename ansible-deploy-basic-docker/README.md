@@ -3,6 +3,6 @@
 **Example**
 
 ```
-ansible-playbook -i hosts.txt -i linux-debian playbook-install-docker.yml
+ansible-playbook -i hosts.txt -i linux-debian playbook-install-docker.yml -kK
 ```
 
