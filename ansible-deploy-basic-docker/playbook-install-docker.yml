@@ -14,15 +14,15 @@
   - name: For Debian and Ubuntu Only  
     block:
     
-  - set_fact:
-      fact_docker_gpg_url: https://download.docker.com/linux/debian/gpg
-      fact_docker_repo_url: https://download.docker.com/linux/debian
-      when: ansible_distribution == 'Debian' 
+    - set_fact:
+        fact_docker_gpg_url: https://download.docker.com/linux/debian/gpg
+        fact_docker_repo_url: https://download.docker.com/linux/debian
+        when: ansible_distribution == 'Debian' 
  
-  - set_fact:
-      fact_docker_gpg_url: https://download.docker.com/linux/ubuntu/gpg
-      fact_docker_repo_url: https://download.docker.com/linux/ubuntu
-      when: ansible_distribution == 'Ubuntu' 
+    - set_fact:
+        fact_docker_gpg_url: https://download.docker.com/linux/ubuntu/gpg
+        fact_docker_repo_url: https://download.docker.com/linux/ubuntu
+        when: ansible_distribution == 'Ubuntu' 
     
     - name: Update all packages to the latest version
       apt:
