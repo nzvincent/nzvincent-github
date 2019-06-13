@@ -17,6 +17,8 @@
     - name: Update all packages to the latest version
       apt:
         upgrade: dist
+        update_cache: yes
+        
 
     - name: Install packages
       apt: 
@@ -43,7 +45,8 @@
     - name: Update all packages to the latest version
       apt:
         upgrade: dist
-
+        update_cache: yes
+        
     - name: Install packages
       apt: 
         name: "{{ item }}" 
