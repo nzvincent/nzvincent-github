@@ -1,0 +1,19 @@
+---
+# This script enable no password sudoer via visudo 
+# @Author: Vincent Pang / nzvincent@gmail.com
+
+
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+  
+  - name: Enable No password for %sudo group 
+    lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: '^%sudo'
+      line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'
