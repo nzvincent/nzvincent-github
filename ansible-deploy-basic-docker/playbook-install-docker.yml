@@ -1,5 +1,6 @@
 ---
 # @Author: Vincent Pang / nzvincent@gmail.com
+# Deploy standalone Docker CE to 64 bits Ubuntu and Debian
 
 - hosts: all
   become: yes
