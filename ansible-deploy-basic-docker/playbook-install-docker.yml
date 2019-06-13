@@ -14,9 +14,9 @@
     when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'  
     
     - name: Update all packages to the latest version
-      apt:
-        upgrade: dist
-
+    apt:
+      upgrade: dist
+      
     - name: Install packages
       apt: 
         name: {{ item }} 
