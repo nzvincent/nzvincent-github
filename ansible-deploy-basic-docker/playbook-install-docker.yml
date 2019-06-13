@@ -7,7 +7,6 @@
 
   tasks:
   
-  
   ############################
   # Block: for Debian / Ubuntu
   ############################
@@ -44,3 +43,17 @@
       shell: |
         apt-get -y update && \ 
         apt-get -y install docker-ce docker-ce-cli containerd.io
+        
+    - name: Start and enable Docker service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+        
+    - name: Verify Docker installation
+      shell: |
+        docker --version
+        docker images
+      register: command_output
+        
+    - debug: msg:"{{ command_output.stdout.split("\n") }}"    
