@@ -14,6 +14,16 @@
   - name: For Debian and Ubuntu Only  
     block:
     
+    - set_fact:
+     fact_docker_gpg_url: https://download.docker.com/linux/debian/gpg
+     fact_docker_repo_url: https://download.docker.com/linux/debian
+     when: ansible_distribution == 'Debian' 
+ 
+     - set_fact:
+     fact_docker_gpg_url: https://download.docker.com/linux/ubuntu/gpg
+     fact_docker_repo_url: https://download.docker.com/linux/ubuntu
+     when: ansible_distribution == 'Ubuntu' 
+    
     - name: Update all packages to the latest version
       apt:
         upgrade: dist
@@ -32,34 +42,17 @@
         - libxss1
         - aptitude
 
-    - name: Add Docker’s Debian official GPG key - old school way
+    - name: Add Docker’s official GPG key - old school way
       shell: |
-        curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-      when: ansible_distribution == 'Debian'
+        curl -fsSL {{ fact_docker_gpg_url }} | sudo apt-key add -
       ignore_errors: yes
       
-    - name: Add Docker’s Ubuntu official GPG key - old school way
-      shell: |
-        curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-      when: ansible_distribution == 'Ubuntu'
-      ignore_errors: yes
-
-    - name: Add Docker Debian respository - old school way
+    - name: Add Docker respository - old school way
       shell: |
         add-apt-repository \
-           "deb [arch=amd64] https://download.docker.com/linux/debian \
+           "deb [arch=amd64] {{ fact_docker_repo_url }} \
            $(lsb_release -cs) \
            stable"
-      when: ansible_distribution == 'Debian'
-      ignore_errors: yes
-      
-    - name: Add Docker Ubuntu respository - old school way
-      shell: |
-        add-apt-repository \
-           "deb [arch=amd64] https://download.docker.com/linux/debian \
-           $(lsb_release -cs) \
-           stable"
-      when: ansible_distribution == 'Ubuntu'
       ignore_errors: yes
       
     - name: Update all packages to the latest version
