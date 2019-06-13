@@ -3,7 +3,6 @@
 - hosts: all
   become: true
   user: root
-  connection: ssh 
 
   tasks:
   
