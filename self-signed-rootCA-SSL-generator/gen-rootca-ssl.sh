@@ -52,11 +52,15 @@ INPUT=$1
 
 CA_KEY=rootCA-${CA_DNS}.key
 CA_CRT=rootCA-${CA_DNS}.crt
+CA_DER=rootCA-${CA_DNS}.der
+CA_PEM=rootCA-${CA_DNS}.pem
 CA_CFN=rootCA-${CA_DNS}.cfn
 
 HOST_KEY=device-${CA_DNS}.key
 HOST_CSR=device-${CA_DNS}.csr
 HOST_CRT=device-${CA_DNS}.crt
+HOST_DER=device-${CA_DNS}.der
+HOST_PEM=device-${CA_DNS}.pem
 HOST_CFN=device-${CA_DNS}.cfn
 
 INDEX=index.txt
@@ -192,6 +196,16 @@ h1 "Verify device's cert"
 openssl x509 -noout -text \
   -in ${HOST_CRT}
   
+############################################
+# Convert certifictes to other formats
+############################################
+h1 "Convert crt to der and pem format"
+openssl x509 -in ${CA_CRT} -outform der -out ${CA_DER}
+openssl x509 -in ${HOST_CRT} -outform der -out ${HOST_DER}
+
+openssl x509 -in ${CA_CRT}   -outform pem -out ${CA_PEM}
+openssl x509 -in ${HOST_CRT} -outform pem -out ${HOST_PEM}
+
 h1 "Secure private keys"
 chmod 600 *.key
 
