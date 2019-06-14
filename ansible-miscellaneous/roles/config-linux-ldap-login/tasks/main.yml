@@ -1,0 +1,12 @@
+---
+
+block:
+  
+  - name: Configure Ldap config
+  
+  - name: Configure ldap nsswithc
+  
+  - name: Configure ldap system auth
+  
+  
+  
