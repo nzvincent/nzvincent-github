@@ -1,0 +1,8 @@
+---
+
+ldad:
+  config: '/etc/ldap.conf'
+  nsswtch: '/etc/nsswitch.conf'
+  system_auth: '/etc/pam.d/system-auth'
+
+  
