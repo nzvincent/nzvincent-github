@@ -4,8 +4,13 @@
 # This script uses inotifywatch to monitor files status and trigger commands.
 # To install .eg apt-get install -y inotify-tools
 # Download this code to your git clone project directory, do not rename this script.
+# Usage:
+#   - Copy this script to your cloned git root directory. 
+#   - Modify the variables
+#   - Change file permission to - chmod 0744 inotify.sh
+#   - Run ./inotify.sh and the script will monitor files status and trigger commands. 
 
-# Modify below here.
+# Modify variables below here.
 DIR=`pwd`
 CMD_PREFIX="ansible-playbook -i hosts.txt -l linux-debian "
 GIT_BRANCH=master
