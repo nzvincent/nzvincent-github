@@ -1,8 +1,9 @@
 #!/bin/bash
 
-#@Author: 
-# This standing up a Samba server for Windows files sharing
-
+# @Usage: ./samba-docker-image.sh
+# @Author: nzvincent@gmail.com
+# @Ref: https://hub.docker.com/r/dperson/samba/
+# @Notes: This standing up a Samba server for Windows files sharing
 
 IMAGE=jenserat/samba-publicshare
 NAME=samba
@@ -16,8 +17,6 @@ EXTRA_OPT=""
 if [ $1 = "force" ];
   docker rm -f samba
 fi
-
-
 
 docker run ${RUN_OPT} \
   --name ${NAME} \
