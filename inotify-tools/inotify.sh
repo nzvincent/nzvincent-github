@@ -9,7 +9,8 @@
 #   - Copy this script to your cloned git root directory. 
 #   - Modify the variables
 #   - Change file permission to - chmod 0744 inotify.sh
-#   - Run ./inotify.sh and the script will monitor files status and trigger commands. 
+#   - on your git project root directory, Run ./inotify.sh, 
+# Notes: this script will utilise your terminal during inotify watch, so you may need to start up another terminal.
 
 
 # Modify variables below here.
