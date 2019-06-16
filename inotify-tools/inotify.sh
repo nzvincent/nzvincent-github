@@ -2,6 +2,7 @@
 
 #@Author: nzvincent@gmail.com / Vincent Pang
 # This script uses inotifywatch to monitor files status and trigger commands.
+# I designed this for Ansible playbook but you can use this on other development purposes.
 # To install .eg apt-get install -y inotify-tools
 # Download this code to your git clone project directory, do not rename this script.
 # Usage:
