@@ -12,16 +12,17 @@
 
 # Modify variables below here.
 DIR=`pwd`
+NOTIFY_OPT="-r --exclude .git -e modify -e create"
 CMD_PREFIX="ansible-playbook -i hosts.txt -l linux-debian "
 GIT_BRANCH=master
 GIT_MSG="Ansible successfully built."
 
 if [ ! $@ ]; then
-  echo "Error input, Example: $0 playbook-file.yml"
+  echo "Input error!!!, example: $0 playbook-file.yml"
   exit 127
 fi
 
-while inotifywait -r --exclude .git -e modify -e create ${DIR}; do
+while inotifywait ${NOTIFY_OPT} ${DIR}; do
    ${CMD_PREFIX} $@
    EXIT=$?
    if [ $EXIT -eq 0 ]; then
