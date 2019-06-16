@@ -13,7 +13,7 @@
 
 # Modify variables below here.
 DIR=`pwd`
-NOTIFY_OPT="-r --exclude .git -e modify -e create"
+INOTIFY_OPT="-r --exclude .git -e modify -e create"
 CMD_PREFIX="ansible-playbook -i hosts.txt -l linux-debian "
 GIT_BRANCH=master
 GIT_MSG="Ansible successfully built."
@@ -23,7 +23,7 @@ if [ ! $@ ]; then
   exit 127
 fi
 
-while inotifywait ${NOTIFY_OPT} ${DIR}; do
+while inotifywait ${INOTIFY_OPT} ${DIR}; do
    ${CMD_PREFIX} $@
    EXIT=$?
    if [ $EXIT -eq 0 ]; then
