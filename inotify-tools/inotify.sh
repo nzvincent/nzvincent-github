@@ -11,19 +11,26 @@
 #   - Change file permission to - chmod 0744 inotify.sh
 #   - Run ./inotify.sh and the script will monitor files status and trigger commands. 
 
+
 # Modify variables below here.
-DIR=`pwd`
-INOTIFY_OPT="-r --exclude .git -e modify -e create"
+
+MONDIR=`pwd`
+# -r is recursive, you can exclude .git .svn -e is what event to be monitored
+INOTIFY_OPT="-r --exclude .git -e modify -e create"  
+# Build command prefix to be triggered when change made
 CMD_PREFIX="ansible-playbook -i hosts.txt -l linux-debian "
+# Git commit options on build success. 
 GIT_BRANCH=master
 GIT_MSG="Ansible successfully built."
 
+
+# CMD_PREFIX $@, command prefix [ arguments ] eg. ansible-playbook -i hosts.txt -l linux-debian [ playbook.yml ]
 if [ ! $@ ]; then
   echo "Input error!!!, example: $0 playbook-file.yml"
   exit 127
 fi
 
-while inotifywait ${INOTIFY_OPT} ${DIR}; do
+while inotifywait ${INOTIFY_OPT} ${MONDIR}; do
    ${CMD_PREFIX} $@
    EXIT=$?
    if [ $EXIT -eq 0 ]; then
