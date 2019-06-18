@@ -24,7 +24,7 @@
       mode: "{{ item.mode }}"
     loop:
       - { source: '{{ registry_ssl_crt }}' , dest: '{{ registry_cert_dir }}/{{ registry_ssl_crt }}', mode: '0640' }
-      - { source: '{{ registry_ssl_key }}' , dest: '{{ registry_cert_dir }}/{{ registry_ssl_key }}', mode: '0640' }   
+      - { source: '{{ registry_ssl_key }}' , dest: '{{ registry_cert_dir }}/{{ registry_ssl_key }}', mode: '0600' }   
 
 
   - name: Deploy Docker registry
