@@ -18,6 +18,8 @@
 MONDIR=`pwd`
 # -r is recursive, you can exclude .git .svn -e is what event to be monitored
 INOTIFY_OPT="-r --exclude .git -e modify -e create"  
+# Set delay after change detected
+DELAY=3
 # Build command prefix to be triggered when change made
 CMD_PREFIX="ansible-playbook -i hosts.txt -l linux-debian "
 # Git commit options on build success. 
@@ -32,6 +34,7 @@ if [ ! $@ ]; then
 fi
 
 while inotifywait ${INOTIFY_OPT} ${MONDIR}; do
+   sleep ${DELAY}
    ${CMD_PREFIX} $@
    EXIT=$?
    if [ $EXIT -eq 0 ]; then
