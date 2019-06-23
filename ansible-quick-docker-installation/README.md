@@ -1,4 +1,4 @@
-## A simple way to deploy docker and docker-compose to Debian 9 & Ubuntu 
+## A quick way to deploy docker and docker-compose to Debian 9 & Ubuntu 
 
 **Requirements:**
 * Debian / Ubuntu 64 bits OS
