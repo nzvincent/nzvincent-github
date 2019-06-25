@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv 
+  name: nfs-web-proxy-pv 
 spec:
   capacity:
     storage: 1Gi 
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc  
+  name: nfs-web-proxy-pvc  
 spec:
   accessModes:
   - ReadWriteMany      
@@ -55,6 +55,6 @@ spec:
   volumes:
     - name: nfsvol
       persistentVolumeClaim:
-        claimName: nfs-pvc 
+        claimName: nfs-web-proxy-pvc 
 
 
