@@ -1,1 +1,30 @@
----
+  ---
+  tasks:
+  
+  - name: install ca package on rhel systems
+    yum:
+      name: ca-certificates
+      state: present
+    when: ansible_os_family == "Centos"
+ 
+  - name: enable dynamic ca configuration on Centos
+    shell: /bin/update-ca-trust enable
+    when: ansible_os_family == "Centos" and ansible_distribution_major_version|int == 7
+ 
+  - name: copy certificate authority to trusted ca path of the os
+    copy:
+      src: '{{ item }}'
+      dest: '{{ ca_path[ansible_os_family][ansible_distribution_major_version|int] }}/'
+      owner: root
+      group: root
+      mode: 0644
+    with_fileglob:
+      - files/ca/*
+    notify:
+      - update trusted ca centos
+ 
+  handlers:
+ 
+  - name: update trusted ca centos
+    shell: /bin/update-ca-trust
+when: ansible_os_family == "Centos"
