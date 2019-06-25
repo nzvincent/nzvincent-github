@@ -1,17 +1,10 @@
-  vars:
-  ca_path_debian: /usr/local/share/ca-certificates
-  ca_path:
-    RedHat:
-      6: /usr/local/share/ca-certificates
-      7: /etc/pki/ca-trust/source/anchors
-    Centos:
-      6: /usr/local/share/ca-certificates
-      7: /etc/pki/ca-trust/source/anchors        
-    Debian:
-      7: '{{ ca_path_debian }}'
-      8: '{{ ca_path_debian }}'
-      9: '{{ ca_path_debian }}'   
-     Ubuntu:
-      14: '{{ ca_path_debian }}'
-      16: '{{ ca_path_debian }}'
-      18: '{{ ca_path_debian }}' 
+ca_path:
+  Debian:
+    8: /usr/local/share/ca-certificates
+    9: /usr/local/share/ca-certificates
+  RedHat:  
+    6: /usr/local/share/ca-certificates
+    7: /etc/pki/ca-trust/source/anchors   
+  Centos:
+    6: /usr/local/share/ca-certificates
+    7: /etc/pki/ca-trust/source/anchors   
