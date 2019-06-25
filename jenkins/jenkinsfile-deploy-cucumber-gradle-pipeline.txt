@@ -7,7 +7,7 @@ pipeline {
   environment {
     JENKINS_AGENTS = 'windows-agents'
     GIT_STABLE_RELEASE = '4669d82bb3095d78c440c5494dee908dae82a08'
-    GIT_REPOS= 'github.com/nzvincent/cucumber.git'
+    GIT_REPO = 'github.com/nzvincent/cucumber.git'
   }
     
 
@@ -18,6 +18,16 @@ pipeline {
  stages{
     stage('Checkout SCM project'){
        steps{
+       
+       checkout([
+        $class: 'GitSCM', 
+        branches: [[name: 'GIT_STABLE_RELEASE' ]], 
+        doGenerateSubmoduleConfigurations: false, 
+        extensions: [[$class: 'CleanCheckout']], 
+        submoduleCfg: [], 
+        userRemoteConfigs: [[credentialsId: '<gitCredentials>', url: 'GIT_REPO']]
+    ])
+       
        
        }
     }
