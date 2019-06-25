@@ -20,7 +20,7 @@
       group: root
       mode: 0644
     with_fileglob:
-      - files/ca/*
+      - files/*.crt
     notify:
       - update trusted ca centos
  
