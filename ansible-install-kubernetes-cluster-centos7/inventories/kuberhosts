@@ -1,3 +1,7 @@
+# Directory layout recommended by:
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout
+# @Author: nzvincent@gmail.com | Vincent Pang
+
 [kuber:children]
 kuber-master
 kuber-worker
@@ -16,4 +20,3 @@ kuber-nfs-server
 
 [kuber-nfs-server]
 192.168.1.90
-
