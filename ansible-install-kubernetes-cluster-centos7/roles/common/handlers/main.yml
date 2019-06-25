@@ -12,7 +12,7 @@
   - name: Reboot OS
     reboot:
 
-  - name: Update trusted CA for Centos
+  - name: Update trusted root CA for Centos
     shell: /bin/update-ca-trust
   when: ansible_os_family == "Centos"
 
