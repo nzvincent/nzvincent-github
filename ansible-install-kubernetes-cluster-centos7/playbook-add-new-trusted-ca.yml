@@ -3,3 +3,17 @@
 # https://blog.confirm.ch/adding-a-new-trusted-certificate-authority/
 
 ---
+
+- hosts: all
+
+  tasks:
+
+  #================================================================================================
+  - name: Add new trucsted CA
+  #================================================================================================
+    include_role:
+      name: add-new-trusted-ca
+      
+  become: yes
+  become_user: root
+become_method: sudo
