@@ -28,5 +28,10 @@
     echo -e "fstab: `cat /etc/fstab`"
   register: command_output
   
-- debug: msg="{{ command_output.stdout.split('\n') }}"     
+- debug: msg="{{ command_output.stdout.split('\n') }}"   
+
+
+  - name: update trusted ca centos
+    shell: /bin/update-ca-trust
+  when: ansible_os_family == "Centos"
         
