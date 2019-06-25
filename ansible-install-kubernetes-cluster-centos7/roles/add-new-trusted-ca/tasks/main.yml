@@ -1,5 +1,6 @@
-  ---
-  tasks:
+---
+
+  block:
   
   - name: install ca package on rhel systems
     yum:
@@ -23,8 +24,4 @@
     notify:
       - update trusted ca centos
  
-  handlers:
- 
-  - name: update trusted ca centos
-    shell: /bin/update-ca-trust
-when: ansible_os_family == "Centos"
+
