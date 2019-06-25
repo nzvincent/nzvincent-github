@@ -22,6 +22,6 @@
     with_fileglob:
       - files/*.crt
     notify:
-      - update trusted ca centos
+      - Update Centos trusted root CA
  
 
