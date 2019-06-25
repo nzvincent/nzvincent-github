@@ -20,7 +20,7 @@
       16: '{{ ca_path_debian }}'
       18: '{{ ca_path_debian }}' 
   
-  - name: install ca package on rhel systems
+  - name: install ca package on R systems
     yum:
       name: ca-certificates
       state: present
