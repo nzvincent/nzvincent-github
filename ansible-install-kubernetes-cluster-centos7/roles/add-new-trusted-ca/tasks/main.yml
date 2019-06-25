@@ -2,7 +2,7 @@
 
   block:
 
-  - name: install ca package on R systems
+  - name: install ca package on Centos systems
     yum:
       name: ca-certificates
       state: present
