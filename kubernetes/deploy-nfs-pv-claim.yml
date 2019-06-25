@@ -1,3 +1,6 @@
+# @Author: nzvincent@gmail.com | Vincent Pang
+# Reference: https://docs.okd.io/latest/install_config/storage_examples/shared_storage.html
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -10,6 +13,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain 
   nfs: 
     path: /data/NFS_EXPORT 
-    server: nfs.f22 
+    server: $NFS_SERVER_IP
     readOnly: false
 
