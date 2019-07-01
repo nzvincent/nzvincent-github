@@ -2,7 +2,7 @@
 # @Author: Vincent Pang / nzvincent@gmail.com
 # This script configure ldap login
 # Notes: 
-#  - ldaps (secure) requires trusted DNS, your ldap's server certificate root CA must be imported to guess OS if it's self signed.
+#  - ldaps (secure) requires trusted DNS, your ldap servers' root CA certificates must be imported to guess OS and matched hostname if it's self signed.
 
 become_user: root
 become: true
