@@ -8,6 +8,7 @@ import os
 
 # @Author: nzvincent@gmail.com
 # A Simple Python one page script to run Selenium
+# TODO.. add encrytion / logging / find / replace (for header / cookie / header ) 
 
 class siteAuto:
     
@@ -103,7 +104,7 @@ class siteAuto:
 				self.ff.find_element_by_xpath(xpath).click()	
 			elif action == "link" :
 				# xpath here is hyperlink text
-				self.ff.find_find_element_by_link_text(xpath).click()	
+				self.ff.find_element_by_link_text(xpath).click()	
 			elif action == "return" :
 				self.ff.find_element_by_xpath(xpath).send_keys(Keys.RETURN)					
 			else :
