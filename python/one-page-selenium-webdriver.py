@@ -92,7 +92,18 @@ class siteAuto:
 		
 	def wait(self, second):
 		time.sleep(second)
-
+		
+	def find(self, keyword, type="content" ):
+		try:
+			if type == "content" :
+				# to find content
+			elif type == "cookie"
+				self.findCookie(keyword)
+			elif type = "header"
+				# find http header 
+				
+				
+		
 	def do(self, action , xpath="none", input="none" ):
 		try:
 			if action == "goto" :
