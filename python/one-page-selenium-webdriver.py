@@ -5,14 +5,16 @@ from pprint import pprint
 import time
 import datetime
 import os
+import logging
 
 # @Author: nzvincent@gmail.com
 # A Simple Python one page script to run Selenium
-# TODO.. add encrytion / logging / find / replace (for header / cookie / header ) 
+# TODO.. add encrytion / logging / find / modify (for header / cookie / header ) 
 
 class siteAuto:
     
 	' Define constant variables '
+	logFile="logfile.txt"
 	cookieFile="cookieFile.txt"
 	jsFile="./js-injection.js"
 	
@@ -36,30 +38,34 @@ class siteAuto:
 	profile.set_preference("network.proxy.socks", proxyhost );
 	profile.set_preference("network.proxy.socks_port",  proxyport);
     
-	# if no proxy, use:
-	#ff = webdriver.Firefox(profile) if proxy else 
-	#ff = webdriver.Firefox()
-
+	logging.basicConfig(filename=logFile, filemode='w', level=logging.INFO)
+	
 	# Constructor
 	def __init__(self):
 		# Print profile on start
-		pprint(vars(siteAuto.profile))
-		self.ff = webdriver.Firefox()
-				
+		logging.info(vars(siteAuto.profile))
+		//self.ff = webdriver.Firefox()
+		# if no proxy, use:
+		self.ff = webdriver.Firefox(profile) if self.proxy == "TRUE" else webdriver.Firefox()
+	
+		
 	def findCookie(self, cookieName):
+		# ToDo... use regex
 		cookies_list = self.ff.get_cookies()
 		cookies_dict = {}
 		for cookie in cookies_list:
 			cookies_dict[cookie['name']] = cookie['value']
 
-		session_id = cookies_dict.get(cookieName)
+		found_cookie = cookies_dict.get(cookieName)
 
-		if not session_id:
-		  print("JSESSIONID Cookie not found...close browser and retry...")
-		  siteTest.closeMe()
-
-		host_id = session_id[-12:]
-		print("Host cookie found:" + host_id )
+		if not found_cookie:
+			logging.info("Cookie " + cookieName + " not found")
+		  	//siteTest.close()
+		else
+			logging.info("Cookie found" + cookieName + ". Found found_cookie )
+		
+		## host_id = session_id[-12:]
+		## print("Host cookie found:" + host_id )
 
 
 		#if host_id in open( self.cookieFile).read():
@@ -71,38 +77,47 @@ class siteAuto:
 		########################
 		# Write detected cookie to file
 		########################  
-		print ("Writting Cookie value " + host_id + " to " + self.cookieFile)
+		logging.info("Writting Cookie value " + found_cookie + " to " + self.cookieFile)
 		fp = open( self.cookieFile, 'a+')
 		fp.write(session_id + "\n")
 		fp.close() 
 
-	def takescreenshot(self):
+	def takescreenshot(self): 
 		if ( self.screenshot == "TRUE" ):
 			# Delay 3 seconds before taking screenshot
+			# Note: If function takes less than 3 seconds to write image file to I/O		     
 			time.sleep(3)
 			ts = time.time()
-			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
-			saveFile = self.path + "/" + fileName + ".png"
+			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
+			saveFile = self.path + "/" + fileName 
 			self.ff.save_screenshot(saveFile) 
-			pprint("screenshot taken")
-		
-		
+			logging.info("screenshot taken " + fileName )
+				
 	def close(self):
 		self.ff.close()
 		
 	def wait(self, second):
 		time.sleep(second)
 		
-	def find(self, keyword, type="content" ):
+	def find(self, keyword , type="content" ):
 		try:
 			if type == "content" :
 				# to find content
 			elif type == "cookie"
 				self.findCookie(keyword)
 			elif type = "header"
-				# find http header 
-				
-				
+				# find http header 				
+	
+	# To modify content / header or cookie
+	def modify(self, keyword , type="content" ):
+		try:
+			if type == "content" :
+				# to find content
+			elif type == "cookie"
+				self.findCookie(keyword)
+			elif type = "header"
+				# find http header 				     
+				     
 		
 	def do(self, action , xpath="none", input="none" ):
 		try:
