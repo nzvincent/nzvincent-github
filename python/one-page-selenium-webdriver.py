@@ -7,7 +7,7 @@ import datetime
 import os
 
 # @Author: nzvincent@gmail.com
-# Simple Python one page script to run Selenium
+# A Simple Python one page script to run Selenium
 
 class siteAuto:
     
