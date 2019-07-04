@@ -23,7 +23,7 @@ class siteAuto:
 	path="./screenshots"
 	
 	proxy="FALSE"
-	proxyhost="myprody"
+	proxyhost="myproxy"
 	proxyport=3128
 
 	profile = webdriver.FirefoxProfile()
