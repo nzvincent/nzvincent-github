@@ -59,7 +59,7 @@ class siteAuto:
 
 		if not found_cookie:
 			logging.info("Cookie " + cookieName + " not found")
-		  	//siteTest.close()
+		  	# siteTest.close()
 		else
 			logging.info("Cookie found" + cookieName + ". Found found_cookie )
 		
