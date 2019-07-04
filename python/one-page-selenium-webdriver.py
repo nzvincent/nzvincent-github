@@ -44,7 +44,6 @@ class siteAuto:
 	def __init__(self):
 		# Print profile on start
 		logging.info(vars(siteAuto.profile))
-		//self.ff = webdriver.Firefox()
 		# if no proxy, use:
 		self.ff = webdriver.Firefox(profile) if self.proxy == "TRUE" else webdriver.Firefox()
 	
