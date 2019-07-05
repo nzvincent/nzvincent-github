@@ -70,7 +70,8 @@ class siteAuto:
 				# Modify cookie with regular expression
 				# eg. re.sub("\sPok.*\s", " new_hostname ", str )
 				self.log( "String substitution: " + find +":"+ replace +":"+  found_cookie )
-				newCookie = re.sub( find , replace , found_cookie )
+				#newCookie = re.sub( find , replace , found_cookie )
+				newCookie =  self.replace( find , replace , found_cookie )
 				cookie = {'name' : cookieName , 'value' : newCookie }
 				self.ff.add_cookie(cookie)
 				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCookie )
@@ -106,6 +107,17 @@ class siteAuto:
 				
 	def close(self):
 		self.ff.close()
+	
+	# String substitution with regular expression
+	def replace(self, find , replace_with, input ):
+		# ToDo.. implement error handling
+		self.log( "Input string: " + input )
+		self.log( "Find: " + find )
+		self.log( "Replace with: " + replace_with )
+		newString = re.sub( find , replace_with , input )
+		return newString
+
+			
 		
 	def wait(self, second):
 		time.sleep(second)
