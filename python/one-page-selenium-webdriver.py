@@ -64,8 +64,8 @@ class siteAuto:
 			self.log("Cookie " + cookieName + " not found")
 		  	# siteTest.close()
 		else:
-			self.log("Cookie found" + cookieName + "=" + found_cookie )
-			self.writeCookie( "Found cookie " +  cookieName + "=" + found_cookie )
+			self.log("Original cookie: " + cookieName + "=" + found_cookie )
+			self.writeCookie( "Original cookie: " +  cookieName + "=" + found_cookie )
 			if action == "EDIT" :
 				# Modify cookie with regular expression
 				# eg. re.sub("\sPok.*\s", " new_hostname ", str )
@@ -74,7 +74,7 @@ class siteAuto:
 				newCookie =  self.replace( find , replace , found_cookie )
 				cookie = {'name' : cookieName , 'value' : newCookie }
 				self.ff.add_cookie(cookie)
-				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCookie )
+				self.writeCookie( "Modified cookie: " +  cookieName + "=" + newCookie )
 				
 		
 		## host_id = session_id[-12:]
