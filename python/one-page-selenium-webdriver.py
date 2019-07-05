@@ -102,21 +102,25 @@ class siteAuto:
 		try:
 			if type == "content" :
 				# to find content
-			elif type == "cookie"
+			elif type == "cookie" :
 				self.findCookie(keyword)
-			elif type = "header"
-				# find http header 				
+			elif type = "header" :
+				# find http header
+			else:
+				pass
+	
 	
 	# To modify content / header or cookie
 	def modify(self, keyword , type="content" ):
 		try:
 			if type == "content" :
 				# to find content
-			elif type == "cookie"
+			elif type == "cookie" :
 				self.findCookie(keyword)
-			elif type = "header"
+			elif type = "header" :
 				# find http header 				     
-				     
+			else:
+				pass
 		
 	def do(self, action , xpath="none", input="none" ):
 		try:
