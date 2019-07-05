@@ -63,6 +63,7 @@ class siteAuto:
 		  	# siteTest.close()
 		else:
 			self.log("Cookie found" + cookieName + ". Found" +  found_cookie )
+			self.writecookie( found_cookie )
 		
 		## host_id = session_id[-12:]
 		## print("Host cookie found:" + host_id )
@@ -74,12 +75,12 @@ class siteAuto:
 		#else:
 		#    print("Continue to warm up...")
 
-		########################
-		# Write detected cookie to file
-		########################  
-		self.log("Writting Cookie value " + found_cookie + " to " + self.cookieFile)
+
+	
+	def writeCookie(self, cookie = "none" ):
+		self.log("Writting Cookie value " + cookie + " to " + self.cookieFile )	
 		fp = open( self.cookieFile, 'a+')
-		fp.write(session_id + "\n")
+		fp.write(cookie + "\n")
 		fp.close() 
 
 	def takescreenshot(self): 
