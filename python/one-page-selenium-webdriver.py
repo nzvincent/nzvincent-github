@@ -108,7 +108,7 @@ class siteAuto:
 				self.log("cookie")
 				self.findCookie(keyword)
 			elif type == "header" :
-				self.log("cookie")
+				self.log("header")
 				# find http header
 			else:
 				self.log("nothing")
@@ -127,7 +127,7 @@ class siteAuto:
 				self.log("cookie")
 				self.findCookie(keyword)
 			elif type == "header" :
-				self.log("cookie")
+				self.log("header")
 				# find http header
 			else:
 				self.log("nothing")
@@ -173,6 +173,7 @@ surf.screenshot="FALSE"
 surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','testing 1234 34333')
 surf.screenshot="TRUE"
 surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
+surf.find('SSID','cookie')
 surf.wait(5)
 surf.close()
 
