@@ -25,7 +25,7 @@ class siteAuto:
 	proxy="FALSE"
 	proxyhost="myproxy"
 	proxyport=3128
-
+	
 	profile = webdriver.FirefoxProfile()
 	# Browser manual proxy setting
 	profile.set_preference("network.proxy.type", 1);
@@ -38,12 +38,13 @@ class siteAuto:
 	profile.set_preference("network.proxy.socks", proxyhost );
 	profile.set_preference("network.proxy.socks_port",  proxyport);
     
+	showloginconsole="TRUE"
 	logging.basicConfig(filename=logFile, filemode='w', level=logging.INFO)
 	
 	# Constructor
 	def __init__(self):
 		# Print profile on start
-		logging.info(vars(siteAuto.profile))
+		self.log(vars(siteAuto.profile))
 		# if no proxy, use:
 		self.ff = webdriver.Firefox(profile) if self.proxy == "TRUE" else webdriver.Firefox()
 	
@@ -58,10 +59,10 @@ class siteAuto:
 		found_cookie = cookies_dict.get(cookieName)
 
 		if not found_cookie:
-			logging.info("Cookie " + cookieName + " not found")
+			self.log("Cookie " + cookieName + " not found")
 		  	# siteTest.close()
 		else:
-			logging.info("Cookie found" + cookieName + ". Found" +  found_cookie )
+			self.log("Cookie found" + cookieName + ". Found" +  found_cookie )
 		
 		## host_id = session_id[-12:]
 		## print("Host cookie found:" + host_id )
@@ -76,7 +77,7 @@ class siteAuto:
 		########################
 		# Write detected cookie to file
 		########################  
-		logging.info("Writting Cookie value " + found_cookie + " to " + self.cookieFile)
+		self.log("Writting Cookie value " + found_cookie + " to " + self.cookieFile)
 		fp = open( self.cookieFile, 'a+')
 		fp.write(session_id + "\n")
 		fp.close() 
@@ -90,7 +91,7 @@ class siteAuto:
 			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
 			saveFile = self.path + "/" + fileName 
 			self.ff.save_screenshot(saveFile) 
-			logging.info("screenshot taken " + fileName )
+			self.log("screenshot taken " + fileName )
 				
 	def close(self):
 		self.ff.close()
@@ -102,17 +103,18 @@ class siteAuto:
 		try:
 			if type == "content" :
 				# to find content
-				logging.info("content")
+				self.log("content")
 			elif type == "cookie" :
-				logging.info("cookie")
+				self.log("cookie")
 				self.findCookie(keyword)
 			elif type == "header" :
-				logging.info("cookie")
+				self.log("cookie")
 				# find http header
 			else:
-				logging.info("nothing")
+				self.log("nothing")
+			self.log("find function inputs " + keyword + " in " + type )	
 		except NoSuchElementException:
-			print("No able to find " + keyword + " in " + type )	
+			self.log("No able to find " + keyword + " in " + type )	
 	
 
 	# To modify content / header or cookie
@@ -120,18 +122,25 @@ class siteAuto:
 		try:
 			if type == "content" :
 				# to find content
-				logging.info("content")
+				self.log("content")
 			elif type == "cookie" :
-				logging.info("cookie")
+				self.log("cookie")
 				self.findCookie(keyword)
 			elif type == "header" :
-				logging.info("cookie")
+				self.log("cookie")
 				# find http header
 			else:
-				logging.info("nothing")
+				self.log("nothing")
+			self.log("modify function inputs " + keyword + " in " + type )	
 		except NoSuchElementException:
-			print("No able to modify " + keyword + " in " + type )		
-	
+			self.log("No able to modify " + keyword + " in " + type )		
+
+	def log(self, msg , leval="INFO") :
+		logging.info(msg)
+		if showloginconsole == "TRUE" :
+			ppring(msg)
+		
+			
 	def do(self, action , xpath="none", input="none" ):
 		try:
 			if action == "goto" :
@@ -147,10 +156,11 @@ class siteAuto:
 			elif action == "return" :
 				self.ff.find_element_by_xpath(xpath).send_keys(Keys.RETURN)					
 			else :
-				print("Do nothing but taking screenshot")
+				self.log("Do nothing but taking screenshot")
+			self.log("Do function inputs, Action: " + action + " - Input: " + input + " - Xpath: " + xpath )	
 			self.takescreenshot()
 		except NoSuchElementException:
-			print("No Element found, Action: " + action + " - Input: " + input + " - Xpath: " + xpath )
+			self.log("No Element found, Action: " + action + " - Input: " + input + " - Xpath: " + xpath )
 
 
 
