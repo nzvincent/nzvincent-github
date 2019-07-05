@@ -114,6 +114,7 @@ class siteAuto:
 				pass
 	
 	
+	
 	# To modify content / header or cookie
 	def modify(self, keyword , type="content" ):
 		try:
@@ -129,7 +130,8 @@ class siteAuto:
 			else:
 				logging.info("nothing")
 				pass
-		
+	
+	
 	def do(self, action , xpath="none", input="none" ):
 		try:
 			if action == "goto" :
