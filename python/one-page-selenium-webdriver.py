@@ -49,7 +49,7 @@ class siteAuto:
 		self.ff = webdriver.Firefox(profile) if self.proxy == "TRUE" else webdriver.Firefox()
 	
 		
-	def findCookie(self, cookieName):
+	def findCookie(self, cookieName, action="none", modify="none"):
 		# ToDo... use regex
 		cookies_list = self.ff.get_cookies()
 		cookies_dict = {}
@@ -64,7 +64,11 @@ class siteAuto:
 		  	# siteTest.close()
 		else:
 			self.log("Cookie found" + cookieName + "=" + found_cookie )
-			self.writecookie( cookieName + "=" + found_cookie )
+			self.writeCookie( "Found cookie " +  cookieName + "=" + found_cookie )
+			if action == "EDIT" :
+				# Modify cookie
+				self.writeCookie( "Modified cookie " +  cookieName + "=" + found_cookie )
+				
 		
 		## host_id = session_id[-12:]
 		## print("Host cookie found:" + host_id )
