@@ -102,11 +102,15 @@ class siteAuto:
 		try:
 			if type == "content" :
 				# to find content
+				logging.info("content")
 			elif type == "cookie" :
+				logging.info("cookie")
 				self.findCookie(keyword)
 			elif type = "header" :
+				logging.info("cookie")
 				# find http header
 			else:
+				logging.info("nothing")
 				pass
 	
 	
@@ -115,11 +119,15 @@ class siteAuto:
 		try:
 			if type == "content" :
 				# to find content
+				logging.info("content")
 			elif type == "cookie" :
+				logging.info("cookie")
 				self.findCookie(keyword)
 			elif type = "header" :
-				# find http header 				     
+				logging.info("cookie")
+				# find http header
 			else:
+				logging.info("nothing")
 				pass
 		
 	def do(self, action , xpath="none", input="none" ):
