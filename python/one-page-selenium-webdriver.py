@@ -55,6 +55,7 @@ class siteAuto:
 		cookies_dict = {}
 		for cookie in cookies_list:
 			cookies_dict[cookie['name']] = cookie['value']
+			self.log( cookie['name']] + "=" + cookie['value'] )
 
 		found_cookie = cookies_dict.get(cookieName)
 
