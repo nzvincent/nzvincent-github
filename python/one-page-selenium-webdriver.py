@@ -69,8 +69,9 @@ class siteAuto:
 			if action == "EDIT" :
 				# Modify cookie with regular expression
 				# eg. re.sub("\sPok.*\s", " new_hostname ", str )
+				self.log( "String substitution: " + find +":"+ replace +":"+  found_cookie )
 				newCookie = re.sub( find , replace , found_cookie )
-				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCooki )
+				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCookie )
 				
 		
 		## host_id = session_id[-12:]
