@@ -138,7 +138,7 @@ class siteAuto:
 	def log(self, msg , leval="INFO") :
 		logging.info(msg)
 		if self.showloginconsole == "TRUE" :
-			ppring(msg)
+			pprint(msg)
 		
 			
 	def do(self, action , xpath="none", input="none" ):
