@@ -112,6 +112,8 @@ class siteAuto:
 			else:
 				logging.info("nothing")
 				pass
+		except NoSuchElementException:
+			print("No able to find " + keyword + " in " + type )	
 	
 
 	# To modify content / header or cookie
@@ -129,7 +131,8 @@ class siteAuto:
 			else:
 				logging.info("nothing")
 				pass
-	
+		except NoSuchElementException:
+			print("No able to modify " + keyword + " in " + type )		
 	
 	def do(self, action , xpath="none", input="none" ):
 		try:
