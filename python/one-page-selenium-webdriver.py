@@ -111,7 +111,6 @@ class siteAuto:
 				# find http header
 			else:
 				logging.info("nothing")
-				pass
 		except NoSuchElementException:
 			print("No able to find " + keyword + " in " + type )	
 	
@@ -130,7 +129,6 @@ class siteAuto:
 				# find http header
 			else:
 				logging.info("nothing")
-				pass
 		except NoSuchElementException:
 			print("No able to modify " + keyword + " in " + type )		
 	
