@@ -6,6 +6,7 @@ import time
 import datetime
 import os
 import logging
+import re
 
 # @Author: nzvincent@gmail.com
 # A Simple Python one page script to run Selenium
@@ -49,7 +50,7 @@ class siteAuto:
 		self.ff = webdriver.Firefox(profile) if self.proxy == "TRUE" else webdriver.Firefox()
 	
 		
-	def findCookie(self, cookieName, action="none", modify="none"):
+	def findCookie(self, cookieName, action="none", find="none", replace="none"):
 		# ToDo... use regex
 		cookies_list = self.ff.get_cookies()
 		cookies_dict = {}
@@ -66,8 +67,10 @@ class siteAuto:
 			self.log("Cookie found" + cookieName + "=" + found_cookie )
 			self.writeCookie( "Found cookie " +  cookieName + "=" + found_cookie )
 			if action == "EDIT" :
-				# Modify cookie
-				self.writeCookie( "Modified cookie " +  cookieName + "=" + found_cookie )
+				# Modify cookie with regular expression
+				# eg. re.sub("\sPok.*\s", " new_hostname ", str )
+				newCookie = re.sub( find , replace , found_cookie )
+				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCooki )
 				
 		
 		## host_id = session_id[-12:]
