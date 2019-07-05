@@ -61,7 +61,7 @@ class siteAuto:
 			logging.info("Cookie " + cookieName + " not found")
 		  	# siteTest.close()
 		else:
-			logging.info("Cookie found" + cookieName + ". Found found_cookie )
+			logging.info("Cookie found" + cookieName + ". Found" +  found_cookie )
 		
 		## host_id = session_id[-12:]
 		## print("Host cookie found:" + host_id )
