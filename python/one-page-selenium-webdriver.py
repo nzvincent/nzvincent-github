@@ -108,7 +108,8 @@ class siteAuto:
 	def close(self):
 		self.ff.close()
 	
-	# String substitution with regular expression
+	# String substitution with regular expression support
+	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
 	def replace(self, find , replace_with, input ):
 		# ToDo.. implement error handling
 		self.log( "Input string: " + input )
@@ -186,6 +187,7 @@ class siteAuto:
 			self.log("No Element found, Action: " + action + " - Input: " + input + " - Xpath: " + xpath )
 
 
+			
 
 #####################
 #      TO RUN       #
