@@ -71,7 +71,7 @@ class siteAuto:
 				# eg. re.sub("\sPok.*\s", " new_hostname ", str )
 				self.log( "String substitution: " + find +":"+ replace +":"+  found_cookie )
 				newCookie = re.sub( find , replace , found_cookie )
-				cookie = {'name' : ookieName , 'value' : newCookie }
+				cookie = {'name' : cookieName , 'value' : newCookie }
 				self.ff.add_cookie(cookie)
 				self.writeCookie( "Modified cookie " +  cookieName + "=" + newCookie )
 				
