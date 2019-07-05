@@ -106,7 +106,7 @@ class siteAuto:
 			elif type == "cookie" :
 				logging.info("cookie")
 				self.findCookie(keyword)
-			elif type = "header" :
+			elif type == "header" :
 				logging.info("cookie")
 				# find http header
 			else:
@@ -123,7 +123,7 @@ class siteAuto:
 			elif type == "cookie" :
 				logging.info("cookie")
 				self.findCookie(keyword)
-			elif type = "header" :
+			elif type == "header" :
 				logging.info("cookie")
 				# find http header
 			else:
