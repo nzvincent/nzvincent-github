@@ -113,8 +113,7 @@ class siteAuto:
 				logging.info("nothing")
 				pass
 	
-	
-	
+
 	# To modify content / header or cookie
 	def modify(self, keyword , type="content" ):
 		try:
