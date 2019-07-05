@@ -196,6 +196,9 @@ class siteAuto:
 		
 	def re_search( self, keyword, content ):
 		result re.search(keyword, content )
+		
+	def history(self, steps ):
+		self.ff.execute_script("window.history.go(" + str(steps) + ")")
 	
 	def log(self, msg , leval="INFO") :
 		logging.info(msg)
