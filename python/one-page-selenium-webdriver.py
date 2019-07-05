@@ -163,7 +163,45 @@ class siteAuto:
 		logging.info(msg)
 		if self.showloginconsole == "TRUE" :
 			pprint(msg)
+
+	
+	# to check content / header of cookie
+	def check (self, type="content", condition="contain", keyword="none" ):
+		try:
+			if type == "content" :
+				self.log("check content")
+				output = self.check_content(keyword, content )
+			elif type == "cookie" :
+				self.log("cookie")
+				output = self.findCookie(keyword)
+			elif type == "header" :
+				self.log("header")
+				# find http header
+			else:
+				self.log("nothing")
+			self.log("modify function inputs " + keyword + " in " + type )	
+		except NoSuchElementException:
+			self.log("No able to modify " + keyword + " in " + type )		
+
+	def check_content(self, keyword, content) :
+		result re.search(keyword, content )
+	
+	# header consists of key value pair
+	def check_header(self, keyword, content) :
+		result re.search(keyword, content )
+	
+	# cookie consists of key value pair
+	def check_cookie(self, keyword, content) :
+		result re.search(keyword, content )
 		
+	def re_search( self, keyword, content ):
+		result re.search(keyword, content )
+	
+	def log(self, msg , leval="INFO") :
+		logging.info(msg)
+		if self.showloginconsole == "TRUE" :
+			pprint(msg)			
+			
 			
 	def do(self, action , xpath="none", input="none" ):
 		try:
