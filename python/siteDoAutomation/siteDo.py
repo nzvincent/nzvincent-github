@@ -13,13 +13,14 @@ import json
 # @Author: nzvincent@gmail.com
 # Features:
 # - Firefox browser
-# - Easy to run
-# - Save screenshots
+# - Easy to run. Eg. python siteDo.py
+# - Take screenshots
 # - Proxy configuration
 # - Logging
-# - Find/Edit content , header , cookie ( To be completed )
-# - Simple assertion test and reports ( ToDo.. )
-
+# To be completed:
+# - Find/Add/delete/Edit content , header , cookie
+# ToDo wish list:
+# - Test assertion and reports 
 
 class siteDo:
     
