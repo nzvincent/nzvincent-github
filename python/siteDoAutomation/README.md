@@ -11,18 +11,31 @@ python siteDo.py
 
 ```
 
-**Customise**
 
-* Instantiate
-  * surf = SiteDo()
-surf.screenshot="False"
-surf.do('goto','https://www.ebay.com')
-surf.screenshot="True"
-surf.do('goto','https://www.google.com')
-surf.find('cookie', 'VIEW' , 'COOKIENAME' )
-surf.screenshot="False"
-surf.history('-2')
-surf.wait(2)
-surf.close()
+####Example
+
+**Instantiate**
+* surf = SiteDo()
+
+**Set take screenshot to false**  
+* surf.screenshot="False"
+
+**Do...Goto URL**
+* surf.do('goto','https://www.ebay.com')
+
+**Set take screenshot to true**  
+* surf.screenshot="True*
+* surf.do('goto','https://www.google.com')
+
+**Do...select html element via xpath and perform tasks**
+* surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','google search')
+* surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
+
+**Javascript history**
+* surf.history('-2')
+
+**Browser teardown**
+* surf.wait(2)
+* surf.close()
 
 
