@@ -9,18 +9,19 @@ import logging
 import re
 import json
 
+# SiteDo is simple one page Python Selenium script to Do most of the browser tasks
 # @Author: nzvincent@gmail.com
-# A Simple Python one page script to run Selenium
 # Features:
-# - Easy predefined functions
-# - save screenshots
-# - proxy configuration
-# - logging and console output
-# - modify cookie , content and  header ( TBC )
-# - Assertion test and reports 
+# - Firefox browser
+# - Easy to run
+# - Save screenshots
+# - Proxy configuration
+# - Logging
+# - Find/Edit content , header , cookie ( To be completed )
+# - Simple assertion test and reports ( ToDo.. )
 
 
-class siteAuto:
+class siteDo:
     
 	' Define constant variables '
 	logFile="logfile.txt"
@@ -56,7 +57,7 @@ class siteAuto:
 	# Constructor
 	def __init__(self):
 		self.ff = webdriver.Firefox(profile) if self.proxy == "True" else webdriver.Firefox()
-		self.log(vars(siteAuto.profile), "DEBUG")
+		self.log(vars(siteDo.profile), "DEBUG")
 
 	
 	# ToDo..make this private method	
@@ -280,7 +281,7 @@ class siteAuto:
 #####################
 #      TO RUN       #
 #####################          
-surf = siteAuto()
+surf = siteDo()
 surf.testColor()
 surf.do('goto','https://www.ebay.com')
 surf.do('go','https://www.google.com')
