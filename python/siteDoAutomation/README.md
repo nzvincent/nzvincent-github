@@ -1,5 +1,9 @@
 
-## SiteDo is simple one page Python Selenium script to Do most of the browser tasks
+## SiteDo
+
+SiteDo is simple one page Python Selenium script to Do most of the browser tasks
+Currently tested on Python 2.7 and above Linux OS, and should also be working on Windows OS.
+
 
 **Download and Run**
 
