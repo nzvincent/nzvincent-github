@@ -27,7 +27,10 @@ python siteDo.py
 * surf.screenshot="True"
 * surf.do('goto','https://www.google.com')
 
-**Do...select html element via xpath and perform tasks**
+**Do...click on hyperlink**
+* surf.do('link','lin-text-name')
+
+**Do...enter html form**
 * surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','google search')
 * surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
 
