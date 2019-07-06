@@ -12,7 +12,7 @@ python siteDo.py
 ```
 
 
-####Example
+#### Example
 
 **Instantiate**
 * surf = SiteDo()
@@ -24,7 +24,7 @@ python siteDo.py
 * surf.do('goto','https://www.ebay.com')
 
 **Set take screenshot to true**  
-* surf.screenshot="True*
+* surf.screenshot="True"
 * surf.do('goto','https://www.google.com')
 
 **Do...select html element via xpath and perform tasks**
