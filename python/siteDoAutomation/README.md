@@ -31,16 +31,17 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 
 #### Usage:
 
+**Variables**
+* \__log_level="INFO|DEBUG|WARNING|CRITICAL|ERROR"
+* showloginconsole="False|True"
+* screenshot="False|True"
+
 **Instantiate class**
 * surf = SiteDo()
 
 **Set screenshot to true or false**
 * surf.screenshot="True"
 * surf.screenshot="False"
-
-**Modify variables**
-* showloginconsole="False"
-* showloginconsole="True"
 
 **Do navigation methods**
 * surf.do('goto','https://www.ebay.com') # go to url
