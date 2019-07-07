@@ -25,6 +25,11 @@ python siteDo.py
 * surf.screenshot="True"
 * surf.screenshot="False"
 
+**Modify variables**
+* showloginconsole="False" # Do not display log in console
+* 
+
+
 **Do navigation methods**
 * surf.do('goto','https://www.ebay.com') # go to url
 * surf.do('form', '/html/form//input#user_id','john') # enter john to form input
