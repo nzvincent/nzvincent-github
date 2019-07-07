@@ -21,6 +21,7 @@ import json
 # - Find/Add/delete/Edit content , header , cookie
 # ToDo wish list:
 # - Test assertion and reports 
+# - Multiple windows
 
 class siteDo:
     
@@ -61,7 +62,8 @@ class siteDo:
 		self.log(vars(siteDo.profile), "DEBUG")
 
 	
-	# ToDo..make this private method	
+	# Find , Add , delete and delete all cookies
+	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
 	def __findCookie(self, cookieName, action="none", find="none", replace="none"):
 		# ToDo... use regex
 		cookies_list = self.ff.get_cookies()
@@ -71,7 +73,13 @@ class siteDo:
 			self.log( "Site cookie: [" + cookie['name'] + "=" + cookie['value'] + " ]" , "DEBUG" )
 
 		found_cookie = cookies_dict.get(cookieName)
-
+		
+		if action == "ADD" :
+			cookieValue = find
+			cookie = {'name' : cookieName , 'value' : cookieValue }
+			self.ff.add_cookie(cookie)
+			self.log( "Added cookie: [ " +  cookieName + "=" + cookieValue + " ]" , "DEBUG" )
+		
 		if not found_cookie:
 			self.log("Cannot find cookie name [ " + cookieName + " ]", "WARNING" ) 
 		  	# siteTest.close()
@@ -86,8 +94,12 @@ class siteDo:
 				newCookie =  self.replace( find , replace , found_cookie )
 				cookie = {'name' : cookieName , 'value' : newCookie }
 				self.ff.add_cookie(cookie)
-				self.writeCookie( "Modify cookie: [ " +  cookieName + "=" + newCookie + " ]" , "DEBUG" )
-				
+				self.log( "Modified cookie: [ " +  cookieName + "=" + newCookie + " ]" , "DEBUG" )
+			if action == "DELETE" :
+				self.ff.delete_cookie(cookieName)
+			elif action == "DELETE_ALL_COOKIES" :
+				self.ff.delete_all_cookies()
+
 		
 		## host_id = session_id[-12:]
 		## print("Host cookie found:" + host_id )
@@ -116,7 +128,14 @@ class siteDo:
 			saveFile = self.path + "/" + fileName 
 			self.ff.save_screenshot(saveFile) 
 			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
-				
+		
+	def label(self, label_name="Default Label"):
+		#self.log("Label() Method: ["  + label_name + " ]", "DEBUG")
+		CSTART = '\033[101m'
+		CEND = '\033[0m'
+		print("[ LABEL ] " + CSTART + label_name + CEND )
+
+
 	def close(self):
 		self.log("Close() Method ", "DEBUG" )
 		self.ff.close()
@@ -138,16 +157,26 @@ class siteDo:
 
 	
 	# Implemented cookie find
-	def find(self, type="cookie" , action="VIEW", search_keyword="none", replace_word="none" ):
-		self.log("Find() Method: [ " + type + " , " + action + " , " + search_keyword + " , " + replace_word + " ] " , "INFO")
+	def find(self, type="CONTENT" , action="VIEW", search_key="none", replace_word="none", search_value="none" ):
+		self.log("Find() Method: [ " + type + " , " + action + " , " + search_key + " , " + replace_word + " ] " , "INFO")
 		try:
-			if type == "content" :
+			if type == "CONTENT" :
 				# to find content
 				self.log("content")
-			elif type == "cookie" :
-				self.log("cookie")
-				self.__findCookie( search_keyword )
-			elif type == "header" :
+			elif type == "COOKIE" :
+				cookieName = search_key
+				if action == "VIEW":
+					self.__findCookie( search_key )
+				elif action == "EDIT" :
+					find = search_value
+					# __findCookie(self, cookieName, action="none", find="none", replace="none"):
+					self.__findCookie( cookieName , "EDIT", find , replace_word )
+				elif action == "ADD" :
+					cookieValue=replace_word
+					self.__findCookie( cookieName , "ADD", cookieValue )
+				elif action == "DELETE" or  action == "DELETE_ALL_COOKIES" :
+					self.__findCookie( cookieName , action )
+			elif type == "HEADER" :
 				self.log("header")
 				# find http header
 			else:
@@ -220,6 +249,10 @@ class siteDo:
 		self.log("Go history " + steps , "DEBUG" )
 		self.ff.execute_script("window.history.go(" + str(steps) + ")")
 	
+	def javascript(self, script ):
+		self.log("Execute javascript " + script , "DEBUG" )
+		self.ff.execute_script(" + script + ")
+	
 	def log(self, input , level="INFO") :
 		ts = time.time()
 		logtime = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
@@ -278,21 +311,32 @@ class siteDo:
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
 
 
-
 #####################
 #      TO RUN       #
 #####################          
 surf = siteDo()
 surf.testColor()
+surf.label("Start Ebay")
 surf.do('goto','https://www.ebay.com')
+surf.find('COOKIE', 'VIEW', 'ebay')
+surf.find('COOKIE', 'EDIT', 'ebay' , 'CHANGED_JS' ,'js')
+surf.label("DELETE ebay Cookie")
+surf.find('COOKIE', 'DELETE', 'ebay' )
+surf.wait(2)
+surf.find('COOKIE', 'DELETE_ALL_COOKIES' )
+surf.wait(2)
+surf.find('COOKIE', 'VIEW', 'ebay')
 surf.do('go','https://www.google.com')
-surf.find('cookie', 'VIEW' , 'ABC' )
-surf.check_element('//*[@id="content-wrap"]/h1')
-surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','testing 1234 34333')
-surf.screenshot="True"
-surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
-#surf.find('NID','cookie')
-surf.history('-2')
+surf.do('goto','https://www.ebay.com')
+surf.find('COOKIE', 'VIEW', 'ebay')
+
+#surf.do('go','https://www.google.com')
+#surf.find('COOKIE', 'VIEW' , 'ABC' )
+#surf.check_element('//*[@id="content-wrap"]/h1')
+#surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','testing 1234 34333')
+#surf.screenshot="True"
+#surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
+#surf.history('-2')
 surf.wait(2)
 surf.close()
 
