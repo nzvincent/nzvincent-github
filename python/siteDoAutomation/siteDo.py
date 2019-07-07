@@ -10,22 +10,29 @@ import logging
 import re
 import json
 
-
-# SiteDo is simple one page Python Selenium script to Do most of the browser tasks
-# @Author: nzvincent@gmail.com
+# siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks
+# This project is not to replace test frameworks such as cucumber and other test tools.
+# As most of the operation tasks are short-lived and and requires rapid changes, 
+# I created this siteDo class to deal with repetitive automation tasks for day to day activities.
+# The purpose for this was to make changes easier and quicker without involving enormous coding efforts.
+# @Author: nzvincent@gmail.com | Vincent Pang
+#
 # Features:
 # - Firefox browser
-# - Easy to run. Eg. python siteDo.py
 # - Take screenshots
+# - Assertion test
 # - Proxy configuration
-# - Logging
-# To be completed:
-# - Find/Add/delete/Edit content , header , cookie
+# - Multi level logging
+# - Cookie modification
+# - Execute custom Javascript
 # ToDo wish list:
-# - Assertion reports 
+# - Reports 
+# - Headers add / delete / edit
+# - Content add / delete / edit
 # - Password encryption
-# - Open tabs and windows
-# Reference:
+# - Multiple tabs and windows
+# - Other browsers support
+# References:
 # - Assert https://selenium-python.readthedocs.io/getting-started.html
 # - Cookie https://selenium-python-zh.readthedocs.io/en/latest/api.html
 # - Color code https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-terminal-in-python
@@ -404,3 +411,6 @@ surf.javascript("alert('You can also inject javascript!!!');")
 surf.label("Tearing down")
 surf.wait(4)
 surf.close()
+
+
+
