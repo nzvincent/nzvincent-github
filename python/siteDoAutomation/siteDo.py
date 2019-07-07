@@ -2,12 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from pprint import pprint
+import requests
 import time
 import datetime
 import os
 import logging
 import re
 import json
+
 
 # SiteDo is simple one page Python Selenium script to Do most of the browser tasks
 # @Author: nzvincent@gmail.com
@@ -20,33 +22,46 @@ import json
 # To be completed:
 # - Find/Add/delete/Edit content , header , cookie
 # ToDo wish list:
-# - Test assertion and reports 
-# - Multiple windows
+# - Assertion reports 
+# - Password encryption
+# - Open tabs and windows
 # Reference:
 # - Assert https://selenium-python.readthedocs.io/getting-started.html
 # - Cookie https://selenium-python-zh.readthedocs.io/en/latest/api.html
 # - Color code https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-terminal-in-python
 # - Windows installation https://www.liquidweb.com/kb/install-pip-windows/
+# - Specifications: https://selenium-python.readthedocs.io/api.html
 
 class siteDo:
     
 	' Define constant variables '
-	logFile="logfile.txt"
-	reportFile="report.html"
-	cookieFile="cookieFile.txt"
-	jsFile="./js-injection.js"
+	__logFile="logfile.txt"
+	__reportFile="report.html"
+	__cookieFile="__cookieFile.txt"
+	__jsFile="./js-injection.js"
+	__step = 0
 	
+	# Please ensure Python can write files to this folder 
+	__screenshot_path="./screenshots"
+	
+	# Turn screenshot on / off 
 	screenshot="True"
-	# Make sure folder exists
-	path="./screenshots"
 	
+	# Turn on / off console output
+	showloginconsole="True"
+	
+	# Switch log level
+	__log_level="DEBUG"
+	
+	# Display label in log or console
+	# To modify: 
+	#   obj.label("Step 3, search for keyword ebay in page source")
 	__static_label = "Step one" # use obj.label("New step name") to modify __static_label
 
-	
 	proxy="False"
 	proxyhost="myproxy"
 	proxyport=3128
-	
+
 	profile = webdriver.FirefoxProfile()
 	# Browser manual proxy setting
 	profile.set_preference("network.proxy.type", 1);
@@ -58,18 +73,27 @@ class siteDo:
 	profile.set_preference("network.proxy.ssl_port",  proxyport);
 	profile.set_preference("network.proxy.socks", proxyhost );
 	profile.set_preference("network.proxy.socks_port",  proxyport);
-    
-	showloginconsole="True"
-
-	#logging.basicConfig(filename=logFile, filemode='w', level=logging.INFO)
-	logging.basicConfig(filename=logFile, filemode='w', level=logging.DEBUG)
-	
+  
+	if __log_level == "INFO":
+		logging.basicConfig(filename=__logFile, filemode='w', level=logging.INFO )
+	elif __log_level == "DEBUG":
+		logging.basicConfig(filename=__logFile, filemode='w', level=logging.DEBUG )
+	elif __log_level == "WARNING":
+		logging.basicConfig(filename=__logFile, filemode='w', level=logging.WARNING )
+	elif __log_level == "CRITICAL":	
+		logging.basicConfig(filename=__logFile, filemode='w', level=logging.ERROR )	
+	elif __log_level == "ERROR":
+		logging.basicConfig(filename=__logFile, filemode='w', level=logging.ERROR )	
+	else:
+		logging.basicConfig(filename=__logFile, filemode='w')
+		
+		
+		
 	# Constructor
 	def __init__(self):
 		self.ff = webdriver.Firefox(profile) if self.proxy == "True" else webdriver.Firefox()
 		self.log(vars(siteDo.profile), "DEBUG")
 
-	
 	# Find , Add , delete and delete all cookies
 	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
 	# https://selenium-python-zh.readthedocs.io/en/latest/api.html
@@ -87,10 +111,10 @@ class siteDo:
 			cookieValue = find
 			cookie = {'name' : cookieName , 'value' : cookieValue }
 			self.ff.add_cookie(cookie)
-			self.log( "Added cookie: [ " +  cookieName + "=" + cookieValue + " ]" , "DEBUG" )
+			self.log( "Added cookie: [ " +  cookieName + "=" + cookieValue + " ]" , "INFO" )
 		
 		if not found_cookie:
-			self.log("Cannot find cookie name [ " + cookieName + " ]", "WARNING" ) 
+			self.log("Cookie not found: [ " + cookieName + " ]", "WARNING" ) 
 		  	# siteTest.close()
 		else:
 			#self.log("Original cookie: " + cookieName + "=" + found_cookie )
@@ -103,32 +127,22 @@ class siteDo:
 				newCookie =  self.replace( find , replace , found_cookie )
 				cookie = {'name' : cookieName , 'value' : newCookie }
 				self.ff.add_cookie(cookie)
-				self.log( "Modified cookie: [ " +  cookieName + "=" + newCookie + " ]" , "DEBUG" )
+				self.log( "Modified cookie: [ " +  cookieName + "=" + newCookie + " ]" , "INFO" )
 			if action == "DELETE" :
 				self.ff.delete_cookie(cookieName)
+				self.log( "Deleted cookie: [ " +  cookieName + " ]" , "INFO" )
 			elif action == "DELETE_ALL_COOKIES" :
 				self.ff.delete_all_cookies()
 
-		
-		## host_id = session_id[-12:]
-		## print("Host cookie found:" + host_id )
 
-
-		#if host_id in open( self.cookieFile).read():
-		#    print("Host cookie exists: " + host_id + " close browser and skip warm up...")
-		#    siteTest.closeMe()
-		#else:
-		#    print("Continue to warm up...")
-
-		
 	def writeCookie(self, cookie = "none" ):
-		self.log("writeCookie() Method: [" + cookie + " ] to file [ " + self.cookieFile + " ]", "DEBUG" )
+		self.log("writeCookie() Method: [" + cookie + " ] to file [ " + self.__cookieFile + " ]", "DEBUG" )
 		try:
-			fp = open( self.cookieFile, 'a+')
+			fp = open( self.__cookieFile, 'a+')
 			fp.write(cookie + "\n")
 			fp.close() 
 		except IOError:
-			self.log("Could not write to cookie file :" + self.cookieFile , "CRITICAL")
+			self.log("Could not write to cookie file :" + self.__cookieFile , "CRITICAL")
 
 	def takescreenshot(self): 
 		if ( self.screenshot == "True" ):
@@ -137,21 +151,22 @@ class siteDo:
 			time.sleep(3)
 			ts = time.time()
 			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
-			saveFile = self.path + "/" + fileName 
+			saveFile = self.__screenshot_path + "/" + fileName 
 			self.ff.save_screenshot(saveFile) 
 			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
 		
 	def label(self, label_name="Default Label"):
-		#self.log("Label() Method: ["  + label_name + " ]", "DEBUG")
+		self.__step = self.__step + 1
+		self.log("Label() Method: ["  + label_name + " ]", "DEBUG")
 		CSTART = '\033[101m'
 		CEND = '\033[0m'
-		print(CSTART + "[ LABEL ]" + CEND  + " " + label_name )
+		print(CSTART + "[ LABEL ]" + CEND  + " (#"  + str(self.__step) + ") " + label_name )
 		try:
-			fp = open( self.logFile, 'a+')
-			fp.write("[ LABEL ]"  + " " + label_name + "\n")
+			fp = open( self.__logFile, 'a+')
+			fp.write("[ LABEL ]"  + " (#"  + str(self.__step) + ") " +  label_name + "\n")
 			fp.close()
 		except IOError:
-			self.log("Could not write to logfile :" + self.logFile , "CRITICAL")
+			self.log("Could not write to logfile :" + self.__logFile , "CRITICAL")
 	
 	def close(self):
 		try:
@@ -169,51 +184,33 @@ class siteDo:
 			
 	def javascript(self, script ):
 		try:
-			self.log("Execute javascript " + script , "DEBUG" )
+			self.log("Execute javascript " + script , "INFO" )
 			self.ff.execute_script(script)
 		except:
 			self.log("Javascript() Method unknown exception", "ERROR")
 
-			
 	def size_position(self, width="200", height="200", xpos="0", ypos="0"):
 		try:
+			self.log("Execute Size_position() Method [ " + width + " , " + height + " , " + xpos + " , " +  ypos + " ]", "INFO" )
 			self.ff.set_window_size( width , height)
 			self.ff.set_window_position(xpos , xpos)
 		except:
 			self.log("Size_position() Method unknown exception", "ERROR")
 			
-
 	def wait(self, second):
-		self.log("Wait() Method [ " + str(second) + " ] ", "DEBUG" )
-		time.sleep(second)
-		
-	# String substitution with regular expression support
-	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
-	def replace(self, find , replace_with, input ):
-		# ToDo.. implement error handling
-		self.log( "Info - Input string: [ " + input + " ]" , "DEBUG" )
-		self.log( "Info - Find: [" + find + "]" , "DEBUG" )
-		self.log( "Info - Replace with: [ " + replace_with + " ]" , "DEBUG" )
-		newString = re.sub( find , replace_with , input )
-		return newString
+		try:
+			self.log("Wait() Method [ " + str(second) + " ] ", "INFO" )
+			time.sleep(second)
+		except:
+			self.log("Wait() Method ) Method unknown exception", "ERROR")
+			
 
-	# Implemented cookie find
+	# key value pair search, use find()
+	# content/xpath search , use lookup()
 	def find(self, type="CONTENT" , action="VIEW", search_key="none", replace_word="none", search_value="none" ):
 		self.log("Find() Method: [ " + type + " , " + action + " , " + search_key + " , " + replace_word + "," + search_value + " ]" , "INFO")
 		try:
-			if type == "CONTENT" :
-				# to find content
-				page_source = self.ff.page_source
-				self.log(page_source, "DEBUG")
-				if action == "VIEW" :
-					search_content = search_key
-					##elem = self.ff.find_elements_by_xpath(xpath)
-					result = self.__re_search( search_content , page_source)
-					if ( result == "True" ):
-						self.log( result , "INFO")
-					else:
-						self.log( "Content search [ " + search_content + " ] not found. ", "INFO")
-			elif type == "COOKIE" :
+			if type == "COOKIE" :
 				cookieName = search_key
 				if action == "VIEW":
 					self.__findCookie( search_key )
@@ -233,72 +230,26 @@ class siteDo:
 				self.log("nothing")
 		except NoSuchElementException:
 			self.log("No able to find " + keyword + " in " + type , "CRITICAL" )
-	
 
-	# To modify content / header or cookie
-	def _______________modify(self, keyword , type="content" ):
-		try:
-			if type == "content" :
-				# to find content
-				self.log("content")
-			elif type == "cookie" :
-				self.log("cookie")
-				self.findCookie(keyword)
-			elif type == "header" :
-				self.log("header")
-				# find http header
-			else:
-				self.log("nothing")
-			self.log("modify function inputs " + keyword + " in " + type )
-		except NoSuchElementException:
-			self.log("No able to modify " + keyword + " in " + type , "CRITICAL" )
-	
-	# to check content / header of cookie
-	def _____________check (self, type="content", condition="contain", keyword="none" ):
-		try:
-			if type == "content" :
-				self.log("check content")
-				output = self.check_content(keyword, content )
-			elif type == "cookie" :
-				self.log("cookie")
-				output = self.findCookie(keyword)
-			elif type == "header" :
-				self.log("header")
-				# find http header
-			else:
-				self.log("nothing")
-			self.log("modify function inputs " + keyword + " in " + type )
-		except NoSuchElementException:
-			self.log("No able to modify " + keyword + " in " + type , "WARNING" )
-
-	# return True when xpath element found 
-	def ___________check_element(self, xpath):		
-		try:
-			return self.ff.find_element_by_xpath(xpath)
-			self.log("OK - Found element: " + xpath )
-		except NoSuchElementException:
-			self.log("Failed to find element: " + xpath , "WARNING" )
-			return False
-		
-	def check_content(self, keyword, content) :
-		return  re.search(keyword, content )
-	
-	# header consists of key value pair
-	def check_header(self, keyword, content) :
-		return re.search(keyword, content )
+	# String substitution with regular expression support
+	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
+	def replace(self, find , replace_with, input ):
+		# ToDo.. implement error handling
+		self.log( "Info - Input string: [ " + input + " ]" , "DEBUG" )
+		self.log( "Info - Find: [" + find + "]" , "DEBUG" )
+		self.log( "Info - Replace with: [ " + replace_with + " ]" , "DEBUG" )
+		newString = re.sub( find , replace_with , input )
+		return newString	
 	
 	# cookie consists of key value pair
 	#def check_cookie(self, keyword, content) :
 	#	return re.search(keyword, content )
-		
 	def __re_search( self, keyword, content ):
 		if re.search(keyword, content ):
 			return keyword
 		else:
 			return False
 		
-
-	
 	def log(self, input , level="INFO") :
 		ts = time.time()
 		logtime = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
@@ -356,19 +307,25 @@ class siteDo:
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
 
-	def test(self, keyword):
-	
-		#self.log( "Test() Method: " + xpath, "DEBUG")
-		result = self.ff.find_element_by_xpath('//*[@id="destinations_list1"]/div/div/div/h2').text
-		pprint(result)
-		assert keyword in self.ff.page_source
 		
 	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
 	def lookup(self,  search_keyword, condition="IN" , type="SOURCE" , xpath="" ):
+		self.log("Current URL: " + self.ff.current_url , "DEBUG")
 		if type == "SOURCE":
-			content = self.ff.page_source
+			try:
+				content = self.ff.page_source
+			except:
+				content = ""
+				self.log("Cannot find page source", "WARNING" )
+				#self.log("Status code [ " + self.ff.status + " ] ", "WARNING" )
 		elif type == "XPATH":
-			content = self.ff.find_element_by_xpath(xpath).text
+			try:
+				content = self.ff.find_element_by_xpath(xpath).text
+			except:
+				content = ""
+				self.status(self.ff.current_url)
+				self.log("Invalid xpath or cannot find elements [ " + xpath + " ] ", "WARNING" )
+				
 		if condition == "IN":
 			if search_keyword in content:
 				self.log("[TRUE] " + search_keyword + " in " + type , "INFO")
@@ -378,69 +335,72 @@ class siteDo:
 				return False
 		elif condition == "NOT_IN" or condition == "NOTIN" :
 			if search_keyword not in content:
-				self.log("[TRUE]" + search_keyword + " not in "  + type, "INFO")
+				self.log("[TRUE] " + search_keyword + " not in "  + type, "INFO")
 				return "OK"
 			else:
 				self.log("[FALSE] " + search_keyword + " not in "  + type, "INFO")
 				return False
-			
+
+	# Selenium lack of request and response headers support
+	# This function requires requests library.
+	# Another sophisticate way is to use HAR such as Chrome browser to 
+	def status(self, url ):
+		self.log("Request url [ " + url + " ]", "INFO")
+		try:
+			r = requests.head(url)
+			self.log("Request response status [ " + str(r) + " ]", "INFO")
+		except:
+			self.log("HTTP request status unknown exception", "ERROR")
+
+	
 
 #####################
 #      TO RUN       #
-#####################          
+#####################
 surf = siteDo()
 
-surf.label("Visit Ebay website")
+surf.label("Test console output colour")
+surf.testColor()
 surf.size_position("500","1080")
+
+surf.label("Visit Ebay website")
 surf.do('goto','https://www.ebay.com')
+
+surf.label("Display Ebay website status")
+surf.status('https://www.ebay.com')
+
+surf.label("Go to Google website")
+surf.do('goto','https://www.google.com')
+
+surf.label("Back to Ebay website")
+surf.do('goto','https://www.ebay.com')
+
+surf.label("Find cookie on eBay website and modify")
+surf.find('COOKIE', 'EDIT', 'ebay' , 'CHANGED_JS' ,'js')
+
+surf.label("Delete a cookie on eBay website")
+surf.find('COOKIE', 'DELETE', 'ebay' )
+
+surf.label("Delete all cookies on eBay website")
+surf.find('COOKIE', 'DELETE_ALL_COOKIES' )
+
+surf.label("View cookie name ebay")
+surf.find('COOKIE', 'VIEW', 'ebay')
+
+surf.label("Go to Trademe website")
+surf.do('goto','https://www.trademe.co.nz')
+
+surf.label("Assertion test Ebay website")
 surf.lookup("fashion" , "IN", "SOURCE" )
 surf.lookup("xfashion" , "NOT_IN", "SOURCE" )
 surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div/h2' )
-surf.javascript("alert('BINGO');")
-surf.wait(10)
+
+surf.label("Assertion test using invalid xpath")
+surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div3/h2' )
+
+surf.label("Execute javascript on eBay website")
+surf.javascript("alert('You can also inject javascript!!!');")
+
+surf.label("Tearing down")
+surf.wait(4)
 surf.close()
-
-
-#surf.testColor()
-
-#surf.do('goto','https://www.ebay.com')
-#surf.find('COOKIE', 'VIEW', 'ebay')
-#surf.find('CONTENT','VIEW', 'ebay')
-
-
-
-
-
-#surf.label("Change Cookie value")
-#surf.find('COOKIE', 'EDIT', 'ebay' , 'CHANGED_JS' ,'js')
-#surf.label("DELETE ebay Cookie")
-#surf.find('COOKIE', 'DELETE', 'ebay' )
-#surf.wait(2)
-
-#surf.close()
-
-#surf.label("Delete all cookies")
-
-#surf.find('COOKIE', 'DELETE_ALL_COOKIES' )
-#surf.wait(2)
-#surf.find('COOKIE', 'VIEW', 'ebay')
-
-#surf.label("Visit Google site")
-#surf.do('go','https://www.google.com')
-
-#surf.label("Visit Ebay website")
-#surf.do('goto','https://www.ebay.com')
-
-#surf.label("View ebay cookies")
-
-#surf.find('COOKIE', 'VIEW', 'ebay')
-#surf.do('go','https://www.google.com')
-#surf.find('COOKIE', 'VIEW' , 'ABC' )
-#surf.check_element('//*[@id="content-wrap"]/h1')
-#surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','testing 1234 34333')
-#surf.screenshot="True"
-#surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
-#surf.history('-2')
-surf.wait(2)
-surf.close()
-
