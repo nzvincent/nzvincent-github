@@ -11,18 +11,25 @@ All you need is download single page of python class file to run the common brow
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
-**Download and Run**
+**Features**
+* Firefox browser
+* Take screenshots
+* Assertion test
+* Proxy configuration
+* Multi level colour coded logging
+* Cookie modification
+* Execute custom Javascript
+
+
+**To download**
 
 ```
 wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py \
      -O siteDo.py
-
-python siteDo.py
-
 ```
 
 
-#### Example
+#### Usage:
 
 **Instantiate**
 * surf = SiteDo()
