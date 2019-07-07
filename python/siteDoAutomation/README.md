@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 
 #### Usage:
 
-**Instantiate**
+**Instantiate class**
 * surf = SiteDo()
 
 **Set screenshot to true or false**
@@ -39,9 +39,8 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.screenshot="False"
 
 **Modify variables**
-* showloginconsole="False" # Do not display log in console
-* 
-
+* showloginconsole="False"
+* showloginconsole="True"
 
 **Do navigation methods**
 * surf.do('goto','https://www.ebay.com') # go to url
@@ -49,6 +48,16 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.do('return','/html/form//input#user_id') # return key
 * surf.do('click','/html/form//input#user_id') # perform click via xpath
 * surf.do('link','Log me out') # click on Log me out hyperlink 
+
+**Lable**
+* surf.label("Label name")
+
+**Find and replace**
+* surf.find("COOKIE","VIEW","cookie-name")
+* surf.find("COOKIE","EDIT","cookie-name","new-value","search-regular-expression-word-to-be-replace")
+* surf.find("COOKIE","ADD","cookie-name","new-cookie-value")
+* surf.find("COOKIE","DELETE","cookie-name")
+* surf.find("COOKIE","DELETE_ALL_COOKIE")
 
 **Javascript**
 * surf.history('-2') # go to history 
