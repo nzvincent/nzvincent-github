@@ -22,7 +22,7 @@ import json
 # - Take screenshots
 # - Assertion test
 # - Proxy configuration
-# - Multi level logging
+# - Multi level colour coded logging
 # - Cookie modification
 # - Execute custom Javascript
 # ToDo wish list:
