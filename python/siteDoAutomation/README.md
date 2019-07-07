@@ -59,6 +59,12 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.find("COOKIE","DELETE","cookie-name")
 * surf.find("COOKIE","DELETE_ALL_COOKIE")
 
+**Lookup**
+* surf.lookup("fashion" , "IN", "SOURCE" ) # lookup page source
+* surf.lookup("xfashion" , "NOT_IN", "SOURCE" )
+* surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div/h2' ) # loockup element text
+
+
 **Javascript**
 * surf.history('-2') # go to history 
 * surf.javascript("alert('bingo')") # execute javascript
