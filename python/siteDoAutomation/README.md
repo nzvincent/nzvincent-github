@@ -50,7 +50,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.do('click','/html/form//input#user_id') # perform click via xpath
 * surf.do('link','Log me out') # click on Log me out hyperlink 
 
-**Lable**
+**Label**
 * surf.label("Label name")
 
 **Find and edit/replace cookies**
