@@ -22,6 +22,11 @@ import json
 # ToDo wish list:
 # - Test assertion and reports 
 # - Multiple windows
+# Reference:
+# - Assert https://selenium-python.readthedocs.io/getting-started.html
+# - Cookie https://selenium-python-zh.readthedocs.io/en/latest/api.html
+# - Color code https://stackoverflow.com/questions/287871/how-to-print-colored-text-in-terminal-in-python
+# - Windows installation https://www.liquidweb.com/kb/install-pip-windows/
 
 class siteDo:
     
@@ -34,6 +39,9 @@ class siteDo:
 	screenshot="True"
 	# Make sure folder exists
 	path="./screenshots"
+	
+	__static_label = "Step one" # use obj.label("New step name") to modify __static_label
+
 	
 	proxy="False"
 	proxyhost="myproxy"
@@ -54,7 +62,7 @@ class siteDo:
 	showloginconsole="True"
 
 	#logging.basicConfig(filename=logFile, filemode='w', level=logging.INFO)
-	logging.basicConfig(filename=logFile, filemode='w' )
+	logging.basicConfig(filename=logFile, filemode='w', level=logging.DEBUG)
 	
 	# Constructor
 	def __init__(self):
@@ -64,6 +72,7 @@ class siteDo:
 	
 	# Find , Add , delete and delete all cookies
 	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
+	# https://selenium-python-zh.readthedocs.io/en/latest/api.html
 	def __findCookie(self, cookieName, action="none", find="none", replace="none"):
 		# ToDo... use regex
 		cookies_list = self.ff.get_cookies()
@@ -113,10 +122,13 @@ class siteDo:
 
 		
 	def writeCookie(self, cookie = "none" ):
-		self.log("writeCookie() Method: [" + cookie + " ] to file [ " + self.cookieFile + " ]", "DEBUG" )	
-		fp = open( self.cookieFile, 'a+')
-		fp.write(cookie + "\n")
-		fp.close() 
+		self.log("writeCookie() Method: [" + cookie + " ] to file [ " + self.cookieFile + " ]", "DEBUG" )
+		try:
+			fp = open( self.cookieFile, 'a+')
+			fp.write(cookie + "\n")
+			fp.close() 
+		except IOError:
+			self.log("Could not write to cookie file :" + self.cookieFile , "CRITICAL")
 
 	def takescreenshot(self): 
 		if ( self.screenshot == "True" ):
@@ -133,12 +145,43 @@ class siteDo:
 		#self.log("Label() Method: ["  + label_name + " ]", "DEBUG")
 		CSTART = '\033[101m'
 		CEND = '\033[0m'
-		print("[ LABEL ] " + CSTART + label_name + CEND )
-
-
+		print(CSTART + "[ LABEL ]" + CEND  + " " + label_name )
+		try:
+			fp = open( self.logFile, 'a+')
+			fp.write("[ LABEL ]"  + " " + label_name + "\n")
+			fp.close()
+		except IOError:
+			self.log("Could not write to logfile :" + self.logFile , "CRITICAL")
+	
 	def close(self):
-		self.log("Close() Method ", "DEBUG" )
-		self.ff.close()
+		try:
+			self.log("Close() Method ", "DEBUG" )
+			self.ff.close()
+		except:
+			self.log("Close() Method unknown exception", "ERROR" )
+
+	def history(self, steps ):
+		try:
+			self.log("History() Method " + steps , "DEBUG" )
+			self.ff.execute_script("window.history.go(" + str(steps) + ")")
+		except:
+			self.log("History() Method unknown exception", "ERROR")
+			
+	def javascript(self, script ):
+		try:
+			self.log("Execute javascript " + script , "DEBUG" )
+			self.ff.execute_script(script)
+		except:
+			self.log("Javascript() Method unknown exception", "ERROR")
+
+			
+	def size_position(self, width="200", height="200", xpos="0", ypos="0"):
+		try:
+			self.ff.set_window_size( width , height)
+			self.ff.set_window_position(xpos , xpos)
+		except:
+			self.log("Size_position() Method unknown exception", "ERROR")
+			
 
 	def wait(self, second):
 		self.log("Wait() Method [ " + str(second) + " ] ", "DEBUG" )
@@ -154,15 +197,22 @@ class siteDo:
 		newString = re.sub( find , replace_with , input )
 		return newString
 
-
-	
 	# Implemented cookie find
 	def find(self, type="CONTENT" , action="VIEW", search_key="none", replace_word="none", search_value="none" ):
-		self.log("Find() Method: [ " + type + " , " + action + " , " + search_key + " , " + replace_word + " ] " , "INFO")
+		self.log("Find() Method: [ " + type + " , " + action + " , " + search_key + " , " + replace_word + "," + search_value + " ]" , "INFO")
 		try:
 			if type == "CONTENT" :
 				# to find content
-				self.log("content")
+				page_source = self.ff.page_source
+				self.log(page_source, "DEBUG")
+				if action == "VIEW" :
+					search_content = search_key
+					##elem = self.ff.find_elements_by_xpath(xpath)
+					result = self.__re_search( search_content , page_source)
+					if ( result == "True" ):
+						self.log( result , "INFO")
+					else:
+						self.log( "Content search [ " + search_content + " ] not found. ", "INFO")
 			elif type == "COOKIE" :
 				cookieName = search_key
 				if action == "VIEW":
@@ -181,13 +231,12 @@ class siteDo:
 				# find http header
 			else:
 				self.log("nothing")
-
 		except NoSuchElementException:
 			self.log("No able to find " + keyword + " in " + type , "CRITICAL" )
 	
 
 	# To modify content / header or cookie
-	def modify(self, keyword , type="content" ):
+	def _______________modify(self, keyword , type="content" ):
 		try:
 			if type == "content" :
 				# to find content
@@ -205,7 +254,7 @@ class siteDo:
 			self.log("No able to modify " + keyword + " in " + type , "CRITICAL" )
 	
 	# to check content / header of cookie
-	def __check (self, type="content", condition="contain", keyword="none" ):
+	def _____________check (self, type="content", condition="contain", keyword="none" ):
 		try:
 			if type == "content" :
 				self.log("check content")
@@ -218,12 +267,12 @@ class siteDo:
 				# find http header
 			else:
 				self.log("nothing")
-			self.log("modify function inputs " + keyword + " in " + type )	
+			self.log("modify function inputs " + keyword + " in " + type )
 		except NoSuchElementException:
 			self.log("No able to modify " + keyword + " in " + type , "WARNING" )
 
 	# return True when xpath element found 
-	def check_element(self, xpath):		
+	def ___________check_element(self, xpath):		
 		try:
 			return self.ff.find_element_by_xpath(xpath)
 			self.log("OK - Found element: " + xpath )
@@ -239,19 +288,16 @@ class siteDo:
 		return re.search(keyword, content )
 	
 	# cookie consists of key value pair
-	def check_cookie(self, keyword, content) :
-		return re.search(keyword, content )
+	#def check_cookie(self, keyword, content) :
+	#	return re.search(keyword, content )
 		
-	def re_search( self, keyword, content ):
-		return re.search(keyword, content )
+	def __re_search( self, keyword, content ):
+		if re.search(keyword, content ):
+			return keyword
+		else:
+			return False
 		
-	def history(self, steps ):
-		self.log("Go history " + steps , "DEBUG" )
-		self.ff.execute_script("window.history.go(" + str(steps) + ")")
-	
-	def javascript(self, script ):
-		self.log("Execute javascript " + script , "DEBUG" )
-		self.ff.execute_script(" + script + ")
+
 	
 	def log(self, input , level="INFO") :
 		ts = time.time()
@@ -289,7 +335,7 @@ class siteDo:
 		self.log("EMPTY")
 			
 	def do(self, action , xpath="none", input="none" ):
-		self.log("Do() Method: [ '" + action + " ',' " + xpath  + " ',' " + input + "']", "INFO")
+		self.log("Do() Method: LABEL: [ " + self.__static_label + " ] PARAMETERS: [ '" + action + " ',' " + xpath  + " ',' " + input + "']", "INFO")
 		try:
 			if action == "goto" or action == "go" :
 				url = xpath
@@ -310,26 +356,84 @@ class siteDo:
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
 
+	def test(self, keyword):
+	
+		#self.log( "Test() Method: " + xpath, "DEBUG")
+		result = self.ff.find_element_by_xpath('//*[@id="destinations_list1"]/div/div/div/h2').text
+		pprint(result)
+		assert keyword in self.ff.page_source
+		
+	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
+	def lookup(self,  search_keyword, condition="IN" , type="SOURCE" , xpath="" ):
+		if type == "SOURCE":
+			content = self.ff.page_source
+		elif type == "XPATH":
+			content = self.ff.find_element_by_xpath(xpath).text
+		if condition == "IN":
+			if search_keyword in content:
+				self.log("[TRUE] " + search_keyword + " in " + type , "INFO")
+				return True
+			else:
+				self.log("[FALSE] " + search_keyword + "  in " + type , "INFO")
+				return False
+		elif condition == "NOT_IN" or condition == "NOTIN" :
+			if search_keyword not in content:
+				self.log("[TRUE]" + search_keyword + " not in "  + type, "INFO")
+				return "OK"
+			else:
+				self.log("[FALSE] " + search_keyword + " not in "  + type, "INFO")
+				return False
+			
 
 #####################
 #      TO RUN       #
 #####################          
 surf = siteDo()
-surf.testColor()
-surf.label("Start Ebay")
-surf.do('goto','https://www.ebay.com')
-surf.find('COOKIE', 'VIEW', 'ebay')
-surf.find('COOKIE', 'EDIT', 'ebay' , 'CHANGED_JS' ,'js')
-surf.label("DELETE ebay Cookie")
-surf.find('COOKIE', 'DELETE', 'ebay' )
-surf.wait(2)
-surf.find('COOKIE', 'DELETE_ALL_COOKIES' )
-surf.wait(2)
-surf.find('COOKIE', 'VIEW', 'ebay')
-surf.do('go','https://www.google.com')
-surf.do('goto','https://www.ebay.com')
-surf.find('COOKIE', 'VIEW', 'ebay')
 
+surf.label("Visit Ebay website")
+surf.size_position("500","1080")
+surf.do('goto','https://www.ebay.com')
+surf.lookup("fashion" , "IN", "SOURCE" )
+surf.lookup("xfashion" , "NOT_IN", "SOURCE" )
+surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div/h2' )
+surf.javascript("alert('BINGO');")
+surf.wait(10)
+surf.close()
+
+
+#surf.testColor()
+
+#surf.do('goto','https://www.ebay.com')
+#surf.find('COOKIE', 'VIEW', 'ebay')
+#surf.find('CONTENT','VIEW', 'ebay')
+
+
+
+
+
+#surf.label("Change Cookie value")
+#surf.find('COOKIE', 'EDIT', 'ebay' , 'CHANGED_JS' ,'js')
+#surf.label("DELETE ebay Cookie")
+#surf.find('COOKIE', 'DELETE', 'ebay' )
+#surf.wait(2)
+
+#surf.close()
+
+#surf.label("Delete all cookies")
+
+#surf.find('COOKIE', 'DELETE_ALL_COOKIES' )
+#surf.wait(2)
+#surf.find('COOKIE', 'VIEW', 'ebay')
+
+#surf.label("Visit Google site")
+#surf.do('go','https://www.google.com')
+
+#surf.label("Visit Ebay website")
+#surf.do('goto','https://www.ebay.com')
+
+#surf.label("View ebay cookies")
+
+#surf.find('COOKIE', 'VIEW', 'ebay')
 #surf.do('go','https://www.google.com')
 #surf.find('COOKIE', 'VIEW' , 'ABC' )
 #surf.check_element('//*[@id="content-wrap"]/h1')
