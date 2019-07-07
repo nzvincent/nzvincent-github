@@ -7,6 +7,8 @@ As most of the operation tasks are short-lived and and requires rapid changes,
 I created this siteDo class to deal with repetitive automation tasks for day to day activities.
 The purpose for this was to make changes easier and quicker without involving enormous coding efforts.
 
+All you need is download single page of python class file to run the common browser auotation activities.
+
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
 **Download and Run**
