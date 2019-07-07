@@ -21,28 +21,23 @@ python siteDo.py
 **Instantiate**
 * surf = SiteDo()
 
-**Set take screenshot to false**  
+**Set screenshot to true or false**
+* surf.screenshot="True"
 * surf.screenshot="False"
 
-**Do...Goto URL**
-* surf.do('goto','https://www.ebay.com')
+**Do navigation methods**
+* surf.do('goto','https://www.ebay.com') # go to url
+* surf.do('form', '/html/form//input#user_id','john') # enter john to form input
+* surf.do('return','/html/form//input#user_id') # return key
+* surf.do('click','/html/form//input#user_id') # perform click via xpath
+* surf.do('link','Log me out') # click on Log me out hyperlink 
 
-**Set take screenshot to true**  
-* surf.screenshot="True"
-* surf.do('goto','https://www.google.com')
-
-**Do...click on hyperlink**
-* surf.do('link','lin-text-name')
-
-**Do...enter html form**
-* surf.do('form','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input','google search')
-* surf.do('return','/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input')
-
-**Javascript history**
-* surf.history('-2')
+**Javascript**
+* surf.history('-2') # go to history 
+* surf.javascript("alert('bingo')") # execute javascript
 
 **Browser teardown**
-* surf.wait(2)
-* surf.close()
+* surf.wait(2) # wait 2 seconds
+* surf.close() # close browser
 
 
