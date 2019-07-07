@@ -59,7 +59,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.find("COOKIE","DELETE","cookie-name")
 * surf.find("COOKIE","DELETE_ALL_COOKIE")
 
-**Lookup**
+**Lookup and assertion test**
 * surf.lookup("fashion" , "IN", "SOURCE" ) # return TRUE when fashing found in page source
 * surf.lookup("xfashion" , "NOT_IN", "SOURCE" ) # return TRUE when xfashion not found in page source
 * surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div/h2' ) # return TRUE when eBay found in xpath element text 
