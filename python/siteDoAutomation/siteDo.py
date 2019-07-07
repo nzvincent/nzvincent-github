@@ -361,9 +361,12 @@ class siteDo:
 
 	
 
-#####################
-#      TO RUN       #
-#####################
+########################################################
+#     TO RUN HERE OR RUN FROM ANOTHER PYTHON SCRIPT    #
+########################################################
+# If to run from another script, add the following line at the beginning
+# from siteDo import siteDo
+
 surf = siteDo()
 
 surf.label("Test console output colour")
