@@ -1,9 +1,13 @@
 
 ## SiteDo
 
-SiteDo is simple one page Python Selenium script to Do most of the browser tasks
-Currently tested on Python 2.7 and above Linux OS, and should also be working on Windows OS.
+siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks
+This project is not to replace test frameworks such as cucumber and other test tools.
+As most of the operation tasks are short-lived and and requires rapid changes, 
+I created this siteDo class to deal with repetitive automation tasks for day to day activities.
+The purpose for this was to make changes easier and quicker without involving enormous coding efforts.
 
+*@Author: nzvincent@gmail.com | Vincent Pang*
 
 **Download and Run**
 
