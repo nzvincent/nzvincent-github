@@ -1,7 +1,7 @@
 
-## SiteDo
+## siteDo
 
-siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks.
+siteDo is simple one page Python Selenium class to perform "Do" most of the browser automation tasks.
 This project is not to replace test frameworks such as cucumber and other test tools.
 As most of the operation tasks are short-lived and and requires rapid changes, 
 I created this siteDo class to deal with repetitive automation tasks for day to day activities.
