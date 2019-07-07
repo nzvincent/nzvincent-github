@@ -52,7 +52,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 **Lable**
 * surf.label("Label name")
 
-**Find and replace**
+**Find and edit/replace cookies**
 * surf.find("COOKIE","VIEW","cookie-name")
 * surf.find("COOKIE","EDIT","cookie-name","new-value","search-regular-expression-word-to-be-replace")
 * surf.find("COOKIE","ADD","cookie-name","new-cookie-value")
