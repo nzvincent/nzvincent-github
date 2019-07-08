@@ -83,6 +83,7 @@ surf = siteDo()
 * your_password = "your-unencrypted-password"
 * enc_password = surf.encrypt("your_password")
 * surf.decrypt(enc_password)
+* To generate token and encrypted password, use another script *python encrypt.py*
 
 **Use encrypted password in form**
 * ENC_PASSWORD = "ENC_PASS:gAAA3ABdIr4Fc9...mYoxjOhmvGGo_SxV_uti8xLFQcH4"
