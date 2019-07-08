@@ -29,7 +29,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 ```
 
 **Python dependency pakages**
-* pip install selenium requests encryption pprint re json
+* pip install selenium requests encryption pprint
 
 ## Usage:
 
