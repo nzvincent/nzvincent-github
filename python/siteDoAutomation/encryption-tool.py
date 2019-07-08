@@ -6,6 +6,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import getpass
+import re
 
 keyfile="./keyfile2.txt"
 
@@ -75,27 +76,44 @@ def decrypt(enc_password):
 	f = Fernet(key)
 	return f.decrypt(enc_password)
 
-ans = raw_input("Do you want to generate new key?\n")
+CSTART = '\033[33m'
+CEND = '\033[0m'	
+	
+ans = raw_input(CSTART + "Do you want to generate new token key? \n Warning!! your existing key will be overridden\n YES or enter to skip\n" + CEND)
 
-if ans == "yes" :
+#if ans == "yes" :
+if re.match('yes', ans , re.IGNORECASE):
 	print("Generate new key...")
 	genkey()
 else:
-	print("Skip task")
+	print("Skip generating token key.")
 
 print("Your token key is located at " + keyfile )
 
 #password = raw_input("Enter password\n")
-password = getpass.getpass("Enter your password: ")
+password = getpass.getpass( CSTART + "Enter your password: " + CEND )
 
 
 if password != "" :
-	print(readfile(keyfile))
+
+	print(CSTART)
+	print""" 
+	########################################################################################
+	#  Export the token key to your environment variable and keep it secure, do not lost it.
+	#  eg. export siteDoKey=\"your-token-key\" or add this to your ~/.bashrc file
+	#  Use encrypted password in your siteDo automation.
+	#  eg. browser.siteDo('form','xpath', 'ENC_PASS:gAgAAAAABd...........HY2CDgUZl' )
+	########################################################################################
+	"""
+	print(CEND)
+	
+	print(CSTART + "\nToken key: " + CEND + readfile(keyfile) )
+
 	enc = encrypt(password)
-	print("Encrypted password: " + enc )
+	print(CSTART + "Encrypted password: " + CEND + "ENC_PASS:" + enc )
 	dec = decrypt(enc)
 	stars = dec[1:-1]
 	dec = dec[0:1] + ( "*" * len(stars)) + dec[-1:]
-	print("Decrypted password: " + dec)
+	print( CSTART + "Decrypted password: " +CEND + dec + "\n")
 else:
-	print("No password entered, skip")
+	print("\nNo password entered, skip")
