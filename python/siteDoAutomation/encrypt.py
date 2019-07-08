@@ -8,6 +8,10 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import getpass
 import re
 
+# Create encryption token key, encrypted password.
+# Usage: python encrypt.py
+# @Author: nzvincent@gmail.com | Vincent Pang
+
 keyfile="./keyfile2.txt"
 
 def genkey():
@@ -28,8 +32,8 @@ def genkey2(passphrase):
 		backend=default_backend()
 		)
 	key = base64.urlsafe_b64encode(kdf.derive(passphrase))
-	print ("KEY::")
 	print(key)
+	writefile(key)
 	
 	f = Fernet(key)
 	
@@ -83,10 +87,11 @@ ans = raw_input(CSTART + "Do you want to generate new token key? \n Warning!! yo
 
 #if ans == "yes" :
 if re.match('yes', ans , re.IGNORECASE):
-	print("Generate new key...")
+	print("Generated new token key...")
 	genkey()
+	#genkey2("secret")
 else:
-	print("Skip generating token key.")
+	print("Skipped generating token key.")
 
 print("Your token key is located at " + keyfile )
 
@@ -116,4 +121,9 @@ if password != "" :
 	dec = dec[0:1] + ( "*" * len(stars)) + dec[-1:]
 	print( CSTART + "Decrypted password: " +CEND + dec + "\n")
 else:
-	print("\nNo password entered, skipped")
+	print("\nSkipped. No password entered.")
+
+
+
+
+	
