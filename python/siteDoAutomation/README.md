@@ -37,6 +37,7 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 **Export siteDoKey to OS environment variable**
 * Export enviroment variable or add it to you ~/.bashrc script
 * export siteDoKey="what-ever-key-you-may-be-generated"
+* To generate siteDokey token and encrypted password, use my other script *python encrypt.py*
 
 **Modify variables inside the siteDo.py file**
 * \__log_level="INFO|DEBUG|WARNING|CRITICAL|ERROR"
