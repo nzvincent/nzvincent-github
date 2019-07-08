@@ -16,7 +16,7 @@ All you need is to download single page of python file and to run the common bro
 * Take screenshots
 * Assertion test
 * Proxy configuration
-* Multi level colour coded logging
+* Colour coded logging
 * password encryption / decryption
 * Cookie modification
 * Execute custom Javascript
