@@ -17,9 +17,9 @@ All you need is to download single page of python file and to run the common bro
 * Assertion test
 * Proxy configuration
 * Multi level colour coded logging
+* password encryption / decryption
 * Cookie modification
 * Execute custom Javascript
-
 
 **To download**
 
@@ -31,13 +31,25 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 
 #### Usage:
 
-**Variables**
+**Export OS environment variable**
+* Export enviroment variable or add it to you ~/.bashrc script
+* Export siteDoKey="what-ever-key-you-may-be-generated"
+
+**Modify variables inside the siteDo.py file**
 * \__log_level="INFO|DEBUG|WARNING|CRITICAL|ERROR"
 * showloginconsole="False|True"
 * screenshot="False|True"
 
-**Instantiate class**
-* surf = SiteDo()
+**Instantiate class within siteDo.py file**
+* surf = siteDo()
+
+**Instantiate class from another Python script**
+```
+from siteDo import siteDo
+
+surf = siteDo()
+...
+```
 
 **Set screenshot to true or false**
 * surf.screenshot="True"
@@ -65,6 +77,15 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 * surf.lookup("xfashion" , "NOT_IN", "SOURCE" ) # return TRUE when xfashion not found in page source
 * surf.lookup('eBay' , 'IN', 'XPATH' , '//*[@id="destinations_list1"]/div/div/div/h2' ) # return TRUE when eBay found in xpath element text 
 
+**Generate encrypted password**
+* your_password = "your-unencrypted-password"
+* enc_password = surf.encrypt("your_password")
+* surf.decrypt(enc_password)
+
+**Use encrypted password in form**
+* ENC_PASSWORD = "ENC_PASS:gAAA3ABdIr4Fc9...mYoxjOhmvGGo_SxV_uti8xLFQcH4"
+* surf.do('form','//*[@id="user_name"]', YOUR_USER_ID )
+* surf.do('form','//*[@id="password"]', ENC_PASSWORD )
 
 **Javascript**
 * surf.history('-2') # go to history 
