@@ -40,29 +40,36 @@ import json
 # - Specifications: https://selenium-python.readthedocs.io/api.html
 
 class siteDo:
-    
-	' Define constant variables '
-	__logFile="logfile.txt"
-	__reportFile="report.html"
-	__cookieFile="__cookieFile.txt"
-	__jsFile="./js-injection.js"
-	__step = 0
+
+	# Switch log level
+	__log_level="DEBUG"
 	
-	# Please ensure Python can write files to this folder 
-	__screenshot_path="./screenshots"
-	
-	# Turn screenshot on / off 
+		# Turn screenshot on / off 
 	screenshot="True"
 	
 	# Turn on / off console output
 	showloginconsole="True"
 	
-	# Switch log level
-	__log_level="DEBUG"
+	# Export your siteDoKey environment variable or add to your ~/.bashrc script
+	# Add Export siteDoKey="your-secret-key"
+	try:
+		__decryption_key = os.environ['siteDoKey']
+	except:
+		print("Error!!! Please export siteDoKey to your OS environment variable")
+		exit()
+
+	# File location
+	# Please ensure Python can write files to this folder 
+	__logFile="logfile.txt"
+	__reportFile="report.html"
+	__cookieFile="__cookieFile.txt"
+	__jsFile="./js-injection.js"
+	__screenshot_path="./screenshots"
+
+	# Increment number of label
+	__step = 0
 	
-	# Display label in log or console
-	# To modify: 
-	#   obj.label("Step 3, search for keyword ebay in page source")
+	# Default label name
 	__static_label = "Step one" # use obj.label("New step name") to modify __static_label
 
 	proxy="False"
@@ -293,7 +300,14 @@ class siteDo:
 		self.log("EMPTY")
 			
 	def do(self, action , xpath="none", input="none" ):
-		self.log("Do() Method: LABEL: [ " + self.__static_label + " ] PARAMETERS: [ '" + action + " ',' " + xpath  + " ',' " + input + "']", "INFO")
+		# Handle ENCRYPTED CONTENT
+		INPUT=input
+		if input.startswith('ENC_PASS:') :
+			INPUT="*******"
+			input = self.decrypt(input)
+			
+		self.log("Do() Method: LABEL: [ " + self.__static_label + " ] PARAMETERS: [ '" + action + " ',' " + xpath  + " ',' " + INPUT + "']", "INFO")		
+		
 		try:
 			if action == "goto" or action == "go" :
 				url = xpath
@@ -358,8 +372,25 @@ class siteDo:
 			self.log("Request response status [ " + str(r) + " ]", "INFO")
 		except:
 			self.log("HTTP request status unknown exception", "ERROR")
-
+			
+	def encrypt(self, password):
+		try:
+			f = Fernet(self.__decryption_key)
+			return "ENC_PASS:" + f.encrypt(password)
+		except:
+			self.log("Encryption caught exception [ " + self.__decryption_key + " , ******  ]", "CRITICAL")
+			return False
 	
+	def decrypt(self, enc_password ):
+		enc_password=enc_password[8:]
+		try:
+			f = Fernet(self.__decryption_key)
+			return f.decrypt(enc_password)
+		except:
+			self.log("Decryption caught exception [ " + self.__decryption_key + " , " + str(enc_password) + "]", "CRITICAL")
+			return False
+
+
 
 ########################################################
 #     TO RUN HERE OR RUN FROM ANOTHER PYTHON SCRIPT    #
