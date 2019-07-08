@@ -24,4 +24,45 @@ Metadata:
         Parameters:
           - PeerVPCOwner
           - PeerVPC
-          - PeerVPCRegion
+          - PeerVPCRegion    
+ Parameters:
+  ApplicationCode:
+    Description: The application code this stack is built for.
+    Type: String
+    Default: bot
+  EnvironmentCode:
+    Description: The environment code this stack is built for.
+    Type: String
+    Default: poc
+  VpcName:
+    Description: VPC Name
+    Default: Deploy LAMP server
+    Type: String
+  VpcAcronymName:
+    Description: The short code for VPC Name.
+    Type: String
+    Default: lamp-stack
+  VpcCidrBlock:
+    Description: CIDR Block for the assigned VPC
+    Type: String
+    Default: 172.17.10.0/24
+  PublicTierSubnet1CidrBlock:
+    Description: Public Tier Subnet 1 CIDR Block
+    Type: String
+    Default: 172.17.10.0/24
+  PublicTierSubnet1Az:
+    Description: Public Tier Subnet 1 Availability Zone
+    Type: String
+    Default: ap-southeast-2c
+  PeerVPCOwner:
+    Description: Peer VPC Owner Account Id
+    Type: String
+    Default: __INT_ID__
+  PeerVPC:
+    Description: Peer VPC Id
+    Type: String
+    Default: vpc-_________
+  PeerVPCRegion:
+    Description: Peer VPC Region
+    Type: String
+    Default: ap-southeast-2         
