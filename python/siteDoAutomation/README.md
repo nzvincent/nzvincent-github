@@ -14,10 +14,11 @@ All you need is to download single page of python file and to run the common bro
 **Features**
 * Firefox browser
 * Take screenshots
+* Easy form input, link and click via xpath
 * Assertion test
 * Proxy configuration
 * Colour coded logging
-* password encryption / decryption
+* Password encryption / decryption
 * Cookie modification
 * Execute custom Javascript
 
