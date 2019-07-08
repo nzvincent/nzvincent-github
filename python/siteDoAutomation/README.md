@@ -28,10 +28,10 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
      -O siteDo.py
 ```
 
-### Python dependencies
+**Python dependency pakages**
 * pip install selenium requests encryption pprint re json
 
-#### Usage:
+## Usage:
 
 **Export OS environment variable**
 * Export enviroment variable or add it to you ~/.bashrc script
