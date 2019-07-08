@@ -33,9 +33,9 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 
 ## Usage:
 
-**Export OS environment variable**
+**Export siteDoKey to OS environment variable**
 * Export enviroment variable or add it to you ~/.bashrc script
-* Export siteDoKey="what-ever-key-you-may-be-generated"
+* export siteDoKey="what-ever-key-you-may-be-generated"
 
 **Modify variables inside the siteDo.py file**
 * \__log_level="INFO|DEBUG|WARNING|CRITICAL|ERROR"
