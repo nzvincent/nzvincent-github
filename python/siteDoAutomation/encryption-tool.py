@@ -116,4 +116,4 @@ if password != "" :
 	dec = dec[0:1] + ( "*" * len(stars)) + dec[-1:]
 	print( CSTART + "Decrypted password: " +CEND + dec + "\n")
 else:
-	print("\nNo password entered, skip")
+	print("\nNo password entered, skipped")
