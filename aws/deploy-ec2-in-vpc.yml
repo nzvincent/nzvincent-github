@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2018-01-05
+Description: Deploy LAMP server
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+      - Label:
+          default: Environment Configuration
+        Parameters:
+          - ApplicationCode
+          - EnvironmentCode
+      - Label:
+          default: VPC Configuration
+        Parameters:
+          - VpcName
+          - VpcAcronymName
+          - VpcCidrBlock
+      - Label:
+          default: Availability Zone 1 Configuration
+        Parameters:
+          - PublicTierSubnet1CidrBlock
+          - PublicTierSubnet1Az
+      - Label:
+          default: VPC Peering Configuration
+        Parameters:
+          - PeerVPCOwner
+          - PeerVPC
+          - PeerVPCRegion
