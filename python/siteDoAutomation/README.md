@@ -28,6 +28,8 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
      -O siteDo.py
 ```
 
+### Python dependencies
+* pip install selenium requests encryption pprint re json
 
 #### Usage:
 
