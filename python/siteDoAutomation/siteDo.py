@@ -400,6 +400,7 @@ class siteDo:
 			return False
 
 
+COMMENT="""		
 
 ########################################################
 #     TO RUN HERE OR RUN FROM ANOTHER PYTHON SCRIPT    #
@@ -454,6 +455,8 @@ surf.javascript("alert('You can also inject javascript!!!');")
 surf.label("Tearing down")
 surf.wait(4)
 surf.close()
+
+"""
 
 
 
