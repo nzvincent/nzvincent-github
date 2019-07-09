@@ -254,12 +254,14 @@ class siteDo:
 
 	# String substitution with regular expression support
 	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
-	def replace(self, find , replace_with, input ):
+	def replace(self, replace_with , , input ):
 		# ToDo.. implement error handling
-		self.log( "Info - Input string: [ " + input + " ]" , "DEBUG" )
-		self.log( "Info - Find: [" + find + "]" , "DEBUG" )
-		self.log( "Info - Replace with: [ " + replace_with + " ]" , "DEBUG" )
+		self.log("Replace String" , "DEBUG" )
+		self.log("Input String : [ " + input + " ]" , "DEBUG" )
+		self.log("Find String: [" + find + "]" , "DEBUG" )
+		self.log("Replace with: [ " + replace_with + " ]" , "DEBUG" )
 		newString = re.sub( find , replace_with , input )
+		self.log("New replaced String: [ " + newString + " ]" , "DEBUG" )
 		return newString	
 	
 	# cookie consists of key value pair
