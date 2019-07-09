@@ -254,7 +254,7 @@ class siteDo:
 
 	# String substitution with regular expression support
 	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
-	def replace(self, replace_with , , input ):
+	def replace(self, replace_with , input ):
 		# ToDo.. implement error handling
 		self.log("Replace String" , "DEBUG" )
 		self.log("Input String : [ " + input + " ]" , "DEBUG" )
