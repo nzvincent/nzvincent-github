@@ -19,27 +19,24 @@ import logging
 import re
 import json
 
-# siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks
-# This project is not to replace test frameworks such as cucumber and other test tools.
-# As most of the operation tasks are short-lived and and requires rapid changes, 
-# I created this siteDo class to deal with repetitive automation tasks for day to day activities.
-# The purpose for this was to make changes easier and quicker without involving enormous coding efforts.
+# siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks.
+# Purpose for this is to make modification of Selenium test cases simple.
 # @Author: nzvincent@gmail.com | Vincent Pang
-#
-# Features:
-# - Firefox browser 
-# - Firefox headless
-# - Take screenshots
-# - Assertion test
-# - Proxy configuration
-# - Multi level colour coded logging
-# - Cookie modification
+
+# siteDo class covered most of the basic features, that required by day to day operation:
+# - Automate Firefox browser tests
+# - Easy customise test case. eg. to input data into form, use siteDo.do("form","XPATH","your user id")
+# - Encryption - eg. o input password into form, use siteDo.do("form","XPATH","ENC_PASS:=enctypted_string=")
+# - screenshots on / off
+# - Assertion test. eg. Find specific text contains in HTML, use siteDo.lookup("find me string","IN","CONTENT")
+# - Cookie modification. eg. siteDo.find("COOKIE", "EDIT", "JSSSIONS", "find-in-regular-expression-match","replacing world")
+# - Proxy on / off
+# - Colour coded logging
 # - Execute custom Javascript
 # ToDo wish list:
 # - Reports 
 # - Headers add / delete / edit
 # - Content add / delete / edit
-# - Password encryption
 # - Multiple tabs and windows
 # - Other browsers support
 # References:
