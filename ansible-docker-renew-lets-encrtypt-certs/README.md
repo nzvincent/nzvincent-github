@@ -3,6 +3,8 @@ Let's encrypt provides CA signed certificates but certificates issued only valid
 The objective for this snippet is to make certificates renewal simple.
 Recommended to run this from Jenkins or other CI/CD platform. 
 
+Ref: https://docs.ansible.com/ansible/2.5/modules/letsencrypt_module.html
+
 #### 3 steps
 * Created encrypted private keys on ansible files directory
 * Generate CSR ( SAN )
