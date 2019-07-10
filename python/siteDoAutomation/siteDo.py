@@ -27,7 +27,8 @@ import json
 # @Author: nzvincent@gmail.com | Vincent Pang
 #
 # Features:
-# - Firefox browser
+# - Firefox browser 
+# - Firefox headless
 # - Take screenshots
 # - Assertion test
 # - Proxy configuration
