@@ -54,7 +54,7 @@ class siteDo:
 	__log_level="DEBUG"
 	
 	# Use proxy 
-	__Proxy="False"
+	__proxy="False"
 	
 	# Firefox headless
 	__headless="True"
