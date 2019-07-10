@@ -97,11 +97,13 @@ class siteDo:
 	profile.set_preference("network.proxy.socks", proxyhost );
 	profile.set_preference("network.proxy.socks_port",  proxyport);
 	
+	profile = ""
 	
 	# Firefox headless
 	options = FirefoxOptions()
 	options.add_argument("--headless")
-	#driver = webdriver.Firefox(options=options)
+	
+	option = ""
 	
   
 	if __log_level == "INFO":
@@ -122,7 +124,7 @@ class siteDo:
 	# Constructor
 	def __init__(self):
 		#self.ff = webdriver.Firefox(profile ) if self.proxy == "True" else webdriver.Firefox()
-		self.ff = webdriver.Firefox(profile, options=options ) if self.proxy == "True" else webdriver.Firefox(options=options)
+		self.ff = webdriver.Firefox( self.profile , options=self.options ) if self.proxy == "True" else webdriver.Firefox(options=options)
 		self.log(vars(siteDo.profile), "DEBUG")
 
 	# Find , Add , delete and delete all cookies
