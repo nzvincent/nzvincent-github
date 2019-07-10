@@ -10,7 +10,7 @@ Ref: https://docs.ansible.com/ansible/2.5/modules/letsencrypt_module.html
 * Generate CSR ( SAN )
 * Request certificates from let's encrypt
 * Move private key and certificate to remote servers and restart if checked
-* Verify newly install certificates
+* Verify newly installed certificates
 
 
 #### How this scritp works?
