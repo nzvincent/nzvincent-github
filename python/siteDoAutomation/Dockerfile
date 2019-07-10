@@ -1,5 +1,9 @@
 FROM debian:latest
 
+# Things you need to run python selenium with firefox webdriver
+# @Author: nzvincent@gmail.com | Vincent Pang
+
+
 ENV USER=pytester
 ENV UID=2000
 ENV GID=2000
@@ -14,4 +18,4 @@ RUN apt-get update && apt-get upgrade && \
     su - "$USER" && \
     pip install selenium requests cryptography \
 
-    
+  
