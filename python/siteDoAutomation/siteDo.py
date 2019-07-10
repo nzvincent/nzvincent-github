@@ -85,7 +85,7 @@ class siteDo:
 	__step = 0
 	
 	# Default label name
-	__static_label = "Step one" # use obj.label("New step name") to modify __static_label
+	__default_label = "Step one" # use obj.label("New step name") to modify __static_label
 
 	proxy="False"
 	proxyhost="myproxy"
@@ -330,7 +330,7 @@ class siteDo:
 			INPUT="*******"
 			input = self.decrypt(input)
 			
-		self.log("Do() Method: LABEL: [ " + self.__static_label + " ] PARAMETERS: [ '" + action + " ',' " + xpath  + " ',' " + INPUT + "']", "INFO")		
+		self.log("Do() Method: LABEL: [ " + self.__default_label + " ] PARAMETERS: [ '" + action + " ',' " + xpath  + " ',' " + INPUT + "']", "INFO")		
 		
 		try:
 			if action == "goto" or action == "go" :
