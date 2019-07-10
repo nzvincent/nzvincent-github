@@ -361,14 +361,14 @@ class siteDo:
 				self.log("[TRUE] " + search_keyword + " in " + type , "INFO")
 				return True
 			else:
-				self.log("[FALSE] " + search_keyword + "  in " + type , "INFO")
+				self.log("[FALSE] " + search_keyword + "  in " + type , "WARNING")
 				return False
 		elif condition == "NOT_IN" or condition == "NOTIN" :
 			if search_keyword not in content:
 				self.log("[TRUE] " + search_keyword + " not in "  + type, "INFO")
 				return "OK"
 			else:
-				self.log("[FALSE] " + search_keyword + " not in "  + type, "INFO")
+				self.log("[FALSE] " + search_keyword + " not in "  + type, "WARNING")
 				return False
 
 	# Selenium lack of request and response headers support
