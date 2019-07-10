@@ -180,6 +180,15 @@ class siteDo:
 		except IOError:
 			self.log("Could not write to cookie file :" + self.__cookieFile , "CRITICAL")
 
+	def __writeToFile(self, content = "" , fileaname = "" ):
+		self.log("__writeToFile Method: [" + content + " ] to file [ " + fileaname + " ]", "DEBUG" )
+		try:
+			fp = open( fileaname , 'a+')
+			fp.write(content + "\n")
+			fp.close() 
+		except IOError:
+			self.log("Could not write to content to file :" + fileaname , "CRITICAL")			
+
 	def takescreenshot(self): 
 		if ( self.screenshot == "True" ):
 			# Delay 3 seconds before taking screenshot
@@ -193,7 +202,7 @@ class siteDo:
 		
 	def label(self, label_name="Default Label"):
 		self.__step = self.__step + 1
-		self.log("Label() Method: ["  + label_name + " ]", "DEBUG")
+		self.log("Label() Method: [ "  + label_name + " ]", "DEBUG")
 		CSTART = '\033[101m'
 		CEND = '\033[0m'
 		print(CSTART + "[ LABEL ]" + CEND  + " (#"  + str(self.__step) + ") " + label_name )
