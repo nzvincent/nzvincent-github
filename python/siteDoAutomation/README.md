@@ -30,7 +30,9 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 ```
 
 **Python dependency pakages**
-* pip install selenium requests pprint cryptography
+* pip install --no-cache-dir cryptography==2.1.4
+* pip install cryptography ( depending on your distribution ) 
+* pip install selenium requests pprint
 
 ## Usage:
 
