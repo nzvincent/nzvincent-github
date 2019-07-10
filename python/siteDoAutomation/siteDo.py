@@ -127,7 +127,7 @@ class siteDo:
 	def __init__(self):
 		self.ff = webdriver.Firefox( self.profile , options=self.options )
 		self.log(vars(siteDo.profile), "DEBUG")
-		self.log(vars(siteDo.options), "DEBUG")
+
 
 	# Find , Add , delete and delete all cookies
 	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
