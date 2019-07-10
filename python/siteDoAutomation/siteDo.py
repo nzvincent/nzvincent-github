@@ -53,6 +53,12 @@ class siteDo:
 	# Switch log level
 	__log_level="DEBUG"
 	
+	# Use proxy 
+	__Proxy="False"
+	
+	# Firefox headless
+	__headless="True"
+	
 	# Turn screenshot on / off 
 	screenshot="True"
 	
@@ -71,7 +77,7 @@ class siteDo:
 	# Please ensure Python can write files to this folder 
 	__logFile="logfile.txt"
 	__reportFile="report.html"
-	__cookieFile="__cookieFile.txt"
+	__cookieFile="cookieFile.txt"
 	__jsFile="./js-injection.js"
 	__screenshot_path="./screenshots"
 
@@ -87,25 +93,23 @@ class siteDo:
 
 	profile = webdriver.FirefoxProfile()
 	# Browser manual proxy setting
-	profile.set_preference("network.proxy.type", 1);
-	profile.set_preference("network.proxy.http", proxyhost);
-	profile.set_preference("network.proxy.http_port",  proxyport);
-	profile.set_preference("network.proxy.ftp", proxyhost);
-	profile.set_preference("network.proxy.ftp_port",  proxyport);
-	profile.set_preference("network.proxy.ssl", proxyhost);
-	profile.set_preference("network.proxy.ssl_port",  proxyport);
-	profile.set_preference("network.proxy.socks", proxyhost );
-	profile.set_preference("network.proxy.socks_port",  proxyport);
-	
-	profile = ""
+	if __proxy == "True" :
+		profile.set_preference("network.proxy.type", 1);
+		profile.set_preference("network.proxy.http", proxyhost);
+		profile.set_preference("network.proxy.http_port",  proxyport);
+		profile.set_preference("network.proxy.ftp", proxyhost);
+		profile.set_preference("network.proxy.ftp_port",  proxyport);
+		profile.set_preference("network.proxy.ssl", proxyhost);
+		profile.set_preference("network.proxy.ssl_port",  proxyport);
+		profile.set_preference("network.proxy.socks", proxyhost );
+		profile.set_preference("network.proxy.socks_port",  proxyport);
 	
 	# Firefox headless
 	options = FirefoxOptions()
-	options.add_argument("--headless")
-	
-	option = ""
-	
-  
+	if __headless == "True" :
+		options.add_argument("--headless")
+		
+	# Loading log level 
 	if __log_level == "INFO":
 		logging.basicConfig(filename=__logFile, filemode='w', level=logging.INFO )
 	elif __log_level == "DEBUG":
@@ -119,13 +123,12 @@ class siteDo:
 	else:
 		logging.basicConfig(filename=__logFile, filemode='w')
 		
-		
-		
+
 	# Constructor
 	def __init__(self):
-		#self.ff = webdriver.Firefox(profile ) if self.proxy == "True" else webdriver.Firefox()
 		self.ff = webdriver.Firefox( self.profile , options=self.options )
 		self.log(vars(siteDo.profile), "DEBUG")
+		self.log(vars(siteDo.options), "DEBUG")
 
 	# Find , Add , delete and delete all cookies
 	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
