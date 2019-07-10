@@ -1,0 +1,11 @@
+---
+## Tasks request-certificates
+
+#==============================================
+- name: check private key on local respository
+#==============================================
+  include_role:
+    name: check_local_private_key # check if private key available
+  notify:
+
+      
