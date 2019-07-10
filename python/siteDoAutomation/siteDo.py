@@ -23,7 +23,7 @@ import json
 # Purpose for this is to make modification of Selenium test cases simple.
 # @Author: nzvincent@gmail.com | Vincent Pang
 
-# siteDo class covered most of the basic features, that required by day to day operation:
+# siteDo class covers most of the basic browser features for my day to day operation work:
 # - Automate Firefox browser tests
 # - Easy customise test case. eg. to input data into form, use siteDo.do("form","XPATH","your user id")
 # - Encryption - eg. o input password into form, use siteDo.do("form","XPATH","ENC_PASS:=enctypted_string=")
