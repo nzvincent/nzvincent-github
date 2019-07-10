@@ -9,4 +9,7 @@ edit /etc/nginx/site-enabled/default
         }
 
 cd /home/pystesr/WWW
+
 ln -s your-screenshots-dir .
+
+/etc/init.d/nginx restart
