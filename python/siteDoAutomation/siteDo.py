@@ -87,7 +87,6 @@ class siteDo:
 	# Default label name
 	__default_label = "Step one" # use obj.label("New step name") to modify __static_label
 
-	proxy="False"
 	proxyhost="myproxy"
 	proxyport=3128
 
