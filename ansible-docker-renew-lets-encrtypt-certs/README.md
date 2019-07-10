@@ -3,6 +3,14 @@ Let's encrypt provides CA signed certificates but certificates issued only valid
 The objective for this snippet is to make certificates renewal simple.
 Recommended to run this from Jenkins or other CI/CD platform. 
 
+#### 3 steps
+* Created encrypted private keys on ansible files directory
+* Generate CSR ( SAN )
+* Request certificates from let's encrypt
+* Move private key and certificate to remote servers and restart if checked
+* Verify newly install certificates
+
+
 #### How this scritp works?
 * Trigger Ansible playbook from Jenkins
 * Verify your existing expiring certificates.
