@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+# Firefox options
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 # Fernet encryption 
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
@@ -51,7 +53,7 @@ class siteDo:
 	# Switch log level
 	__log_level="DEBUG"
 	
-		# Turn screenshot on / off 
+	# Turn screenshot on / off 
 	screenshot="True"
 	
 	# Turn on / off console output
@@ -94,6 +96,13 @@ class siteDo:
 	profile.set_preference("network.proxy.ssl_port",  proxyport);
 	profile.set_preference("network.proxy.socks", proxyhost );
 	profile.set_preference("network.proxy.socks_port",  proxyport);
+	
+	
+	# Firefox headless
+	options = FirefoxOptions()
+	options.add_argument("--headless")
+	#driver = webdriver.Firefox(options=options)
+	
   
 	if __log_level == "INFO":
 		logging.basicConfig(filename=__logFile, filemode='w', level=logging.INFO )
@@ -112,7 +121,8 @@ class siteDo:
 		
 	# Constructor
 	def __init__(self):
-		self.ff = webdriver.Firefox(profile) if self.proxy == "True" else webdriver.Firefox()
+		#self.ff = webdriver.Firefox(profile ) if self.proxy == "True" else webdriver.Firefox()
+		self.ff = webdriver.Firefox(profile, options=options ) if self.proxy == "True" else webdriver.Firefox(options=options)
 		self.log(vars(siteDo.profile), "DEBUG")
 
 	# Find , Add , delete and delete all cookies
