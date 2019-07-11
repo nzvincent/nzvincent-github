@@ -59,7 +59,7 @@ class siteDo:
 	
 	# Please ensure Python can write files to this folder 
 	__logFile="logfile.txt"
-	__reportFile="report.html"
+
 	__cookieFile="cookieFile.txt"
 	__jsFile="./js-injection.js"
 	__screenshot_path="./screenshots"
@@ -68,6 +68,10 @@ class siteDo:
 	screenshot="True"
 	# Set delay before taking screenshot
 	screenshot_delay=5
+	
+	# Turn report on / off
+	report="False"
+	__reportFile="report.html"
 	
 	# Load Javascript before sceenshot
 	loadJavascript="False"
@@ -200,11 +204,13 @@ class siteDo:
 	
 	
 	def takescreenshot(self): 
-		if ( self.screenshot == "True" ):
+		if self.screenshot == "True" :
 			ts = time.time()
 			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
+			date_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 			# Create new directory is it does not exist
 			fileDir = self.__screenshot_path + "/" + self.__start_datetime
+			writeToReportFile = self.__screenshot_path + "/" + self.__start_datetime + "/" + self.__reportFile
 			try:
 				os.stat(fileDir)
 			except:
@@ -212,6 +218,10 @@ class siteDo:
 			saveFile = fileDir + "/" + fileName
 			self.ff.save_screenshot(saveFile)
 			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
+			
+			if self.report == "True" :
+				content = "<div>" + date_time + "</div><div>" + self.label + "</div><a href='" + saveFile + "'><div><src='" + saveFile + "'></a></div>"
+				self.__writeToFile( content, writeToReportFile )
 	
 	
 	
@@ -401,6 +411,9 @@ class siteDo:
 		time.sleep(self.screenshot_delay)
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
+		
+		self.__report = self.__writeToFile( , self.__reportFile )
+		
 		
 		
 	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
