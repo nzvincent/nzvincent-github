@@ -484,17 +484,17 @@ class siteDo:
 		if condition == "IN":
 			if search_keyword in content:
 				self.log("[TRUE] " + search_keyword + " in " + type , "INFO")
-				assert_status = "SUCCESS"
+				assert_status = "TRUE"
 			else:
 				self.log("[FALSE] " + search_keyword + "  in " + type , "WARNING")
-				assert_status = "FAIL"
+				assert_status = "FALSE"
 		elif condition == "NOT_IN" or condition == "NOTIN" :
 			if search_keyword not in content:
 				self.log("[TRUE] " + search_keyword + " not in "  + type, "INFO")
-				assert_status = "SUCCESS"
+				assert_status = "TRUE"
 			else:
 				self.log("[FALSE] " + search_keyword + " not in "  + type, "WARNING")
-				assert_status = "FAIL"
+				assert_status = "FALSE"
 		if self.screenshot == "True" :
 			# ToDO swap assertinreport self.__reportFile = 
 			report_status = assert_status + ": lookup " + "\" " + search_keyword + " \"" + condition + " " + type
@@ -589,6 +589,3 @@ surf.wait(4)
 surf.close()
 
 """
-
-
-
