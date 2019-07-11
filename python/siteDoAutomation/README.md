@@ -42,11 +42,11 @@ surf.do("go", "https://www.ebay.com")
 ```
 * Run python kickstart.py
 
-
 **Python dependency pakages**
+* pip install selenium requests pprint os time
 * pip install --no-cache-dir cryptography==2.1.4
 * pip install cryptography ( depending on your distribution ) 
-* pip install selenium requests pprint
+
 
 ## Usage:
 
@@ -60,18 +60,13 @@ surf.do("go", "https://www.ebay.com")
 * showloginconsole="False|True"
 * screenshot="False|True"
 
-**Instantiate class within siteDo.py file**
-* surf = siteDo()
-
-**Instantiate class from another Python script**
+**Instantiate class**
 ```
 from siteDo import siteDo
 
 surf = siteDo()
 ...
 ```
-
-
 
 **Set screenshot to true or false**
 * surf.screenshot="True"
@@ -85,7 +80,7 @@ surf = siteDo()
 * surf.do('link','Log me out') # click on Log me out hyperlink 
 
 **Label**
-* surf.label("Label name")
+* surf.label("Go to gmail and check messages.")
 
 **Find and edit/replace cookies**
 * surf.find("COOKIE","VIEW","cookie-name")
@@ -113,6 +108,7 @@ surf = siteDo()
 **Javascript**
 * surf.history('-2') # go to history 
 * surf.javascript("alert('bingo')") # execute javascript
+* surf.javascript(javascript-file.js)
 
 **Browser teardown**
 * surf.wait(2) # wait 2 seconds
@@ -126,6 +122,5 @@ ps -ef | grep firefox | awk '{print $2}' | xargs kill -9 &
 ps -ef | grep geckodriver | awk '{print $3}' | xargs kill -9 &
 ps -ef | grep geckodriver | awk '{print $2}' | xargs kill -9 &
 ```
-
 
 
