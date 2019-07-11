@@ -59,6 +59,8 @@ class siteDo:
 	
 	# Turn screenshot on / off 
 	screenshot="True"
+	# Set delay before taking screenshot
+	screenshot_delay=5
 	
 	# Turn on / off console output
 	showloginconsole="True"
@@ -355,6 +357,7 @@ class siteDo:
 				self.log("No action parsed to do function", "WARNING")
 		except NoSuchElementException:
 			self.log("NoSuchElementException exception caught in do function", "WARNING" )
+		time.sleep(self.screenshot_delay)	
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
 
