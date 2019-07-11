@@ -2,7 +2,7 @@
 ## siteDo
 
 siteDo is a simple one page Python Selenium class to perform "Do" most of the browser's tasks.
-Purpose for this is to make Selenium test change as simple as possible.
+Purpose for this is to make browser's automation change as simple as possible.
 
 I created this siteDo class to deal with repetitive automation tasks fo my day to day work and running it from my Linux desktop and Jenkins, but this should be able to run on Windows Desktop too.
 
