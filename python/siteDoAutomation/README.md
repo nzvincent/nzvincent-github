@@ -4,7 +4,9 @@
 siteDo is a simple one page Python Selenium class to perform "Do" most of the browser's tasks.
 Purpose for this is to make browser's automation change as simple as possible.
 
-I created this siteDo class to deal with repetitive automation tasks fo my day to day work and running it from my Linux desktop and Jenkins, but this should be able to run on Windows Desktop too.
+I created this siteDo class to deal with repetitive browser tasks for my day to day work as I need to customise different scenerios to work with rapid changes to Production. 
+
+This script has been running from my Linux desktop and Jenkins, but it should also be able to run on Windows Desktop.
 
 **Features**
 * Firefox browser support GUI or headless
@@ -20,7 +22,6 @@ I created this siteDo class to deal with repetitive automation tasks fo my day t
 * Generate HTML report
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
-
 
 **Simple kickstart**
 * Download wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
