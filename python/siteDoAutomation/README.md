@@ -1,31 +1,32 @@
 
 ## siteDo
 
-siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks.
+siteDo is a simple one page Python Selenium class to perform "Do" most of the browser's tasks.
 Purpose for this is to make Selenium test change as simple as possible.
 
-I created this siteDo class to deal with repetitive automation tasks fo my day to day work.
+I created this siteDo class to deal with repetitive automation tasks fo my day to day work running from my Linux desktop and Jenkins.
 
 **Features**
-* Automate Firefox browser head or headless
+* Firefox browser support GUI or headless
 * Easy customise test case
 * Encrypt password
 * Take screenshots
-* Assertion test
-* xpath 
+* Assertion test and report
+* xpath element selector
 * Proxy support
 * Colour coded logging
 * Cookie modification
-* Execute custom Javascript
+* Execute custom Javascript or Javascript file 
 * Generate HTML report
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
-
 **To download**
-wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
+
 
 **Simple kickstart**
+* Download wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
+* Create kickstart.py file
 ```
 from siteDo import siteDo
 
@@ -39,6 +40,8 @@ surf.do("go", "https://www.ebay.com")
 #surf.do("forom","password-input-xpath", encrypted-password )
 
 ```
+* Run python kickstart.py
+
 
 **Python dependency pakages**
 * pip install --no-cache-dir cryptography==2.1.4
