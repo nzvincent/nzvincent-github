@@ -1,32 +1,43 @@
 
 ## siteDo
 
-siteDo is simple one page Python Selenium class to perform "Do" most of the browser automation tasks.
-This project is not to replace test frameworks such as cucumber and other test tools.
-As most of the operation tasks are short-lived and and requires rapid changes, 
-I created this siteDo class to deal with repetitive automation tasks for day to day activities.
-The purpose for this was to make changes easier and quicker without involving enormous coding efforts.
+siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks.
+Purpose for this is to make Selenium test change as simple as possible.
 
-All you need is to download single page of python file and to run the common browser automation activities.
+I created this siteDo class to deal with repetitive automation tasks fo my day to day work.
+
+**Features**
+* Automate Firefox browser head or headless
+* Easy customise test case
+* Encrypt password
+* Take screenshots
+* Assertion test
+* xpath 
+* Proxy support
+* Colour coded logging
+* Cookie modification
+* Execute custom Javascript
+* Generate HTML report
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
-**Features**
-* Firefox browser
-* Take screenshots
-* Easy form input, link and click via xpath
-* Assertion test
-* Proxy configuration
-* Colour coded logging
-* Password encryption / decryption
-* Cookie modification
-* Execute custom Javascript
 
 **To download**
+wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
 
+**Simple kickstart**
 ```
-wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py \
-     -O siteDo.py
+from siteDo import siteDo
+
+surf = siteDo()
+surf.screenshot="True"
+
+surf.label("Login to ebay.com and take screenshot")
+surf.do("go", "https://www.ebay.com")
+
+#surf.do("form","user-id-input-xpath", user-id )
+#surf.do("forom","password-input-xpath", encrypted-password )
+
 ```
 
 **Python dependency pakages**
@@ -56,6 +67,8 @@ from siteDo import siteDo
 surf = siteDo()
 ...
 ```
+
+
 
 **Set screenshot to true or false**
 * surf.screenshot="True"
