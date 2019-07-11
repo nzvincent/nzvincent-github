@@ -249,7 +249,10 @@ class siteDo:
 	def javascript(self, script ):
 		try:
 			self.log("Execute javascript " + script , "INFO" )
-			self.ff.execute_script(script)
+                        if os.path.isfile(script) :
+                                self.ff.execute_script(open(script).read())
+                        else:
+				self.ff.execute_script(script)
 		except:
 			self.log("Javascript() Method unknown exception", "ERROR")
 
