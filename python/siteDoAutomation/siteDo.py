@@ -24,7 +24,8 @@ import re
 import json
 
 # siteDo is simple one page Python Selenium class to perform "Do" most of the browser's tasks.
-# Purpose for this is to make modification of Selenium test cases simple.
+# Purpose for this is to make Selenium test change as simple as possible.
+
 # @Author: nzvincent@gmail.com | Vincent Pang
 
 # siteDo class covers most of the basic browser features for my day to day operation work:
@@ -38,11 +39,13 @@ import json
 # - Colour coded logging
 # - Execute custom Javascript
 # - Reports 
+
 # ToDo wish list:
 # - Headers add / delete / edit
 # - Content add / delete / edit
 # - Multiple tabs and windows
 # - Other browsers support
+
 # References:
 # - Assert https://selenium-python.readthedocs.io/getting-started.html
 # - Cookie https://selenium-python-zh.readthedocs.io/en/latest/api.html
@@ -245,7 +248,7 @@ class siteDo:
 				<a href='" + fileName + "'><img src='" + fileName + "' style='width:200px; height:200px;'></a> \
 				</div> \
 				<div style='display: table-cell;'>" + str(self.__DoPageLoadTime) + " sec</div> \
-				<div style='display: table-cell;'>" + str(self.ff.current_url) + " sec</div> \
+				<div style='display: table-cell;'>" + str(self.ff.current_url) + "</div> \
 				<div style='display: table-cell;'>" + str(extra) + "</div> \
 				</div>"
 				self.__writeToFile( content, writeToReportFile )
