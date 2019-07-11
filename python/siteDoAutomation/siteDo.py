@@ -224,9 +224,6 @@ class siteDo:
 				self.__writeToFile( content, writeToReportFile )
 	
 	
-	
-	
-	
 	def label(self, label_name="Default Label"):
 		self.__step = self.__step + 1
 		self.log("Label() Method: [ "  + label_name + " ]", "DEBUG")
@@ -406,14 +403,15 @@ class siteDo:
 		
 		# Load javascript before screeshot taken
 		if self.loadJavascript == "True":
-			self.javascript(self.loadJavascriptFile)
+			if os.path.exists(self.loadJavascriptFile) :
+				self.javascript(open(self.loadJavascriptFile).read())
+			else:
+				self.javascript(self.loadJavascriptFile)
 		
 		time.sleep(self.screenshot_delay)
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
-		
-		self.__report = self.__writeToFile( , self.__reportFile )
-		
+		return self.status()
 		
 		
 	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
