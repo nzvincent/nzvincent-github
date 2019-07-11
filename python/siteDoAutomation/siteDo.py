@@ -62,6 +62,11 @@ class siteDo:
 	# Set delay before taking screenshot
 	screenshot_delay=5
 	
+	# Load Javascript before sceenshot
+	loadJavascript="False"
+	loadJavascriptFile="custom-javascript.js"
+	
+	
 	# Turn on / off console output
 	showloginconsole="True"
 	
