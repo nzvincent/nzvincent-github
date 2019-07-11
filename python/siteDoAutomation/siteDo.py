@@ -47,7 +47,7 @@ import json
 # - Specifications: https://selenium-python.readthedocs.io/api.html
 
 class siteDo:
-
+	
 	# Switch log level
 	__log_level="DEBUG"
 	
@@ -57,6 +57,13 @@ class siteDo:
 	# Firefox headless
 	__headless="True"
 	
+	# Please ensure Python can write files to this folder 
+	__logFile="logfile.txt"
+	__reportFile="report.html"
+	__cookieFile="cookieFile.txt"
+	__jsFile="./js-injection.js"
+	__screenshot_path="./screenshots"
+	
 	# Turn screenshot on / off 
 	screenshot="True"
 	# Set delay before taking screenshot
@@ -65,7 +72,6 @@ class siteDo:
 	# Load Javascript before sceenshot
 	loadJavascript="False"
 	loadJavascriptFile="custom-javascript.js"
-	
 	
 	# Turn on / off console output
 	showloginconsole="True"
@@ -77,24 +83,20 @@ class siteDo:
 	except:
 		print("Error!!! Please export siteDoKey to your OS environment variable")
 		exit()
-
-	# File location
-	# Please ensure Python can write files to this folder 
-	__logFile="logfile.txt"
-	__reportFile="report.html"
-	__cookieFile="cookieFile.txt"
-	__jsFile="./js-injection.js"
-	__screenshot_path="./screenshots"
-
+	
+	# Start time
+	ts = time.time()
+	__start_datetime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
+	
 	# Increment number of label
 	__step = 0
 	
 	# Default label name
 	__default_label = "Step one" # use obj.label("New step name") to modify __static_label
-
+	
 	proxyhost="myproxy"
 	proxyport=3128
-
+	
 	profile = webdriver.FirefoxProfile()
 	# Browser manual proxy setting
 	if __proxy == "True" :
@@ -127,16 +129,15 @@ class siteDo:
 	else:
 		logging.basicConfig(filename=__logFile, filemode='w')
 	
-        ts = time.time()
-        __start_datetime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
-
-
+	
+	
+	
+	
 	# Constructor
 	def __init__(self):
 		self.ff = webdriver.Firefox( self.profile , options=self.options )
 		self.log(vars(siteDo.profile), "DEBUG")
-
-
+		
 	# Find , Add , delete and delete all cookies
 	# aciton = VIEW|ADD|DELETE|DELETE_ALL_COOKIES
 	# https://selenium-python-zh.readthedocs.io/en/latest/api.html
@@ -176,8 +177,8 @@ class siteDo:
 				self.log( "Deleted cookie: [ " +  cookieName + " ]" , "INFO" )
 			elif action == "DELETE_ALL_COOKIES" :
 				self.ff.delete_all_cookies()
-
-
+	
+	
 	def writeCookie(self, cookie = "none" ):
 		self.log("writeCookie() Method: [" + cookie + " ] to file [ " + self.__cookieFile + " ]", "DEBUG" )
 		try:
@@ -186,7 +187,8 @@ class siteDo:
 			fp.close() 
 		except IOError:
 			self.log("Could not write to cookie file :" + self.__cookieFile , "CRITICAL")
-
+	
+	
 	def __writeToFile(self, content = "" , fileaname = "" ):
 		self.log("__writeToFile Method: [" + content + " ] to file [ " + fileaname + " ]", "DEBUG" )
 		try:
@@ -194,31 +196,27 @@ class siteDo:
 			fp.write(content + "\n")
 			fp.close() 
 		except IOError:
-			self.log("Could not write to content to file :" + fileaname , "CRITICAL")			
-
+			self.log("Could not write to content to file :" + fileaname , "CRITICAL")
+	
+	
 	def takescreenshot(self): 
 		if ( self.screenshot == "True" ):
-			# Delay 3 seconds before taking screenshot
-			# Note: If function takes less than 3 seconds to write image file to I/O
-                        time.sleep(3)
-                        ts = time.time()
-                        fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
+			ts = time.time()
+			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
 			# Create new directory is it does not exist
-                        fileDir = self.__screenshot_path + "/" + self.__start_datetime
-                        try:
-                                os.stat(fileDir)
-                        except:
-                                os.mkdir(fileDir)
-
-                        saveFile = fileDir + "/" + fileName
-                        self.ff.save_screenshot(saveFile)
-                        self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
-
-			
-			
-			
-			
-		
+			fileDir = self.__screenshot_path + "/" + self.__start_datetime
+			try:
+				os.stat(fileDir)
+			except:
+				os.mkdir(fileDir)
+			saveFile = fileDir + "/" + fileName
+			self.ff.save_screenshot(saveFile)
+			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
+	
+	
+	
+	
+	
 	def label(self, label_name="Default Label"):
 		self.__step = self.__step + 1
 		self.log("Label() Method: [ "  + label_name + " ]", "DEBUG")
@@ -232,20 +230,23 @@ class siteDo:
 		except IOError:
 			self.log("Could not write to logfile :" + self.__logFile , "CRITICAL")
 	
+	
 	def close(self):
 		try:
 			self.log("Close() Method ", "DEBUG" )
 			self.ff.close()
 		except:
 			self.log("Close() Method unknown exception", "ERROR" )
-
+	
+	
 	def history(self, steps ):
 		try:
 			self.log("History() Method " + steps , "DEBUG" )
 			self.ff.execute_script("window.history.go(" + str(steps) + ")")
 		except:
 			self.log("History() Method unknown exception", "ERROR")
-			
+	
+	
 	def javascript(self, script ):
 		try:
 			self.log("Execute javascript " + script , "INFO" )
@@ -255,7 +256,8 @@ class siteDo:
 				self.ff.execute_script(script)
 		except:
 			self.log("Javascript() Method unknown exception", "ERROR")
-
+	
+	
 	def size_position(self, width="200", height="200", xpos="0", ypos="0"):
 		try:
 			self.log("Execute Size_position() Method [ " + width + " , " + height + " , " + xpos + " , " +  ypos + " ]", "INFO" )
@@ -270,8 +272,8 @@ class siteDo:
 			time.sleep(second)
 		except:
 			self.log("Wait() Method ) Method unknown exception", "ERROR")
-			
-
+	
+	
 	# key value pair search, use find()
 	# content/xpath search , use lookup()
 	def find(self, type="CONTENT" , action="VIEW", search_key="none", replace_word="none", search_value="none" ):
@@ -297,7 +299,8 @@ class siteDo:
 				self.log("nothing")
 		except NoSuchElementException:
 			self.log("No able to find " + keyword + " in " + type , "CRITICAL" )
-
+	
+	
 	# String substitution with regular expression support
 	#eg.  replace( "\:.*\.com\s" , ": my-website.com", "server name is : example.com" )
 	def replace(self, replace_with , find , input ):
@@ -310,6 +313,7 @@ class siteDo:
 		self.log("New replaced String: [ " + newString + " ]" , "DEBUG" )
 		return newString	
 	
+	
 	# cookie consists of key value pair
 	#def check_cookie(self, keyword, content) :
 	#	return re.search(keyword, content )
@@ -318,7 +322,8 @@ class siteDo:
 			return keyword
 		else:
 			return False
-		
+	
+	
 	def log(self, input , level="INFO") :
 		ts = time.time()
 		logtime = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y %H:%M:%S')
@@ -345,6 +350,7 @@ class siteDo:
 			CEND = '\033[0m'
 			print(CSTART + msg + CEND )
 	
+	
 	# Test console output colours
 	def testColor(self):
 		self.log("INFO","INFO")
@@ -353,7 +359,8 @@ class siteDo:
 		self.log("CRITICAL","CRITICAL")
 		self.log("ERROR","ERROR")
 		self.log("EMPTY")
-			
+	
+	
 	def do(self, action , xpath="none", input="none" ):
 		# Handle ENCRYPTED CONTENT
 		INPUT=input
@@ -367,28 +374,34 @@ class siteDo:
 			if action == "goto" or action == "go" :
 				url = xpath
 				self.ff.get(url)
-			elif action == "form" :
+			elif action == "form" or action == "input" :
 				self.ff.find_element_by_xpath(xpath).send_keys(input)		
 			elif action == "click" :
 				self.ff.find_element_by_xpath(xpath).click()	
+			elif action == "click_id" :
+				id = xpath
+				self.ff.find_element_id(xpath).click()					
 			elif action == "link" or action == "text_link" or action == "hyperlink_text" :
 				link_text = xpath
 				self.ff.find_element_by_link_text(link_text).click()	
+			elif action == "partial_link" or action == "partial_link_text" or action == "partial_hyperlink_text" :
+				link_text = xpath
+				self.ff.find_element_by_partial_link_text(link_text).click()	
 			elif action == "return" :
 				self.ff.find_element_by_xpath(xpath).send_keys(Keys.RETURN)
 			else :
 				self.log("No action parsed to do function", "WARNING")
 		except NoSuchElementException:
 			self.log("NoSuchElementException exception caught in do function", "WARNING" )
-		time.sleep(self.screenshot_delay)
 		
-		# Load javascript before screeshot
+		# Load javascript before screeshot taken
 		if self.loadJavascript == "True":
 			self.javascript(self.loadJavascriptFile)
 		
+		time.sleep(self.screenshot_delay)
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
-
+		
 		
 	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
 	def lookup(self,  search_keyword, condition="IN" , type="SOURCE" , xpath="" ):
@@ -422,7 +435,8 @@ class siteDo:
 			else:
 				self.log("[FALSE] " + search_keyword + " not in "  + type, "WARNING")
 				return False
-
+				
+				
 	# Selenium lack of request and response headers support
 	# This function requires requests library.
 	# Another sophisticate way is to use HAR such as Chrome browser to 
@@ -434,6 +448,7 @@ class siteDo:
 		except:
 			self.log("HTTP request status unknown exception", "ERROR")
 			
+			
 	def encrypt(self, password):
 		try:
 			f = Fernet(self.__decryption_key)
@@ -441,6 +456,7 @@ class siteDo:
 		except:
 			self.log("Encryption caught exception [ " + self.__decryption_key + " , ******  ]", "CRITICAL")
 			return False
+	
 	
 	def decrypt(self, enc_password ):
 		enc_password=enc_password[8:]
