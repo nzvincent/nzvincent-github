@@ -121,7 +121,10 @@ class siteDo:
 		logging.basicConfig(filename=__logFile, filemode='w', level=logging.ERROR )	
 	else:
 		logging.basicConfig(filename=__logFile, filemode='w')
-		
+	
+        ts = time.time()
+        __start_datetime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
+
 
 	# Constructor
 	def __init__(self):
@@ -192,12 +195,24 @@ class siteDo:
 		if ( self.screenshot == "True" ):
 			# Delay 3 seconds before taking screenshot
 			# Note: If function takes less than 3 seconds to write image file to I/O
-			time.sleep(3)
-			ts = time.time()
-			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
-			saveFile = self.__screenshot_path + "/" + fileName 
-			self.ff.save_screenshot(saveFile) 
-			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
+                        time.sleep(3)
+                        ts = time.time()
+                        fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
+			# Create new directory is it does not exist
+                        fileDir = self.__screenshot_path + "/" + self.__start_datetime
+                        try:
+                                os.stat(fileDir)
+                        except:
+                                os.mkdir(fileDir)
+
+                        saveFile = fileDir + "/" + fileName
+                        self.ff.save_screenshot(saveFile)
+                        self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
+
+			
+			
+			
+			
 		
 	def label(self, label_name="Default Label"):
 		self.__step = self.__step + 1
