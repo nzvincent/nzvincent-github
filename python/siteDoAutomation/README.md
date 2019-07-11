@@ -38,7 +38,9 @@ surf.do("go", "https://www.ebay.com")
 #surf.do("forom","password-input-xpath", encrypted-password )
 
 ```
-* Run python kickstart.py
+* Export siteDoKey ```export siteDoKey="any-random-key-you-like"```
+
+* Run automation ```python kickstart.py```
 
 **Python dependency pakages**
 * pip install selenium requests pprint os time
