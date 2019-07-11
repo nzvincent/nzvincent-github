@@ -380,7 +380,12 @@ class siteDo:
 				self.log("No action parsed to do function", "WARNING")
 		except NoSuchElementException:
 			self.log("NoSuchElementException exception caught in do function", "WARNING" )
-		time.sleep(self.screenshot_delay)	
+		time.sleep(self.screenshot_delay)
+		
+		# Load javascript before screeshot
+		if self.loadJavascript == "True":
+			self.javascript(self.loadJavascriptFile)
+		
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
 
