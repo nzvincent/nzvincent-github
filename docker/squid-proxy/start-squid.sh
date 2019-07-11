@@ -30,3 +30,6 @@ docker run -it -h ${name} --name ${name} \
 #  If above command not supported, login to the container to change the memory size OR include this in the entrypoint.sh file
 #  mount -o remount,size=2G /dev/shm
 
+
+# /etc/squid/squid.conf
+
