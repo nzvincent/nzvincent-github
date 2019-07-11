@@ -1,6 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 # Firefox options
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 # Fernet encryption 
@@ -33,8 +37,8 @@ import json
 # - Proxy on / off
 # - Colour coded logging
 # - Execute custom Javascript
-# ToDo wish list:
 # - Reports 
+# ToDo wish list:
 # - Headers add / delete / edit
 # - Content add / delete / edit
 # - Multiple tabs and windows
@@ -69,8 +73,14 @@ class siteDo:
 	# Set delay before taking screenshot
 	screenshot_delay=5
 	
+	# wait for page element loaded
+	waitPageLoaded="True"
+	waitPageLoadedDelay=3
+	# Accept ID only
+	waitPageLoadeElement="footer"
+	
 	# Turn report on / off
-	report="False"
+	report="True"
 	__reportFile="report.html"
 	
 	# Load Javascript before sceenshot
@@ -91,9 +101,13 @@ class siteDo:
 	# Start time
 	ts = time.time()
 	__start_datetime = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S')
+	__start_year_month_day_path = datetime.datetime.fromtimestamp(ts).strftime('%Y/%m/%d/%H%M%S')
 	
 	# Increment number of label
 	__step = 0
+	
+	# Measure Do() method page load time
+	__DoPageLoadTime=0
 	
 	# Default label name
 	__default_label = "Step one" # use obj.label("New step name") to modify __static_label
@@ -202,25 +216,35 @@ class siteDo:
 		except IOError:
 			self.log("Could not write to content to file :" + fileaname , "CRITICAL")
 	
-	
-	def takescreenshot(self): 
+	# take screenshot and produce HTML report
+	# Parse string to extra to produce report
+	def takescreenshot(self, extra=""): 
 		if self.screenshot == "True" :
 			ts = time.time()
 			fileName = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d_%H%M%S') + ".png"
 			date_time = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y %H:%M:%S')
 			# Create new directory is it does not exist
-			fileDir = self.__screenshot_path + "/" + self.__start_datetime
-			writeToReportFile = self.__screenshot_path + "/" + self.__start_datetime + "/" + self.__reportFile
+			# fileDir = self.__screenshot_path + "/" + self.__start_datetime
+			fileDir = self.__screenshot_path + "/" + self.__start_year_month_day_path
+			writeToReportFile = fileDir + "/" + self.__reportFile
 			try:
 				os.stat(fileDir)
 			except:
-				os.mkdir(fileDir)
+				os.makedirs(fileDir)
+				#os.mkdir(fileDir)
 			saveFile = fileDir + "/" + fileName
 			self.ff.save_screenshot(saveFile)
 			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
 			
 			if self.report == "True" :
-				content = "<div>" + date_time + "</div><div>" + self.label + "</div><a href='" + saveFile + "'><div><src='" + saveFile + "'></a></div>"
+				content = "<div style='display: table-row; width=95%'><div>" + date_time + "</div> \
+				<div style='display: table-cell;'>" + self.__default_label + "</div> \
+				<div style='display: table-cell;'> \
+				<a href='" + fileName + "'><img src='" + fileName + "' style='width:200px; height:200px;'></a> \
+				</div> \
+				<div>" + str(self.__DoPageLoadTime) + " sec</div> \
+				<div>" + str(extra) + "</div> \
+				</div>"
 				self.__writeToFile( content, writeToReportFile )
 	
 	
@@ -230,6 +254,7 @@ class siteDo:
 		CSTART = '\033[101m'
 		CEND = '\033[0m'
 		print(CSTART + "[ LABEL ]" + CEND  + " (#"  + str(self.__step) + ") " + label_name )
+		self.__default_label = label_name
 		try:
 			fp = open( self.__logFile, 'a+')
 			fp.write("[ LABEL ]"  + " (#"  + str(self.__step) + ") " +  label_name + "\n")
@@ -367,6 +392,21 @@ class siteDo:
 		self.log("ERROR","ERROR")
 		self.log("EMPTY")
 	
+	# wait until page element loaded
+	# use siteDo.waitPageLoadeElement to set the expect element ID
+	def __waitPageLoaded(self):
+		self.log("Wait for element to load! [ " + self.waitPageLoadeElement + " ]" ,"DEBUG")
+		waitDelay = self.waitPageLoadedDelay
+		start = time.time()
+		try:
+			# self.waitPageLoadedDelay
+			waitElem = WebDriverWait( self.ff , waitDelay ).until(EC.presence_of_element_located((By.ID, self.waitPageLoadeElement )))
+			self.log("Page is ready!","DEBUG")
+		except TimeoutException:
+			self.log("Loading took too much time or element not found!","WARNING")
+		done = time.time()
+		self.__DoPageLoadTime = done - start
+		self.log("Page take " + str(self.__DoPageLoadTime) + " sec to load","INFO")
 	
 	def do(self, action , xpath="none", input="none" ):
 		# Handle ENCRYPTED CONTENT
@@ -382,7 +422,7 @@ class siteDo:
 				url = xpath
 				self.ff.get(url)
 			elif action == "form" or action == "input" :
-				self.ff.find_element_by_xpath(xpath).send_keys(input)		
+				self.ff.find_element_by_xpath(xpath).send_keys(input)
 			elif action == "click" :
 				self.ff.find_element_by_xpath(xpath).click()	
 			elif action == "click_id" :
@@ -400,7 +440,11 @@ class siteDo:
 				self.log("No action parsed to do function", "WARNING")
 		except NoSuchElementException:
 			self.log("NoSuchElementException exception caught in do function", "WARNING" )
-		
+	
+		# wait for page element to be loaded
+		if self.waitPageLoaded == "True" :
+			self.__waitPageLoaded()
+	
 		# Load javascript before screeshot taken
 		if self.loadJavascript == "True":
 			if os.path.exists(self.loadJavascriptFile) :
@@ -411,13 +455,12 @@ class siteDo:
 		time.sleep(self.screenshot_delay)
 		self.takescreenshot()
 		self.log("Current url [ " + self.ff.current_url + " ] ", "INFO")
-		return self.status()
 		
 		
 	# type SOURCE|XPATH|??? IN|NOT_IN or NOTIN
 	def lookup(self,  search_keyword, condition="IN" , type="SOURCE" , xpath="" ):
 		self.log("Current URL: " + self.ff.current_url , "DEBUG")
-		if type == "SOURCE":
+		if type == "SOURCE" :
 			try:
 				content = self.ff.page_source
 			except:
@@ -435,17 +478,20 @@ class siteDo:
 		if condition == "IN":
 			if search_keyword in content:
 				self.log("[TRUE] " + search_keyword + " in " + type , "INFO")
-				return True
+				assert_status = "SUCCESS"
 			else:
 				self.log("[FALSE] " + search_keyword + "  in " + type , "WARNING")
-				return False
+				assert_status = "FAIL"
 		elif condition == "NOT_IN" or condition == "NOTIN" :
 			if search_keyword not in content:
 				self.log("[TRUE] " + search_keyword + " not in "  + type, "INFO")
-				return "OK"
+				assert_status = "SUCCESS"
 			else:
 				self.log("[FALSE] " + search_keyword + " not in "  + type, "WARNING")
-				return False
+				assert_status = "FAIL"
+		if self.screenshot == "True" :
+			# ToDO swap assertinreport self.__reportFile = 
+			self.takescreenshot(assert_status)
 				
 				
 	# Selenium lack of request and response headers support
