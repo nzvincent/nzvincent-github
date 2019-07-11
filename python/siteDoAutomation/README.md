@@ -21,8 +21,6 @@ I created this siteDo class to deal with repetitive automation tasks fo my day t
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
-**To download**
-
 
 **Simple kickstart**
 * Download wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
