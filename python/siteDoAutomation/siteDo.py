@@ -106,6 +106,8 @@ class siteDo:
 	# Increment number of label
 	__step = 0
 	
+	__current_url=""
+	
 	# Measure Do() method page load time
 	__DoPageLoadTime=0
 	
@@ -237,13 +239,14 @@ class siteDo:
 			self.log("Save screenshot to [ " + fileName + " ]", "DEBUG" )
 			
 			if self.report == "True" :
-				content = "<div style='display: table-row; width=95%'><div>" + date_time + "</div> \
+				content = "<div style='display: table-row; min-width:95%;'><div>" + date_time + "</div> \
 				<div style='display: table-cell;'>" + self.__default_label + "</div> \
 				<div style='display: table-cell;'> \
 				<a href='" + fileName + "'><img src='" + fileName + "' style='width:200px; height:200px;'></a> \
 				</div> \
-				<div>" + str(self.__DoPageLoadTime) + " sec</div> \
-				<div>" + str(extra) + "</div> \
+				<div style='display: table-cell;'>" + str(self.__DoPageLoadTime) + " sec</div> \
+				<div style='display: table-cell;'>" + str(self.ff.current_url) + " sec</div> \
+				<div style='display: table-cell;'>" + str(extra) + "</div> \
 				</div>"
 				self.__writeToFile( content, writeToReportFile )
 	
@@ -491,7 +494,8 @@ class siteDo:
 				assert_status = "FAIL"
 		if self.screenshot == "True" :
 			# ToDO swap assertinreport self.__reportFile = 
-			self.takescreenshot(assert_status)
+			report_status = assert_status + ": lookup " + "\" " + search_keyword + " \"" + condition + " " + type
+			self.takescreenshot(report_status)
 				
 				
 	# Selenium lack of request and response headers support
