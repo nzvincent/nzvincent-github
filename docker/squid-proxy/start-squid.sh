@@ -4,6 +4,7 @@
 # Author: nzvincent@gmail.com
 
 img=debian:jessie
+img=debian-squid:homebrew
 
 name=squid
 dir=`pwd`
