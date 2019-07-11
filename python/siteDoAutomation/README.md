@@ -102,7 +102,7 @@ surf = siteDo()
 * surf.wait(2) # wait 2 seconds
 * surf.close() # close browser
 
-##Troubleshotting**
+**Troubleshotting**
 
 ```
 ps -ef | grep firefox | awk '{print $3}' | xargs kill -9 &
