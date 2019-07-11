@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  Start up squid proxy server
+#  Stand up a host based squid proxy server ( --net=host )
 # Author: nzvincent@gmail.com
 
 img=debian:jessie
