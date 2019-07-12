@@ -89,6 +89,8 @@ class siteDo:
         # Load Javascript before sceenshot
         loadJavascript="False"
         loadJavascriptFile="custom-javascript.js"
+        # Put a delay after loading Javascript
+        __javascript_delay=3
 
         # Turn on / off console output
         showloginconsole="True"
@@ -276,6 +278,7 @@ class siteDo:
                         self.ff.close()
                 except:
                         self.log("Close() Method unknown exception", "ERROR" )
+                time.sleep(self.__javascript_delay)          
 
 
         def history(self, steps ):
@@ -284,18 +287,21 @@ class siteDo:
                         self.ff.execute_script("window.history.go(" + str(steps) + ")")
                 except:
                         self.log("History() Method unknown exception", "ERROR")
+                time.sleep(self.__javascript_delay)          
 
 
         def javascript(self, script ):
                 try:
                         self.log("Execute javascript " + script , "INFO" )
                         if os.path.isfile(script) :
-                                self.ff.execute_script(open(script).read())
+                                self.ff.execute_script(open(script).read()) 
                         else:
                                 self.ff.execute_script(script)
+                                 
                 except:
                         self.log("Javascript() Method unknown exception", "ERROR")
 
+                time.sleep(self.__javascript_delay)          
 
         def size_position(self, width="200", height="200", xpos="0", ypos="0"):
                 try:
@@ -457,7 +463,7 @@ class siteDo:
                         if os.path.exists(self.loadJavascriptFile) :
                                 self.javascript(open(self.loadJavascriptFile).read())
                         else:
-                                self.javascript(self.loadJavascriptFile)
+                                self.javascript(self.loadJavascriptFile)     
 
                 time.sleep(self.screenshot_delay)
                 self.takescreenshot()
