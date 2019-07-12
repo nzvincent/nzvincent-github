@@ -250,7 +250,7 @@ class siteDo:
                                 content = "<div style='display: table-row; min-width:95%;'> \
                                 <div><b>" +  self.__default_label + "</b> - \
                                 [ " + date_time + " (" + str(round(self.__DoPageLoadTime,2)) + " \
-                                sec) ] <a href='" + url_long +"'>" + url_short + "</a> + " </div> \
+                                sec) ] <a href='" + url_long + "'>" + url_short + "</a></div> \
                                 </div> \
                                 <div style='display: table-cell;'> \
                                 <a href='" + fileName + "'><img src='" + fileName + "' style='width:400px; height:400px;'></a> \
