@@ -8,8 +8,9 @@
 * Dokcerfile Squid proxy
 * Dockerfile Apache reverse proxy
 * Bash script self-signed KEY + CSR generator for internal rootCA and SSL certificate
-* Ansible update/install rootCA on Debian/Centos/OpenSuse and Java keystore.
+* Ansible update/install rootCA on Debian/Centos/OpenSuse and Java keystore
 * Python Selenium siteDo - Make browser automation simple and resusable + Ready to run docker image build
+* Python Fernet encryption / decryption - manage encrypted data and password on your enviroment
 * Dockerfile setup Gogs lightweight git / jFrog Artifactory
 * Deploy mini openldap and phpldapadmin with TLS support
 * Docker compose Install Jenkins and agent nodes
