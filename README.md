@@ -18,4 +18,8 @@
 * Dockerfile deploy Splunk standalone
 * Bash script Inotify
 * Javascript - drag and drop template
+* Jenkinsfile - upstream / downstream pipeline with parameters parser
+* AWS - cloudformation server provisioning
+* Kubernete persistent volume and persistent volume claim deployment
+* Kubernete reverse proxy deploy
 
