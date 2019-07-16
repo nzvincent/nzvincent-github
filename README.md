@@ -9,7 +9,7 @@
 * Dockerfile Apache reverse proxy
 * Bash script self-signed KEY + CSR generator for rootCA and SSL certificate
 * Ansible update/install rootCA on Debian/Centos/OpenSuse and Java keystore.
-* Python Selenium siteDo - Make browser automation simple and resusable.
+* Python Selenium siteDo - Make browser automation simple and resusable + Ready to run docker image build
 * Dockerfile setup Gogs lightweight git / jFrog Artifactory
 * Deploy mini openldap and phpldapadmin with TLS support
 * Docker compose Install Jenkins and agent nodes
