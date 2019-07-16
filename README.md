@@ -14,7 +14,7 @@
 * Deploy mini openldap and phpldapadmin with TLS support
 * Docker compose Install Jenkins and agent nodes
 * AWS CloudFormation EC2 provisioning
-* AWS backup data to S3 bucket.
+* AWS backup data to S3 bucket using docker container
 * Ansible RUM ( Real user monitoring ) Boomerang Apache configuration
 * Dockerfile deploy Splunk standalone
 * Bash script Inotify - Monitor files/folder state change and trigger action
