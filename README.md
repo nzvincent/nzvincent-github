@@ -17,7 +17,7 @@
 * AWS backup data to S3 bucket.
 * Ansible RUM ( Real user monitoring ) Boomerang Apache configuration
 * Dockerfile deploy Splunk standalone
-* Bash script Inotify
+* Bash script Inotify - Monitor files/folder state change and trigger action
 * Javascript - drag and drop template
 * Jenkinsfile - upstream / downstream pipeline with parameters parser
 * AWS - cloudformation server provisioning
