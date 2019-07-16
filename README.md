@@ -13,7 +13,8 @@
 * Dockerfile setup Gogs lightweight git / jFrog Artifactory
 * Deploy mini openldap and phpldapadmin with TLS support
 * Docker compose Install Jenkins and agent nodes
-* AWS CloudFormation infrastruture provisioning
+* AWS CloudFormation EC2 provisioning
+* AWS backup data to S3 bucket.
 * Ansible RUM ( Real user monitoring ) Boomerang Apache configuration
 * Dockerfile deploy Splunk standalone
 * Bash script Inotify
