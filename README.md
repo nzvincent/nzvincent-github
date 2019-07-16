@@ -1,21 +1,20 @@
-### A collection of my projects
+### Projects
 
-* Kubernetes cluster installation via Ansible 
-* Kubernetes cluster NFS / DB / persistent share storage installation via Ansible 
-* Deploy docker private registry using Ansible 
-* Kubernetes security uplift
-* Docker filesystem using device mapper
-* Setup Gogs ligth weight GIT server
-* Setup jFrog Artifactory
+* Ansible Kubernetes cluster installation 
+* Ansible Kubernetes cluster NFS / DB / persistent share storage installation 
+* Ansible docker and docker registry installation 
+* Ansible let's encrypt SSL renewal
+* Dockerfile docker compose deploy Elasticsearch / Logstash / Kibana ( ELK )
+* Dokcerfile Squid proxy
+* Dockerfile Apache reverse proxy
+* Bash script self-signed KEY + CSR + SSL for rootCA and SSL certificate
+* Python Selenium - Make browser automation simple and resusable.
+* Dockerfile setup Gogs lightweight git / jFrog Artifactory
 * Deploy openldap and phpldapadmin with TLS support
-* Install Jenkins and agent nodes on docker via docker compose
-* Deploy Elasticsearch / Logstash / Kibana ( ELK ) on docker via docker compose
-* Let's Encrypt via ACME.sh
+* Docker compose Install Jenkins and agent nodes
 * AWS CloudFormation infrastruture provisioning
-* RUM ( Real user monitoring ) on Boomerang and Splunk.
+* Ansible RUM ( Real user monitoring ) Boomerang Apache configuration
+* Dockerfile deploy Splunk standalone
+* Bash script Inotify
+* Javascript - drag and drop template
 
-**Application projects**
-* YAML based test case Python Selenuium App
-* Jenkins CI / CD pipeline
-* Github CI / CD
-* Drupal projects
