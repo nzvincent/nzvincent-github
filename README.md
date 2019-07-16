@@ -20,7 +20,8 @@
 * Bash script Inotify - Monitor files/folder state change and trigger action
 * Javascript - drag and drop template
 * Jenkinsfile - upstream / downstream pipeline with parameters parser
-* AWS - cloudformation server provisioning
+* AWS cloudformation server provisioning
+* AWS lambda autoscaling
 * Kubernete persistent volume and persistent volume claim deployment
 * Kubernete reverse proxy deploy
 
