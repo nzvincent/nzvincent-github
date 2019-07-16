@@ -7,7 +7,7 @@
 * Dockerfile docker compose deploy Elasticsearch / Logstash / Kibana ( ELK )
 * Dokcerfile Squid proxy
 * Dockerfile Apache reverse proxy
-* Bash script self-signed KEY + CSR generator for rootCA and SSL certificate
+* Bash script self-signed KEY + CSR generator for internal rootCA and SSL certificate
 * Ansible update/install rootCA on Debian/Centos/OpenSuse and Java keystore.
 * Python Selenium siteDo - Make browser automation simple and resusable + Ready to run docker image build
 * Dockerfile setup Gogs lightweight git / jFrog Artifactory
