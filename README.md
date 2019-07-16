@@ -5,7 +5,7 @@
 * Ansible docker and docker registry installation with TLS support
 * Ansible let's encrypt SSL renewal
 * Dockerfile docker compose deploy Elasticsearch / Logstash / Kibana ( ELK )
-* Dokcerfile Squid proxy
+* Dockerfile install Squid proxy
 * Dockerfile Apache reverse proxy
 * Bash script self-signed KEY + CSR generator for internal rootCA and SSL certificate
 * Ansible update/install rootCA on Debian/Centos/OpenSuse and Java keystore
