@@ -2,7 +2,7 @@
 
 * Ansible Kubernetes cluster installation 
 * Ansible Kubernetes cluster NFS / DB / persistent share storage installation 
-* Ansible docker and docker registry installation 
+* Ansible docker and docker registry installation with TLS support
 * Ansible let's encrypt SSL renewal
 * Dockerfile docker compose deploy Elasticsearch / Logstash / Kibana ( ELK )
 * Dokcerfile Squid proxy
