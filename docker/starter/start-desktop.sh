@@ -2,6 +2,8 @@
 
 # This script starts up debian9 xfce4 & xrdp on container start
 # Notes: It's a working copy
+# @author: nzvincent@gmail.com
+
 
 name=desktop
 img=debian-xfce4:ready4
