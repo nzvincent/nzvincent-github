@@ -1,0 +1,60 @@
+#!/bin/bash 
+
+# Jenkins bash script
+
+#git clone https://github.com/Neilpang/acme.sh.git
+#cd ./acme.sh
+#./acme.sh --install
+
+
+alias acme.sh='~/.acme.sh/acme.sh'
+
+#~/.acme.sh/acme.sh --register-account
+#~/.acme.sh/acme.sh --update-account --accountemail nzvincent@gmail.com
+
+export DO_API_KEY=__________DIGITALOCEAN_API_KEY__________________________
+
+# https://0wned.it/2018/10/04/using-acme-sh-for-certificate-management/
+#~/.acme.sh/acme.sh --test --dns dns_dgon --cert-home /etc/certs --renew-hook "service apache2 reload" --issue -d www.domain.com -d sub1.
+
+DOMAIN=www.example.com
+
+# First time only --standalone parameter allows to generate certificate on non httpd machines.
+#~/.acme.sh/acme.sh --dns dns_dgon --standalone --issue -d ${DOMAIN}
+# Renewal 
+# ~/.acme.sh/acme.sh --renew-all 
+~/.acme.sh/acme.sh --renew ${DOMAIN}
+
+REMOTE_SERVER=example.com
+
+# Copy cert to /etc/apache2/SSL
+
+ssh root@${REMOTE_SERVER} <<'ENDSSH'
+TS=`date '+%Y%m%d%H%M%S'`
+DOMAIN=www.example.com
+cd /etc/apache2/SSL/
+cp -p ${DOMAIN}.cer  ${DOMAIN}.cer.${TS}
+cp -p ${DOMAIN}.key  ${DOMAIN}.key.${TS}
+cp -p ${DOMAIN}-fullchain.cer  ${DOMAIN}-fullchain.cer.${TS}
+ENDSSH
+
+# Transfer files to remote server
+scp ~/.acme.sh/${DOMAIN}/${DOMAIN}.cer root@${REMOTE_SERVER}:/etc/apache2/SSL/ 
+scp ~/.acme.sh/${DOMAIN}/${DOMAIN}.key root@${REMOTE_SERVER}:/etc/apache2/SSL/ 
+scp ~/.acme.sh/${DOMAIN}/${DOMAIN}-fullchain.cer root@${REMOTE_SERVER}:/etc/apache2/SSL/${DOMAIN}-fullchain.cer
+
+# Secure remote files permissions and reload apache
+ssh root@${REMOTE_SERVER} <<'ENDSSH'
+chmod 644 /etc/apache2/SSL/*.cer
+chmod 640 /etc/apache2/SSL/*.key
+/etc/init.d/apache2 reload
+ENDSSH
+
+
+
+
+
+
+
+
+
