@@ -1,1 +1,9 @@
 export environment_variable="1234"
+
+export http_proxy=myproxy:3128
+export https_proxy=myproxy:3128
+export socks_proxy=myproxy:3128
+
+export HTTP_PROXY=myproxy:3128
+export HTTPS_PROXY=myproxy:3128
+export SOCKS_PROXY=myproxy:3128
