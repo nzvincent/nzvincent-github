@@ -15,7 +15,7 @@ This install minikube on single VM, all kubenetes components will be installed a
 * https://medium.com/@nieldw/running-minikube-with-vm-driver-none-47de91eab84c
 * ```minikube start --vm-driver=none --apiserver-ips 127.0.0.1 --apiserver-name localhost```
 
-## install Kubectl release
+## Install Kubectl release
 * https://github.com/kubernetes/kubernetes/releases
 
 ## Install miniKube 
