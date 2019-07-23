@@ -1,6 +1,6 @@
 ## Install minikube test lab
 
-This install minikube on single VM, all kubenetes components will be installed on Docker containers.
+This install minikube on single VM, all kubenetes components will be installed and run on Docker containers.
 
 ## Install docker
 * Debian https://docs.docker.com/install/linux/docker-ce/debian/
