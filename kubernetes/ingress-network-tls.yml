@@ -1,0 +1,12 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+# Following TLS example to be applied to ingress-proxy
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret-tls
+  namespace: default
+data:
+  tls.crt: base64 encoded cert
+  tls.key: base64 encoded key
+type: kubernetes.io/tls
