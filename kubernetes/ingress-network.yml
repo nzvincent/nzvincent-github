@@ -7,16 +7,28 @@ kind: Ingress
 metadata:
   name: name-virtual-host-ingress
 spec:
+  tls:
+  - hosts:
+    - www.example.com
+    secretName: www.example-secret-tls
+    - video.example.com
+    secretName: video.example-secret-tls
   rules:
   - host: www.example.com
     http:
       paths:
       - backend:
           serviceName: webserver
-          servicePort: 80
+          servicePort: 443
   - host: video.example.com
     http:
       paths:
       - backend:
           serviceName: videoserver
-          servicePort: 80
+          servicePort: 443
+
+spec:
+  tls:
+  - hosts:
+    - sslexample.foo.com
+    secretName: testsecret-tls
