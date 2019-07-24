@@ -26,9 +26,3 @@ spec:
       - backend:
           serviceName: videoserver
           servicePort: 443
-
-spec:
-  tls:
-  - hosts:
-    - sslexample.foo.com
-    secretName: testsecret-tls
