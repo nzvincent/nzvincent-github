@@ -1,3 +1,7 @@
+# @Author: nzvincent@gmail.com | Vincent Pang
+# Reference: https://kubernetes.io/docs/concepts/services-networking/ingress/
+# INTERNET -> DNS -> Ingress-network -> Proxy -> Service -> PODS -> container
+
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
