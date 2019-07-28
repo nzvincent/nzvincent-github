@@ -48,6 +48,12 @@ surf.do("go", "https://www.ebay.com")
 * pip install --no-cache-dir cryptography==2.1.4
 * pip install cryptography ( depending on your distribution ) 
 
+**Ready to use Docker image**
+* Build docker image:
+* ```docker build -t "debian9/siteDo:python .```
+* Run docker:
+* ```docker run -it debian9/siteDo:python /bin/bash```
+
 
 ## Usage:
 
@@ -60,6 +66,7 @@ surf.do("go", "https://www.ebay.com")
 * \__log_level="INFO|DEBUG|WARNING|CRITICAL|ERROR"
 * showloginconsole="False|True"
 * screenshot="False|True"
+* \__headleass="False|True"
 
 **Instantiate class**
 ```
@@ -106,7 +113,7 @@ surf = siteDo()
 * surf.do('form','//*[@id="user_name"]', YOUR_USER_ID )
 * surf.do('form','//*[@id="password"]', ENC_PASSWORD )
 
-**Javascript**
+**Run or load Javascript**
 * surf.history('-2') # go to history 
 * surf.javascript("alert('bingo')") # execute javascript
 * surf.javascript(javascript-file.js)
