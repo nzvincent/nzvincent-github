@@ -209,7 +209,7 @@ Chef Client finished, 0/1 resources updated in 02 seconds
 ```
 
 
-## Another way to register your client to Chef server 
+## Installing Chef client and register node to the Chef server
 - ssh to your target node
 - mkdir /etc/chef/
 - create 3 files
