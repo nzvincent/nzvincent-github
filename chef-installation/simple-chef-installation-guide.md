@@ -26,7 +26,7 @@ chef-client       192.168.1.102
 - For chef workstations and client machines, ensure the main non root user has the sudo root privillege ( recommended using NOPASSWD in the visudo )
 - nano, wget and curl are installed
 
-## To Install Chef Server ( Ubuntu 18.04.3 LTS )  eg. 192.168.1.246
+## To Install Chef Server ( Ubuntu 18.04.3 LTS ) 
 - My Chef Server Lab environments:
   - Linux localhost 4.15.0-60-generic #67-Ubuntu SMP Thu Aug 22 16:55:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
   - PRETTY_NAME="Ubuntu 18.04.3 LTS"
@@ -91,7 +91,7 @@ chef-server-ctl org-create abc 'ABC INC' --association_user admin \
   - https://chef-server
 
 
-## Install ChefDK on workstation / Chef client on the same machine
+## Install ChefDK on Chef workstation 
 - When install chefDK, it will also installing chef-client, embeded Ruby for your chef workstation.
 - To download, run ```wget https://packages.chef.io/files/stable/chefdk/3.2.30/ubuntu/18.04/chefdk_3.2.30-1_amd64.deb```, can also be downloaded from https://downloads.chef.io/
 - As a root user, run ```dpkg -i chefdk_3.2.30-1_amd64.deb```
