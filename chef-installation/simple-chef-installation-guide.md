@@ -220,7 +220,7 @@ Chef Client finished, 0/1 resources updated in 02 seconds
   |- first-boot.json
   \_ clinet.rb 
  ``` 
-- org-validator.pem ( You can use the web UI Admin/Organisation to reset the validation key )
+- abc-validator.pem ( You can use the web UI Admin/Organisation to reset the validation key )
 - firt-boot.json  ( recommended to use web ui to create a default base role and leave it empty )
  
 ```
@@ -251,9 +251,9 @@ node_name               "chef-node1"
  
  
 ## Troubleshooting
-- Export PATH and EDITOR to your ~/.bashrc or ~/.bash_profiles
 
 ```
+# Export PATH and EDITOR to your ~/.bashrc or ~/.bash_profiles
 PATH="/opt/chefdk/embedded/bin:$PATH"
 export EDITOR=/bin/nano
 ```
