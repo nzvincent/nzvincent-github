@@ -1,6 +1,6 @@
 # Installing Chef Server / ChefDK ( Chef Workstation ) / Chef Client
 
-This is my first attempt to install Chef and there are a lot more to learn. This instruction is based on Chef Doc and some Youtuber but I condensed it into one page document. The lab scenario is designed for testing purpose only.
+This is my first attempt to install Chef and there are a lot more to learn. This instruction is based on Chef Doc and some Youtubers videos but I condensed it into one page document. The lab scenario is designed for testing purpose only.
 
 > **Important Notes**
 - Chef unable to run on Docker, use VM instead.
