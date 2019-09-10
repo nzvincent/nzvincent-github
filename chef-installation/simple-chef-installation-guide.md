@@ -12,7 +12,7 @@
 **Preparation** 
 
 If you do not have a DNS server running on your network, you need to hardcode the DNS to all your
-hosts. Append the followowing lines to your 
+hosts. modify the IP addresses and append the followowing lines to your 
 - Linux : /etc/hosts files. 
 - Windows: C:\Windows\System32\drivers\etc\hosts ( You must be Administrator to edit this file )
 - Example: ( recommended FQDN but hostname should be fine )
