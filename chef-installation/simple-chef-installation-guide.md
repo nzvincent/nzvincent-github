@@ -3,10 +3,10 @@
 > **Important Notes**
 - Chef unable to run on Docker, use VM instead.
 - All Chef servers and nodes/clients clocks to be in-sync. Make sure you install NTP on all your hosts and keep the time in-sync.
-- My Lab environments setup were:
-   - Chef Infra Server Standalone ( Ubuntu 18.04.3 LTS )
-   - ChefDK Chef Workstation ( Debian 9 )
-   - Chef client/node ( Centos 7 )
+- My Lab environments setup are:
+   - 1 x Chef Infra Server Standalone ( Ubuntu 18.04.3 LTS )
+   - 1 x ChefDK Chef Workstation ( Debian 9 )
+   - 1 x Chef client/node ( Centos 7 )
    
 
 **Preparation** 
