@@ -63,7 +63,7 @@ run: redis_lb: (pid 27255) 328s; run: log: (pid 1863) 119s
 - Download **Chef Manage** binary from: https://downloads.chef.io/
   - my version of md5sum: ```f1cda551a33c33aebdd8b93e6cfd57b9```  chef-manage_2.5.16-1_amd64.deb
 - To install as root user, run: ```dpkg -i chef-manage_2.5.16-1_amd64.deb```
-- After instation completed, run:
+- After installation completed, run:
   - ```chef-manage-ctl reconfigure```
   - ```chef-server-ctl reconfigure``` ( recommened to run this but I didn't )
  - To verify, Run: ```chef-manage-ctl status```, you will see:
