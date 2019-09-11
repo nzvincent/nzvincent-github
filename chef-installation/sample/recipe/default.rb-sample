@@ -1,0 +1,27 @@
+#
+# Cookbook:: firstjob
+# Recipe:: default
+#
+# Copyright:: 2019, The Authors, All Rights Reserved.
+
+package 'vim' do
+  action :install
+end
+
+package 'Install Apache' do
+  case node[:platform]
+  when 'redhat', 'centos'
+    package_name 'httpd'
+  when 'ubuntu', 'debian'
+    package_name 'apache2'
+  end
+end
+
+
+#sudo 'root' do
+#  user 'root'
+#end
+
+execute 'myid' do
+  command '/usr/bin/id >> /tmp/myouput'
+end
