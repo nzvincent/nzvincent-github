@@ -281,6 +281,11 @@ knife cookbook upload -a
 # Exacute cookbook and push change to target machine
 chef-client
 
+# Using bootstrap to push changes to target machine
+knife bootstrap TARGET_MACHINE_HOST --ssh-user TARGET_MACHINE_USER --sudo --node-name CHEF_SERVER_REG_NODE_NAME --run-list 'recipe[firstjob]'
+
+# other option: --identify-file ~/.chef/login.pem 
+
 
 ```
 
