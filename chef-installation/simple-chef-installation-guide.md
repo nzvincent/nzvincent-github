@@ -3,14 +3,13 @@
 This is my first attempt to install Chef and there are a lot more to learn. This instruction is based on Chef Doc and some Youtubers videos but I condensed it into one page document. The lab scenario is designed for testing purpose only.
 
 > **Important Notes**
-- Chef unable to run on Docker, use VM instead.
-- All Chef servers and nodes/clients clocks to be in-sync. Make sure you install NTP on all your hosts and keep the time in-sync.
-- My Lab environments setup are:
+- Chef server unable to run on Docker, so I use VM instead.
+- All Chef servers and nodes/clients clocks to be in-sync. Make sure you install NTP to keep all your hosts' time in-sync.
+- My Lab environment setup are:
    - 1 x Chef Infra Server Standalone ( Ubuntu 18.04.3 LTS )
    - 1 x ChefDK Chef Workstation ( Debian 9 )
    - 1 x Chef client/node ( Centos 7 )
    
-
 **Preparation** 
 
 If you do not have a DNS server running on your network, you need to hardcode the DNS to all your
@@ -24,7 +23,7 @@ chef-server       192.168.1.100
 chef-workstation  192.168.1.101
 chef-client       192.168.1.102
 ```
-- Make sure your Chef server hostname is **chef-server** by editting /etc/hostname, otherwise your SSL certification will have trouble to be trusted by clients later.
+- Make sure your Chef server hostname is **chef-server** by editting /etc/hostname, otherwise your SSL certification will have trouble to be trusted by clients later. ( You can modify the SSL certificates on the Nginx later but out of my scope )
 - For chef workstations and client machines, ensure the main non root user has the sudo root privillege ( recommended using NOPASSWD in the visudo )
 - nano, wget and curl are installed
 
