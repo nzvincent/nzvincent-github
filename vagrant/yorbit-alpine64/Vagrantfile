@@ -1,0 +1,39 @@
+# Put the contents of this snippet in a file named Vagrantfile
+# Author: nzvincent@gmail.com
+
+
+Vagrant.configure(2) do |config|
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 1
+  end
+
+  #config.vm.define "alpine" do |alpine|
+  #end
+
+  config.vm.box = "yorbit/alpine64"
+  config.vm.synced_folder "./data", "/host-shared", create: true
+  config.vm.hostname = 'alpine'
+  config.vm.box_url = "yorbit/alpine64"
+  #config.vm.network "public_network"
+  config.vm.network "private_network", ip: "192.168.33.88"
+
+  config.ssh.insert_key = false # 1
+  config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa'] # 2
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys" # 3
+
+
+  config.vm.provision "shell", inline: <<-SHELL
+        apk update
+        apk upgrade
+        apk add openrc --no-cache
+        apk add openssh
+        rc-update add sshd
+        rc-status
+        /etc/init.d/sshd start
+        apk add nano nmap
+        apk --no-cache add openjdk11 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+  SHELL
+
+end
