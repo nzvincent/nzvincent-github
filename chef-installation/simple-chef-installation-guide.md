@@ -38,8 +38,8 @@ chef-client       192.168.1.102
   - my version of md5sum: ```700bb3d8e240093a2377e23b845636d1``` chef-server-core_12.18.14-1_amd64.deb
 - As a root user on the Chef Server
 - Run install: ``` dpkg -i chef-server-core_12.18.14-1_amd64.deb ```
-- Youn can modify /etc/opscode/chef-server.rb to add configuration parameters, default is empty.
-- After instalation completed, initialise configuration by running: ```chef-server-ctl reconfigure```
+- You can modify /etc/opscode/chef-server.rb to add configuration parameters, default is empty.
+- After instalLation completed, initialise configuration by running: ```chef-server-ctl reconfigure```
   - When finished, you should see ```Chef Client finished, 494/1101 resources updated in 05 minutes 59 seconds
 Chef Server Reconfigured!```
 - Verify configuration by running: ```chef-server-ctl status```, you will see: 
