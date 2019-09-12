@@ -1,6 +1,8 @@
 # Put the contents of this snippet in a file named Vagrantfile
 # Author: nzvincent@gmail.com
-
+# Note: Because there is no full support for Alpine Virtualbox guest addititionals packages, hence the private key 
+#       cannot be be added to the VM, hence, you need to add copy the private key manually After the VM start up 
+#       ( eg. ssh-copy-id vagrant@vm-ip )
 
 Vagrant.configure(2) do |config|
 
