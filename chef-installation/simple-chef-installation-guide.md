@@ -296,8 +296,10 @@ knife bootstrap TARGET_MACHINE_HOST --ssh-user TARGET_MACHINE_USER --sudo --node
 ```
 
 **For Client node**
-```
+*Note:* Normally, you register your nodes from the Chef workstation via bootstrap command, not directly on the nodes. 
 
+
+```
 # Register node to Chef Server
 chef-client -j /etc/chef/first-boot.json
 
