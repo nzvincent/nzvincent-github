@@ -27,6 +27,12 @@ chef-client       192.168.1.102
 - For chef workstations and client machines, ensure the main non root user has the sudo root privillege ( recommended using NOPASSWD in the visudo )
 - nano, wget and curl are installed
 
+### How Chef works?
+- Chef Server - Where all cookbooks will be stored, all nodes chef-client will pull from Chef server to perform tasks.
+- Chef Workstation - Where you design and prepare your cookbook recipes and push the update to Chef server, you can use Chef workstation to register your nodes using knife bootstrap ```knife bootstrap 192.168.1.102 --ssh-user vagrant --sudo --node-name webserver01 --run-list 'recipe[firstjob]'```. First time when bootstrap run, it will install chef-client and its dependencies to the managed node. 
+- Chef Client - Where your managed nodes. In order chef-client to run periodically, you can set it up as deamon or crontab. eg. Run every 30 mins ```sudo chef-client -i 1800 &``` and then put the signal to the Chef client daemon```sudo killall -USR1 chef-client``` OR ```*/15 * * * * root chef-client -l warn | grep -v 'retrying [1234]/5 in'```
+
+
 ## To Install Chef Server ( Ubuntu 18.04.3 LTS ) 
 - My Chef Server Lab environments:
   - Linux localhost 4.15.0-60-generic #67-Ubuntu SMP Thu Aug 22 16:55:30 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
