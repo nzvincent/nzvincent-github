@@ -29,6 +29,9 @@ envsubst < $WORKDIR/postfix-sasl_passwd >> //etc/postfix/sasl_passwd
 # Start up postfix after environment ready
 /root/config/startup-postfix.sh
 
+# Prevent termination of console
+sh 
+
 
 
 
