@@ -1,21 +1,20 @@
 pipeline {
     
-    git([url: 'https://github.com/nzvincent/nzvincent-github.git', branch: 'master'])
+
          
-    agent { 
-        dockerfile {
-            filename 'docker/gmail-postfix-relay/Dockerfile'
-            dir 'build'
-            additionalBuildArgs  '--build-arg version=1.0.2'
-            args '-v /tmp:/tmp'
-        }
-    }
+    //agent { 
+    //    dockerfile {
+     //       filename 'docker/gmail-postfix-relay/Dockerfile'
+     //       dir 'build'
+     //       additionalBuildArgs  '--build-arg version=1.0.2'
+     //       args '-v /tmp:/tmp'
+     //   }
+    //}
            
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
+                git([url: 'https://github.com/nzvincent/nzvincent-github.git', branch: 'master'])
             }
         }
     }
