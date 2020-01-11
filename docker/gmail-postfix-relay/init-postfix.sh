@@ -11,11 +11,13 @@ set -e
 [[ -e $RELAYHOST_PASSWORD ]] && export POSTFIX_RELAYHOST_PASSWORD=$RELAYHOST_PASSWORD || export POSTFIX_RELAYHOST_PASSWORD="12345678"
 
 # POSTFIX configuration
+# Network
 [[ -e $INET_INTERFACE ]] && export POSTFIX_INET_INTERFACE=$INET_INTERFACE || export POSTFIX_INET_INTERFACE="all"
 [[ -e $MYNETWORK_STYLE ]] && export POSTFIX_MYNETWORK_STYLE=$MYNETWORK_STYLE || export POSTFIX_MYNETWORK_STYLE="host"
 [[ -e $MYNETWORKS ]] && export POSTFIX_MYNETWORKS=$MYNETWORKS || export POSTFIX_MYNETWORKS="all"
-[[ -e $MYHOSTNAME ]] && export POSTFIX_MYHOSTNAME=$MYHOSTNAME|| export POSTFIX_MYHOSTNAME="all"
-[[ -e $MYDOMAIN ]] && export POSTFIX_MYDOMAIN=$MYDOMAIN || export POSTFIX_MYNETWORKS="your-domain.com"
+# Hostname
+[[ -e $MYHOSTNAME ]] && export POSTFIX_MYHOSTNAME=$MYHOSTNAME|| export POSTFIX_MYHOSTNAME="smtp-your-domain.com"
+[[ -e $MYDOMAIN ]] && export POSTFIX_MYDOMAIN=$MYDOMAIN || export POSTFIX_MYDOMAIN="your-domain.com"
 
 
 # Environment variables substitution 
