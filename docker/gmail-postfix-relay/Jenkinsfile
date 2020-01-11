@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                sh 'docker build -t "alpine-postfix:homebrew" ./docker/gmail-postfix-relay/Dockerfile'    
+                sh 'docker build -t "alpine-postfix:homebrew" ./docker/gmail-postfix-relay'    
             }
         }
     }
