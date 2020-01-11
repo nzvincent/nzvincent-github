@@ -11,14 +11,14 @@ mynetworks_style = $POSTFIX_MYNETWORK_STYLE
 mynetworks = $PSOTFIX_MYNETWORKS
 
 # myhostname = smtp.your-domain.com
-myhostname = POSTFIX_MYHOSTNAME
+myhostname = $POSTFIX_MYHOSTNAME
 
 #mydomain = your-domain.com
-mydomain = $MYDOMAIN
-myorigin = $mydomain
+mydomain = $POSTFIX_MYDOMAIN
+myorigin = $POSTFIX_MYDOMAIN
 
 # smtpd_banner = $myhostname ESMTP 2.4.7.1 (Alpine)
-smtpd_banner = $myhostname ( Welcome SMTP )
+smtpd_banner = $POSTFIX_MYHOSTNAME ( Welcome SMTP )
 
 setgid_group = postdrop
 
