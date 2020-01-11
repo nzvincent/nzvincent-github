@@ -1,0 +1,12 @@
+pipeline{
+  agent any
+  
+  stages{
+    stage("Building docker image"){
+      steps{
+        sh 'building docker image"
+      }
+    }
+  
+  }
+}
