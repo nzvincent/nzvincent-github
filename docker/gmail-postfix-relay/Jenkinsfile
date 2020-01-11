@@ -3,9 +3,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                    git branch: 'master',
-                        url: 'https://github.com/nzvincent/nzvincent-github.git'
-                   
+                sh 'find .'    
             }
         }
     }
