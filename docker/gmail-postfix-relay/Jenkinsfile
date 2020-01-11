@@ -1,6 +1,6 @@
 pipeline {
     
-    git([url: 'https://github.com/nzvincent/nzvincent-github.git', branch: 'master')
+    git([url: 'https://github.com/nzvincent/nzvincent-github.git', branch: 'master'])
          
     agent { 
         dockerfile {
