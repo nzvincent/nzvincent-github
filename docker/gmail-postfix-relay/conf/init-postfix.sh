@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Run this once after docker run
+
 set -e
 
 # SMTP relay host
