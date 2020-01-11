@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-RUN apk add --no-cache bash postfix postfix-pcre rsyslog ca-certificates
+RUN apk add --no-cache bash postfix postfix-pcre rsyslog ca-certificates gettext
 
 COPY config/postfix-main.cf
 
