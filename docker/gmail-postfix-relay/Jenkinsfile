@@ -1,5 +1,6 @@
 pipeline {
     agent { 
+        any
         dockerfile true
         filename './docker/gmail-postfix-relay/'
         dir 'build'
