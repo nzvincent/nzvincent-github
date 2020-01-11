@@ -2,7 +2,7 @@
 #    docker run -d -e POSTFIX_RELAYHOST= "[smtp.gmail.com]:587" -e ... 
 
 # Interface all
-inet_interfaces = $POSTFIX_INTERFACE
+inet_interfaces = $POSTFIX_INET_INTERFACE
 
 # Mynetworks_style host
 mynetworks_style = $POSTFIX_MYNETWORK_STYLE
