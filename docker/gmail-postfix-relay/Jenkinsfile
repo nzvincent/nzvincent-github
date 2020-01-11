@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('Docker build') {
             steps {
-                sh 'find .'    
+                sh 'docker build -t "alpine-postfix:homebrew" ./docker/gmail-postfix-relay/Dockerfile'    
             }
         }
     }
