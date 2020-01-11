@@ -3,7 +3,21 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                sh 'docker build -t "alpine-postfix:homebrew" ./docker/gmail-postfix-relay'    
+                //sh 'docker build -t "alpine-postfix:homebrew" ./docker/gmail-postfix-relay'    
+               
+                // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+                dockerfile {
+                    filename './docker/gmail-postfix-relay/'
+                    dir 'build'
+                    label 'my-defined-label'
+                    additionalBuildArgs  '--build-arg version=1.0.2'
+                    args '-v /tmp:/tmp'
+                }
+}
+                
+                
+                
+                
             }
         }
     }
