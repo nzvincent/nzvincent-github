@@ -3,9 +3,7 @@ pipeline{
   
   stages{
     stage("Building docker image"){
-       agent {
         docker.build("alpine-postfix:homebrew", "./docker/gmail-postfix-relay/Dockerfile")
-      }
     }
     
   
