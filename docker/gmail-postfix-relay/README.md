@@ -10,8 +10,14 @@ https://support.plesk.com/hc/en-us/articles/115004947113-How-to-set-up-Postfix-t
 ```
 docker run -it \
   -h postfix --name postfix \
+  --restart always \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /etc/timezone:/etc/timezone:ro \
   -p 25:25 \
-  --restart-always \
   -e MYHOSTNAME my-domain.com \
+  
+  
+ 
+
 
 ```
