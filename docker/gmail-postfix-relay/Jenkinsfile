@@ -16,5 +16,13 @@ pipeline {
                 }
             }
         }
+        
+        stage('Verify image') {
+            steps {
+                sh 'env'
+                sh 'docker ps -a'
+            }
+        }
+        
     }
 }
