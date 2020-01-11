@@ -7,7 +7,11 @@ https://support.plesk.com/hc/en-us/articles/115004947113-How-to-set-up-Postfix-t
 ```docker build -t "alpine-postfix:homebrew" .```
 
 ## Docker run
-'''
-docker run
+```
+docker run -it \
+  -h postfix --name postfix \
+  -p 25:25 \
+  --restart-always \
+  -e MYHOSTNAME my-domain.com \
 
-'''
+```
