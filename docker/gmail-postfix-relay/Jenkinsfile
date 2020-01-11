@@ -1,4 +1,7 @@
 pipeline {
+    
+    git([url: 'https://github.com/nzvincent/nzvincent-github.git', branch: 'master')
+         
     agent { 
         dockerfile {
             filename 'docker/gmail-postfix-relay/Dockerfile'
