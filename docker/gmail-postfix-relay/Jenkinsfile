@@ -1,9 +1,9 @@
 pipeline{
   agent any
-  
+  agent { dockerfile true }
   stages{
-    stage("Building docker image"){
-      docker.image('alpine:edge').withRun('-e test') {
+    stage("Testing docker container"){
+      steps{
         sh 'env'
       }  //docker
     } // stage
