@@ -3,7 +3,11 @@ pipeline{
   
   stages{
     stage("Building docker image"){
-        docker.build("alpine-postfix:homebrew", "./docker/gmail-postfix-relay/Dockerfile")
+      agent{
+        docker.image('alpine:edge').withRun('-e test') {
+          sh 'env'
+        }  
+      }
     }
     
   
