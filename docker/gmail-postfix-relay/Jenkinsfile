@@ -3,13 +3,9 @@ pipeline{
   
   stages{
     stage("Building docker image"){
-      agent{
-        docker.image('alpine:edge').withRun('-e test') {
-          sh 'env'
-        }  
-      }
-    }
-    
-  
-  }
-}
+      docker.image('alpine:edge').withRun('-e test') {
+        sh 'env'
+      }  //docker
+    } // stage
+  } // stages
+} //pipeline
