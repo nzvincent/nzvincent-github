@@ -17,8 +17,8 @@ set -e
 [[ -e $MYHOSTNAME ]] && POSTFIX_MYHOSTNAME=$MYHOSTNAME|| POSTFIX_MYHOSTNAME="all"
 [[ -e $MYDOMAIN ]] && POSTFIX_MYDOMAIN=$MYDOMAIN || POSTFIX_MYNETWORKS="your-domain.com"
 
-cat $WORKDIR/postfix_main.cf >> /etc/postfix/main.cf 
-cat $WORKDIR/postfix_sasl_passwd >> //etc/postfix/sasl_passwd
+cat $WORKDIR/postfix-main.cf >> /etc/postfix/main.cf 
+cat $WORKDIR/postfix-sasl_passwd >> //etc/postfix/sasl_passwd
 
 
 
