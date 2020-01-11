@@ -1,5 +1,6 @@
 pipeline {
-    agent { dockerfile true
+    agent { 
+        dockerfile true
         filename './docker/gmail-postfix-relay/'
         dir 'build'
         label 'alpine-postfix:homebrew'
