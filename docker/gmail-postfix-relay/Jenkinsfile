@@ -1,8 +1,6 @@
 pipeline {
     agent { 
         dockerfile {
-            
-            docker/gmail-postfix-relay/Dockerfile
             filename 'docker/gmail-postfix-relay/Dockerfile'
             dir 'build'
             additionalBuildArgs  '--build-arg version=1.0.2'
