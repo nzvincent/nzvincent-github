@@ -5,7 +5,7 @@ pipeline{
     stage("Building docker image"){
       steps{
         sh 'echo "building docker image"'
-        def testImage = docker.build("alpine-postfix:homebrew", "./docker/gmail-postfix-relay/Dockerfile")
+        alpine-postfix = docker.build("alpine-postfix:homebrew", "./docker/gmail-postfix-relay/Dockerfile")
       }
     }
     
