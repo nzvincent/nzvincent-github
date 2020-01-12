@@ -5,7 +5,7 @@ https://support.plesk.com/hc/en-us/articles/115004947113-How-to-set-up-Postfix-t
 
 ## Building docker image
 ```
-docker build -t "alpine-postfix:homebrew" .
+docker build -t "alpine/postfix:homebrew" .
 ```
 
 ## Start up docker container
@@ -26,6 +26,6 @@ docker run -it \
   -e MYNETWORKS "172.15.0.0/24 192.168.1.0/24" \
   -e MYHOSTNAME smtp-your-domain.com \
   -e MYDOMAIN your-domain.com \
-  alpine-postfix:homebrew \ 
+  alpine/postfix:homebrew 
 
 ```
