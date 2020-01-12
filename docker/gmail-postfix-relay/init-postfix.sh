@@ -23,8 +23,8 @@ set -e
 
 
 # Environment variables substitution 
-envsubst < $WORKDIR/postfix-main.cf >> /etc/postfix/main.cf 
-envsubst < $WORKDIR/postfix-sasl_passwd >> //etc/postfix/sasl_passwd
+envsubst < /root/WORKSPACE/postfix-main.cf >> /etc/postfix/main.cf 
+envsubst < /root/WORKSPACE/postfix-sasl_passwd >> //etc/postfix/sasl_passwd
 
 # Start up postfix after environment ready
 /root/WORKSPACE/startup-postfix.sh
