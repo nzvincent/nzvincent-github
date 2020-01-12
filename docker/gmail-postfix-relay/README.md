@@ -16,16 +16,16 @@ docker run -it \
   -v /etc/localtime:/etc/localtime:ro \
   -v /etc/timezone:/etc/timezone:ro \
   -p 25:25 \
-  -e RELAYHOST smtp.gmail.com \
-  -e RELAYHOST_PORT 587 \
-  -e RELAYHOST_USER your-gmail-id \
-  -e RELAYHOST_PASSWORD your-gmail-app-password \
-  -e MYHOSTNAME my-domain.com \
-  -e INET_INTERFACE all \
-  -e MYNETWORK_STYLE host \
-  -e MYNETWORKS "172.15.0.0/24 192.168.1.0/24" \
-  -e MYHOSTNAME smtp-your-domain.com \
-  -e MYDOMAIN your-domain.com \
+  -e RELAYHOST=smtp.gmail.com \
+  -e RELAYHOST_PORT=587 \
+  -e RELAYHOST_USER=your-gmail-id \
+  -e RELAYHOST_PASSWORD=your-gmail-app-password \
+  -e MYHOSTNAME=my-domain.com \
+  -e INET_INTERFACE=all \
+  -e MYNETWORK_STYLE=host \
+  -e MYNETWORKS="172.15.0.0/24 192.168.1.0/24" \
+  -e MYHOSTNAME=smtp-your-domain.com \
+  -e MYDOMAIN=your-domain.com \
   alpine/postfix:homebrew 
 
 ```
