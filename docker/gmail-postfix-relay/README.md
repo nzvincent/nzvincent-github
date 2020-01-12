@@ -17,9 +17,9 @@ Your-server --> Postfix with Gmail relay --> Internet --> Gmail SMTP --> world.
 docker build -t "alpine/postfix:homebrew" .
 ```
 
-## Start up docker container
+## Start up docker container detached mode
 ```
-docker run -it \
+docker run -id \
   -h postfix --name postfix \
   --restart always \
   -v /etc/localtime:/etc/localtime:ro \
