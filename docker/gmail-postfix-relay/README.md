@@ -21,7 +21,7 @@ docker build -t "alpine/postfix:homebrew" .
 *Notes*
 * Replace variables with yours.
 * RELAYHOST_PASSWORD is NOT your gmail login password, it has to be generated using Google myAccount. https://myaccount.google.com/security
-* MYNETWORKS is network of container, you can startup a docker container in your network and run ```ip addr``` to find out.
+* MYNETWORKS is network of container, you can startup a docker container in your network and run ```ip addr``` to find out. Otherwise Postfix will deny the hosts in your network relaying the email.
 * MYHOSTNAME is your arbitrary STMP host.
 * MYDOMAIN is your company's domain.
 * Depending on your Linux distribution, localtime and timezone volume may not be necessary.
