@@ -10,7 +10,7 @@ if [ -f /etc/postfix/sasl_passwd ]; then
 fi
 
 # Enable log
-# postconf maillog_file=/var/log/postfix.log 
+postconf maillog_file=/var/log/postfix.log 
 
 postfix start
 
