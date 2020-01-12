@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 # Run this once after docker run
 
@@ -34,7 +34,6 @@ env
 
 # Prevent termination of console
 sleep 1000
-sh 
 
 
 
