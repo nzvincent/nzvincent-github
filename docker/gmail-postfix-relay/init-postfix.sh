@@ -34,6 +34,7 @@ env
 
 # Prevent termination of console
 #sleep 1000
+sh
 
 
 
