@@ -33,7 +33,7 @@ env
 
 
 # Prevent termination of console
-sleep 1000
+#sleep 1000
 
 
 
