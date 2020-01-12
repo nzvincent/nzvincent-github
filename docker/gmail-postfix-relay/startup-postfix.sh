@@ -2,7 +2,7 @@
 
 set -e 
 
-postfix stop
+#postfix stop
 
 if [ -f /etc/postfix/sasl_passwd ]; then
   postmap /etc/postfix/sasl_passwd
