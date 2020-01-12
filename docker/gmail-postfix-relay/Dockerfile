@@ -17,5 +17,5 @@ EXPOSE 25
 
 WORKDIR /root
 
-ENTRYPOINT ["/root/WORKSPACE/init-postfix.sh-postfix.sh"]
+ENTRYPOINT ["/root/WORKSPACE/init-postfix.sh"]
 CMD ["startup"] 
