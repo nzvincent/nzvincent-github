@@ -18,6 +18,13 @@ docker build -t "alpine/postfix:homebrew" .
 ```
 
 ## Start up docker container detached mode
+*Notes*
+* Replace variables with yours.
+* RELAYHOST_PASSWORD is NOT your gmail login password, it has to be generated using Google myAccount. https://myaccount.google.com/security
+* MYNETWORKS is network of container, you can startup a docker container in your network and run ```ip addr``` to find out.
+* MYHOSTNAME is your arbitrary STMP host.
+* MYDOMAIN is your company's domain.
+* Depending on your Linux distribution, localtime and timezone volume may not be necessary.
 ```
 docker run -id \
   -h postfix --name postfix \
