@@ -8,8 +8,9 @@ Use Gmail as mail relay to forward your server email externally to the world.
 Your-server --> Postfix with Gmail relay --> Internet --> Gmail SMTP --> world.
 ```
 
-*Before setting up gmail smtp postfix relay, you need to login to GMAIL to setup Application password.*
+*Before setting up gmail smtp postfix relay, you need to login to GMAIL myAccount to setup Application password.*
  * https://support.plesk.com/hc/en-us/articles/115004947113-How-to-set-up-Postfix-to-send-emails-using-Gmail-Relay-with-authentication
+ * My Google Account can be found here: https://myaccount.google.com/security
 
 ## Building docker image
 ```
