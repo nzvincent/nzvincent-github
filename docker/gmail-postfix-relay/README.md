@@ -8,7 +8,7 @@ Use Gmail as mail relay to forward your server email externally to the world.
 Your-server --> Postfix with Gmail relay --> Internet --> Gmail SMTP --> world.
 ```
 
-*Before setting up gmail smtp postfix relay, you need to login to GMAIL myAccount to setup *App password*.*
+*Before setting up gmail smtp postfix relay, you need to login to GMAIL myAccount to setup **App passwords**.*
  * https://support.plesk.com/hc/en-us/articles/115004947113-How-to-set-up-Postfix-to-send-emails-using-Gmail-Relay-with-authentication
  * My Google Account can be found here: https://myaccount.google.com/security
 
@@ -20,7 +20,7 @@ docker build -t "alpine/postfix:homebrew" .
 ## Start up docker container detached mode
 *Notes*
 * Replace variables with yours.
-* RELAYHOST_PASSWORD is NOT your gmail login password, it has to be generated using Google *App Passwords*. https://myaccount.google.com/security
+* RELAYHOST_PASSWORD is NOT your gmail login password, it has to be generated using Google **App Passwords**. https://myaccount.google.com/security
 * MYNETWORKS is network of container, you can startup a docker container in your network and run ```ip addr``` to find out. Otherwise Postfix will deny the hosts in your network relaying the email.
 * MYHOSTNAME is your arbitrary STMP host.
 * MYDOMAIN is your company's domain.
