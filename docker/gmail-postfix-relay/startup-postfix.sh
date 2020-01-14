@@ -7,7 +7,7 @@ set -e
 
 if [ -f /etc/postfix/sasl_passwd ]; then
   postmap /etc/postfix/sasl_passwd
-  rm -f /etc/postfix/sasl_passwd
+  # rm -f /etc/postfix/sasl_passwd
 fi
 
 # Enable log
