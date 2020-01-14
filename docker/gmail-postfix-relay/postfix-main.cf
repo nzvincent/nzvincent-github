@@ -23,7 +23,7 @@ smtpd_banner = $POSTFIX_MYHOSTNAME ( Welcome SMTP )
 setgid_group = postdrop
 
 # relayhost = [smtp.gmail.com]:587
-relayhost = $POSTFIX_RELAYHOST
+relayhost = [$POSTFIX_RELAYHOST]:$POSTFIX_RELAYHOST_PORT
 
 smtp_use_tls = yes
 smtp_sasl_auth_enable = yes
