@@ -18,7 +18,7 @@ set -e
 [[ -e $MYNETWORK_STYLE ]] && export POSTFIX_MYNETWORK_STYLE=$MYNETWORK_STYLE || export POSTFIX_MYNETWORK_STYLE="host"
 [[ -e $MYNETWORKS ]] && export POSTFIX_MYNETWORKS=$MYNETWORKS || export POSTFIX_MYNETWORKS="all"
 # Hostname
-[[ -e $MYHOSTNAME ]] && export POSTFIX_MYHOSTNAME=$MYHOSTNAME|| export POSTFIX_MYHOSTNAME="smtp-your-domain.com"
+[[ -e $MYMAILHOST ]] && export POSTFIX_MYMAILHOST=$MYMAILHOST|| export POSTFIX_MYMAILHOST="smtp-your-domain.com"
 [[ -e $MYDOMAIN ]] && export POSTFIX_MYDOMAIN=$MYDOMAIN || export POSTFIX_MYDOMAIN="your-domain.com"
 
 
