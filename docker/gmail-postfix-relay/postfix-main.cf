@@ -11,7 +11,7 @@ mynetworks_style = $POSTFIX_MYNETWORK_STYLE
 mynetworks = $POSTFIX_MYNETWORKS
 
 # myhostname = smtp.your-domain.com
-myhostname = $POSTFIX_RELAYHOST
+myhostname = $POSTFIX_MYHOSTNAME
 
 #mydomain = your-domain.com
 mydomain = $POSTFIX_MYDOMAIN
