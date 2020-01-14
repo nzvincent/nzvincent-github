@@ -40,7 +40,7 @@ docker run -id \
   -e INET_INTERFACE=all \
   -e MYNETWORK_STYLE=host \
   -e MYNETWORKS="172.15.0.0/24 192.168.1.0/24" \
-  -e MYHOSTNAME=smtp-your-domain.com \
+  -e MYMAILHOST=smtp-your-domain.com \
   -e MYDOMAIN=your-domain.com \
   alpine/postfix:homebrew 
 
