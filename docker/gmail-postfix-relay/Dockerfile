@@ -1,6 +1,7 @@
 FROM alpine:edge
 
-RUN apk add --no-cache bash postfix postfix-pcre rsyslog ca-certificates gettext
+RUN apk add --no-cache bash postfix postfix-pcre rsyslog ca-certificates gettext cyrus-sasl cyrus-sasl-plain
+
 RUN apk update ca-certificates
 
 RUN mkdir /root/WORKSPACE
