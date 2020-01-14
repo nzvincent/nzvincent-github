@@ -15,4 +15,4 @@ RUN chmod -R 755 /root/WORKSPACE
 EXPOSE 25
 
 ENTRYPOINT ["/root/WORKSPACE/init-postfix.sh"]
-CMD ["startup"] 
+#CMD ["startup"] 
