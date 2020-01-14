@@ -30,9 +30,6 @@ envsubst < /root/WORKSPACE/postfix-sasl_passwd >> //etc/postfix/sasl_passwd
 # Start up postfix after environment ready
 /root/WORKSPACE/startup-postfix.sh
 
-env
-
-
 # Prevent termination of console
 #sleep 1000
 sh
