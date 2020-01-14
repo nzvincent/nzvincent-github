@@ -1,6 +1,7 @@
 FROM alpine:edge
 
 RUN apk add --no-cache bash postfix postfix-pcre rsyslog ca-certificates gettext
+RUN apk update ca-certificates
 
 RUN mkdir /root/WORKSPACE
 WORKDIR /root/WORKSPACE
