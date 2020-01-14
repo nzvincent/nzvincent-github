@@ -14,8 +14,7 @@ pipeline{
             }
         }
         
-        
-        stage("Build docker image"){
+        stage("Build Postfix docker image"){
             steps{
                 script{
                     dir("./docker/gmail-postfix-relay"){
