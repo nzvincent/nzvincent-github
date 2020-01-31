@@ -9,7 +9,8 @@ dir=`pwd`
 # Place LetsEncrypt generated fullchain and key here:
 #  - CERTS/fullchain.cer
 #  - CERTS/yourdomain.key
-#  - REG_IMAGE
+# Registry images volume is mounted:
+#  - REG_IMAGES
 # Docker tag
 #   docker tag your-image:latest your-domain.com/your-image
 # Docker push 
@@ -26,7 +27,6 @@ fi
 
 docker run -d -h ${name} --name ${name} \
   --restart always \
-  --privileged \
   -v /etc/localtime:/etc/localtime:ro \
   -v /etc/timezone:/etc/timezone:ro \
   -v `pwd`/CERTS:/certs \
