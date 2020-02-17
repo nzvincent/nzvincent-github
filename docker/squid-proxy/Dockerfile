@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-RUN apk add --no-cache bash squid acf-squid openrc
+RUN apk add --no-cache bash nano squid acf-squid openrc
 RUN apk update ca-certificates
 
 RUN mkdir /root/WORKSPACE
