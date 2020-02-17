@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Enable LAN block 192.168.1.0/24
+# FROM: acl localnet src 192.168.0.0/16         # RFC 1918 local private network (LAN)
+#   TO: acl localnet src 192.168.1.0/24         # RFC 1918 local private network (LAN)
 sed -i 's/192.168.0.0\/16/192.168.1.0\/24/g' /etc/squid/squid.conf
 
 # Enable disk caching
