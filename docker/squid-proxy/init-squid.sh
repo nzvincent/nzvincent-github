@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Enable LAN block 192.168.1.0/24
-sed -i 's/()()()/\1192\.168\.1\.0\/24\3/g' /etc/squid/squid.conf
+sed -i 's/192.168.0.0\/16/192.168.1.0\/24/g' /etc/squid/squid.conf
 
 # Enable disk caching
 # FROM: #cache_dir ufs /var/cache/squid 100 16 256
