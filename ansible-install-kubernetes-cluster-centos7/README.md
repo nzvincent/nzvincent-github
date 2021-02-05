@@ -167,6 +167,95 @@ You should see list of master and worker nodes.
 
 ```
 
+### Renew SSL
+https://github.com/kubernetes/kubeadm/issues/581
+
+```
+If you are using a version of kubeadm prior to 1.8, where I understand certificate rotation #206 was put into place (as a beta feature) or your certs already expired, then you will need to manually update your certs (or recreate your cluster which it appears some (not just @kachkaev) end up resorting to).
+
+You will need to SSH into your master node. If you are using kubeadm >= 1.8 skip to 2.
+
+    Update Kubeadm, if needed. I was on 1.7 previously.
+
+$ sudo curl -sSL https://dl.k8s.io/release/v1.8.15/bin/linux/amd64/kubeadm > ./kubeadm.1.8.15
+$ chmod a+rx kubeadm.1.8.15
+$ sudo mv /usr/bin/kubeadm /usr/bin/kubeadm.1.7
+$ sudo mv kubeadm.1.8.15 /usr/bin/kubeadm
+
+    Backup old apiserver, apiserver-kubelet-client, and front-proxy-client certs and keys.
+
+$ sudo mv /etc/kubernetes/pki/apiserver.key /etc/kubernetes/pki/apiserver.key.old
+$ sudo mv /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.crt.old
+$ sudo mv /etc/kubernetes/pki/apiserver-kubelet-client.crt /etc/kubernetes/pki/apiserver-kubelet-client.crt.old
+$ sudo mv /etc/kubernetes/pki/apiserver-kubelet-client.key /etc/kubernetes/pki/apiserver-kubelet-client.key.old
+$ sudo mv /etc/kubernetes/pki/front-proxy-client.crt /etc/kubernetes/pki/front-proxy-client.crt.old
+$ sudo mv /etc/kubernetes/pki/front-proxy-client.key /etc/kubernetes/pki/front-proxy-client.key.old
+
+    Generate new apiserver, apiserver-kubelet-client, and front-proxy-client certs and keys.
+
+$ sudo kubeadm alpha phase certs apiserver --apiserver-advertise-address <IP address of your master server>
+$ sudo kubeadm alpha phase certs apiserver-kubelet-client
+$ sudo kubeadm alpha phase certs front-proxy-client
+
+    Backup old configuration files
+
+$ sudo mv /etc/kubernetes/admin.conf /etc/kubernetes/admin.conf.old
+$ sudo mv /etc/kubernetes/kubelet.conf /etc/kubernetes/kubelet.conf.old
+$ sudo mv /etc/kubernetes/controller-manager.conf /etc/kubernetes/controller-manager.conf.old
+$ sudo mv /etc/kubernetes/scheduler.conf /etc/kubernetes/scheduler.conf.old
+
+    Generate new configuration files.
+
+There is an important note here. If you are on AWS, you will need to explicitly pass the --node-name parameter in this request. Otherwise you will get an error like: Unable to register node "ip-10-0-8-141.ec2.internal" with API server: nodes "ip-10-0-8-141.ec2.internal" is forbidden: node ip-10-0-8-141 cannot modify node ip-10-0-8-141.ec2.internal in your logs sudo journalctl -u kubelet --all | tail and the Master Node will report that it is Not Ready when you run kubectl get nodes.
+
+Please be certain to replace the values passed in --apiserver-advertise-address and --node-name with the correct values for your environment.
+
+$ sudo kubeadm alpha phase kubeconfig all --apiserver-advertise-address 10.0.8.141 --node-name ip-10-0-8-141.ec2.internal
+[kubeconfig] Wrote KubeConfig file to disk: "admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "scheduler.conf"
+
+    Ensure that your kubectl is looking in the right place for your config files.
+
+$ mv .kube/config .kube/config.old
+$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+$ sudo chmod 777 $HOME/.kube/config
+$ export KUBECONFIG=.kube/config
+
+    Reboot your master node
+
+$ sudo /sbin/shutdown -r now
+
+    Reconnect to your master node and grab your token, and verify that your Master Node is "Ready". Copy the token to your clipboard. You will need it in the next step.
+
+$ kubectl get nodes
+$ kubeadm token list
+
+If you do not have a valid token. You can create one with:
+
+$ kubeadm token create
+
+The token should look something like 6dihyb.d09sbgae8ph2atjw
+
+    SSH into each of the slave nodes and reconnect them to the master
+
+$ sudo curl -sSL https://dl.k8s.io/release/v1.8.15/bin/linux/amd64/kubeadm > ./kubeadm.1.8.15
+$ chmod a+rx kubeadm.1.8.15
+$ sudo mv /usr/bin/kubeadm /usr/bin/kubeadm.1.7
+$ sudo mv kubeadm.1.8.15 /usr/bin/kubeadm
+$ sudo kubeadm join --token=<token from step 8>  <ip of master node>:<port used 6443 is the default> --node-name <should be the same one as from step 5>
+
+    Repeat Step 9 for each connecting node. From the master node, you can verify that all slave nodes have connected and are ready with:
+
+$ kubectl get nodes
+
+
+
+
+```
+
 
 
 
