@@ -31,6 +31,9 @@ rc-update add kubelet default
 kubeadm init --apiserver-advertise-address=192.168.1.19 --kubernetes-version=1.20.0
 kubeadm init --apiserver-advertise-address=192.168.1.40 --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.20.0
 
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
 ```
 
 
