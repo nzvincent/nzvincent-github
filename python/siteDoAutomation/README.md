@@ -23,6 +23,9 @@ This script has been running from my Linux desktop and Jenkins, but it should al
 
 *@Author: nzvincent@gmail.com | Vincent Pang*
 
+**All in one script**
+* ` wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/download.sh -O - |sh `
+
 **Simple kickstart**
 * Download wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/siteDoAutomation/siteDo.py -O siteDo.py
 * Create kickstart.py file
