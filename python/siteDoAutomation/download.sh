@@ -8,4 +8,4 @@ wget https://raw.githubusercontent.com/nzvincent/nzvincent-github/master/python/
 
 docker build -t "sitedo" .
 
-docker run -it -v`pwd`:/myfile --name sitedo -h sitedo -w /myfile sitedo /bin/bash
+# docker run -it -v`pwd`:/myfile --name sitedo -h sitedo -w /myfile sitedo /bin/bash
