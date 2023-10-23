@@ -1,6 +1,6 @@
 certifi==2022.12.07
 chardet==4.0.0
-cryptography==3.2
+cryptography>=41.0.4
 enum34==1.1.6
 idna==2.10
 ipaddress==1.0.17
